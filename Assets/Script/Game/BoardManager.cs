@@ -101,7 +101,7 @@ namespace Script.Game
             cardInstance.Card = cardData;
 
             var cardDragDrop = cardInstance.gameObject.AddComponent<CardDragAndDrop>();
-            cardDragDrop.Initialize(_playerHand, _playerBoard, _canvas, _boardCardLimitCount, _player, _mana,
+            cardDragDrop.Initialize(_playerHand, _playerBoard, _enemyHand, _enemyBoard, _canvas, _boardCardLimitCount, _player, _mana,
                 cardData.Manacost);
 
             return cardInstance.gameObject;
