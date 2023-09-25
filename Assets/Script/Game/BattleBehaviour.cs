@@ -58,26 +58,32 @@ namespace Script.Game
                 EndTurn();
             }
         }
-        
+
         public IEnumerator TurnBot()
         {
             _boardManager.AddCardToEnemyHand(1);
             yield return new WaitForSeconds(1f);
-            
-            for(int i = 0; i < _boardManager.EnemyHand().gameObject.transform.childCount; i ++)
+
+            int cardsOnBoard = _boardManager.EnemyBoard().gameObject.transform.childCount;
+
+            for (int i = 0; i < _boardManager.EnemyHand().gameObject.transform.childCount && cardsOnBoard < 5; i++)
             {
                 int currentCardManacost = _boardManager.EnemyHand().gameObject.transform.GetChild(i).gameObject.GetComponent<CardDisplay>().Card.Manacost;
+
                 if (currentCardManacost <= GetEnemyCurrentMana())
                 {
                     _boardManager.EnemyHand().gameObject.transform.GetChild(i).gameObject.transform.SetParent(_boardManager.EnemyBoard().transform);
                     BotPlayer.ManaObject.Decrease(currentCardManacost);
+
+                    // Increment cardsOnBoard count since a card has been placed on the board
+                    cardsOnBoard++;
                 }
             }
             BotPlayer.ManaObject.ManaCurrent = BotPlayer.ManaObject.ManaMax;
             yield return new WaitForSeconds(1f);
             EndTurn();
         }
-        
+
         public IEnumerator TurnPlayer()
         {
              _boardManager.AddCardToPlayerHand(1);
