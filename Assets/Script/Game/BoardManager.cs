@@ -20,8 +20,8 @@ namespace Script.Game
         [SerializeField] private GameObject _playerHand;
         [SerializeField] private GameObject _playerBoard;
         [SerializeField] private GameObject _enemyHand;
-
         [SerializeField] private GameObject _enemyBoard;
+        
 
         public CardDisplay CardPrefab;
 
@@ -46,6 +46,11 @@ namespace Script.Game
         {
             return _enemyBoard;
         }
+        public GameObject PlayerBoard()
+        {
+            return _playerBoard;
+        }
+
 
         public void AddCardToPlayerHand(int cardAmount)
         {

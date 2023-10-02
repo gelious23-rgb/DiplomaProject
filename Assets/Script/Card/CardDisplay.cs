@@ -24,6 +24,9 @@ namespace Script.Card
         [SerializeField]
         private Image _cardImage;
         
+
+
+
         void Start()
         {
             CardInitialize();
