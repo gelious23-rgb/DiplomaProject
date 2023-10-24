@@ -20,8 +20,8 @@ namespace Script.Game
         [SerializeField] private GameObject _playerHand;
         [SerializeField] private GameObject _playerBoard;
         [SerializeField] private GameObject _enemyHand;
-
         [SerializeField] private GameObject _enemyBoard;
+        
 
         public CardDisplay CardPrefab;
 
@@ -46,41 +46,52 @@ namespace Script.Game
         {
             return _enemyBoard;
         }
+        public GameObject PlayerBoard()
+        {
+            return _playerBoard;
+        }
+
 
         public void AddCardToPlayerHand(int cardAmount)
         {
-            if (_playerHand.transform.childCount + cardAmount > _playerHandCardLimitCount)
-                for (var i = _playerHand.transform.childCount; i < _playerHandCardLimitCount; i++)
+            for (var i = 0; i < cardAmount; i++)
+            {
+                if (_playerHand.transform.childCount < _playerHandCardLimitCount)
                 {
                     var card = _playerDeck[0];
                     _playerDeck.Remove(_playerDeck[0]);
                     card.transform.SetParent(_playerHand.transform);
                 }
-            else
-                for (var i = 0; i < cardAmount; i++)
+                else
                 {
+                    // Burn the card if the hand is full
                     var card = _playerDeck[0];
                     _playerDeck.Remove(_playerDeck[0]);
-                    card.transform.SetParent(_playerHand.transform);
+                    Destroy(card);
+                    Debug.Log("Player's card burned!");
                 }
+            }
         }
 
         public void AddCardToEnemyHand(int cardAmount)
         {
-            if (_enemyHand.transform.childCount + cardAmount > _enemyHandCardLimitCount)
-                for (var i = _enemyHand.transform.childCount; i < _enemyHandCardLimitCount; i++)
+            for (var i = 0; i < cardAmount; i++)
+            {
+                if (_enemyHand.transform.childCount < _enemyHandCardLimitCount)
                 {
                     var card = _enemyDeck[0];
                     _enemyDeck.Remove(_enemyDeck[0]);
                     card.transform.SetParent(_enemyHand.transform);
                 }
-            else
-                for (var i = 0; i < cardAmount; i++)
+                else
                 {
+                    // Burn the card if the hand is full
                     var card = _enemyDeck[0];
                     _enemyDeck.Remove(_enemyDeck[0]);
-                    card.transform.SetParent(_enemyHand.transform);
+                    Destroy(card);
+                    Debug.Log("Enemy's card burned!");
                 }
+            }
         }
 
         public void InitializePlayerDeck()
@@ -101,7 +112,7 @@ namespace Script.Game
             cardInstance.Card = cardData;
 
             var cardDragDrop = cardInstance.gameObject.AddComponent<CardDragAndDrop>();
-            cardDragDrop.Initialize(_playerHand, _playerBoard, _canvas, _boardCardLimitCount, _player, _mana,
+            cardDragDrop.Initialize(_playerHand, _playerBoard, _enemyHand, _enemyBoard, _canvas, _boardCardLimitCount, _player, _mana,
                 cardData.Manacost);
 
             return cardInstance.gameObject;

@@ -11,7 +11,12 @@ namespace Script.Health
         private int _hpValue;
         private TextMeshProUGUI _hp;
         private Player _player;
-        
+
+        public int HpValue
+        {
+            get { return _hpValue; }
+        }
+
         private void Awake()
         {
             _player = GetComponentInParent<Player>();
