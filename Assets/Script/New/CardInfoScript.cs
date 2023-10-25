@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using Script.Card;
 
 public class CardInfoScript : MonoBehaviour
 {
@@ -14,9 +15,27 @@ public class CardInfoScript : MonoBehaviour
     private TextMeshProUGUI _name, _description, _type;
     [SerializeField]
     private TextMeshProUGUI _attack, _hp, _manacost;
+    [SerializeField]
+    private GameObject _hideGO,_highliter;
+    public bool isPlayer;
 
-    public void ShowCardInfo(Card card)
+    public GameObject Highliter
     {
+        get
+        {
+            return _highliter;
+        }
+        set
+        {
+            _highliter = value;
+        }
+    }
+
+    public void ShowCardInfo(Card card, bool p_isPlayer)
+    {
+        isPlayer = p_isPlayer;
+        _hideGO.SetActive(false);
+
         _selfCard = card;
 
         _sprite.sprite = card.image;
@@ -24,20 +43,33 @@ public class CardInfoScript : MonoBehaviour
         _name.text = card.name;
         _description.text = card.description;
         _type.text = card.type;
-        _attack.text = card.damage.ToString();
-        _hp.text = card.hp.ToString();
-        _manacost.text = card.manacost.ToString();
+        
+        
+
+        RefreshData();
     }
 
     public void HideCardInfo(Card card)
     {
         _selfCard = card;
-        _sprite.sprite = null;
-        _name.text = _description.text = _type.text = "";
+        _hideGO.SetActive(true);
+        isPlayer = false;
     }
 
-    private void Start()
+    public void RefreshData()
     {
-       // ShowCardInfo(CardManager.AllCards[transform.GetSiblingIndex()]);
+        _attack.text = _selfCard.damage.ToString();
+        _hp.text = _selfCard.hp.ToString();
+        _manacost.text = _selfCard.manacost.ToString();
+    }
+
+    public void HighlightCard()
+    {
+        _highliter.SetActive(true);
+    }
+
+    public void DeHighlightCard()
+    {
+        _highliter.SetActive(false);
     }
 }
