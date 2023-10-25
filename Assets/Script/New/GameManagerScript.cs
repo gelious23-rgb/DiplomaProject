@@ -224,12 +224,20 @@ public class GameManagerScript : MonoBehaviour
 
 
         if (!playerCard._selfCard.isAlive)
+        {
             DestroyCard(playerCard);
+            int damageDealt = playerCard._selfCard.manacost;
+            DealDamageToPlayerHero(damageDealt);
+        }
         else
             playerCard.RefreshData();
 
         if (!enemyCard._selfCard.isAlive)
+        {
             DestroyCard(enemyCard);
+            int damageDealt = enemyCard._selfCard.manacost;
+            DealDamageToEnemyHero(damageDealt);
+        }
         else
             enemyCard.RefreshData();
 
@@ -262,6 +270,22 @@ public class GameManagerScript : MonoBehaviour
             enemyMana = Mathf.Clamp(enemyMana - p_manacost, 0, int.MaxValue);
 
         ShowMana();
+    }
+
+    private void DealDamageToEnemyHero(int damage)
+    {
+        // Reduce the enemy hero's health and update the UI
+        int currentHealth = int.Parse(_enemyHealthText.text);
+        currentHealth -= damage;
+        _enemyHealthText.text = currentHealth.ToString();
+    }
+
+    private void DealDamageToPlayerHero(int damage)
+    {
+        // Reduce the player hero's health and update the UI
+        int currentHealth = int.Parse(_playerHealthText.text);
+        currentHealth -= damage;
+        _playerHealthText.text = currentHealth.ToString();
     }
 }
 
