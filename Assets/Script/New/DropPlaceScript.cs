@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -30,15 +31,20 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler , IPointerEnterHandle
 
         CardMovementScript card = eventData.pointerDrag.GetComponent<CardMovementScript>();
 
-        if(card)
+        if(card && card.GameManager.PlayerFieldCards.Count < 6 && card.GameManager.IsPlayerTurn && card.GameManager.playerMana >=
+            card.GetComponent<CardInfoScript>()._selfCard.manacost)
         {
+            card.GameManager.PlayerHandCards.Remove(card.GetComponent<CardInfoScript>());
+            card.GameManager.PlayerFieldCards.Add(card.GetComponent<CardInfoScript>());
             card.DefaultParent = transform;
+
+            card.GameManager.ReduceMana(true,card.GetComponent<CardInfoScript>()._selfCard.manacost);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.pointerDrag == null || Type == FieldType.ENEMY_BOARD ||  Type == FieldType.ENEMY_HAND)
+        if (eventData.pointerDrag == null || Type == FieldType.ENEMY_BOARD ||  Type == FieldType.ENEMY_HAND || Type == FieldType.PLAYER_HAND)
             return;
 
         CardMovementScript card = eventData.pointerDrag.GetComponent<CardMovementScript>();

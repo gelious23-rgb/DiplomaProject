@@ -11,6 +11,11 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
     private Transform _defaultParent,_defaultTempCardParent;
     GameObject TempCardGO;
     private bool _isDraggable;
+    private GameManagerScript _gameManager;
+    public GameManagerScript GameManager
+    {
+        get { return _gameManager; }
+    }
 
     public Transform DefaultParent
     {
@@ -40,6 +45,7 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         _mainCamera = Camera.allCameras[0];
         TempCardGO = GameObject.Find("TempCardGO");
+        _gameManager = FindObjectOfType<GameManagerScript>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -50,7 +56,8 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
         //store current parent
         _defaultParent = _defaultTempCardParent = transform.parent;
 
-        _isDraggable = _defaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_HAND;
+        _isDraggable = (_defaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_HAND || _defaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_BOARD) &&
+            _gameManager.IsPlayerTurn;
 
         if (!_isDraggable)
             return;
@@ -76,7 +83,8 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
         if (TempCardGO.transform.parent != _defaultTempCardParent)
             TempCardGO.transform.SetParent(_defaultTempCardParent);
 
-        CheckPosition();
+        if(_defaultParent.GetComponent<DropPlaceScript>().Type != FieldType.PLAYER_BOARD)
+            CheckPosition();
     }
 
     public void OnEndDrag(PointerEventData eventData)
