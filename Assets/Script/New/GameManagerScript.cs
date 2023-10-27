@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -19,7 +20,7 @@ public class Game
     List<Card> GiveDeckCard()
     {
         List<Card> list = new List<Card>();
-        for(int i = 0; i < 10; i ++)
+        for(int i = 0; i < 15; i ++)
         {
             list.Add(CardManager.AllCards[Random.Range(0, CardManager.AllCards.Count)]);
         }
@@ -37,6 +38,11 @@ public class GameManagerScript : MonoBehaviour
     private TextMeshProUGUI _turnTimeText;
     [SerializeField]
     private Button _endTurnButton;
+    [SerializeField]
+    private Button _restartTurnButton;
+    [SerializeField]
+    private TextMeshProUGUI _playerGameOver,_enemyGameOver;
+
 
     public int playerMana = 10, enemyMana = 10;
     [SerializeField]
@@ -54,6 +60,12 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        _restartTurnButton.gameObject.SetActive(false);
+        _playerGameOver.gameObject.SetActive(false);
+        _enemyGameOver.gameObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -277,6 +289,10 @@ public class GameManagerScript : MonoBehaviour
         // Reduce the enemy hero's health and update the UI
         int currentHealth = int.Parse(_enemyHealthText.text);
         currentHealth -= damage;
+        if(currentHealth <=0)
+        {
+            GameOver(true);
+        }
         _enemyHealthText.text = currentHealth.ToString();
     }
 
@@ -285,7 +301,34 @@ public class GameManagerScript : MonoBehaviour
         // Reduce the player hero's health and update the UI
         int currentHealth = int.Parse(_playerHealthText.text);
         currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            GameOver(false);
+        }
         _playerHealthText.text = currentHealth.ToString();
+    }
+
+    private void GameOver(bool p_bool)
+    {
+        Time.timeScale = 0;
+
+        if (p_bool)
+            _playerGameOver.gameObject.SetActive(true);
+        else
+            _enemyGameOver.gameObject.SetActive(true);
+
+        _restartTurnButton.gameObject.SetActive(true);
+    }
+    public void RestartGame()
+    {
+        // Unpause the game
+        Time.timeScale = 1;
+
+        // Get the name of the currently loaded scene (assuming it's the scene you want to restart)
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Reload the current scene
+        SceneManager.LoadScene(currentSceneName);
     }
 }
 
