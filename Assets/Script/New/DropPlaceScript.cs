@@ -31,7 +31,7 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler , IPointerEnterHandle
 
         CardMovementScript card = eventData.pointerDrag.GetComponent<CardMovementScript>();
 
-        if(card && card.GameManager.PlayerFieldCards.Count < 6 && card.GameManager.IsPlayerTurn && card.GameManager.playerMana >=
+        if(card && card.GameManager.PlayerFieldCards.Count < 6 && card.GameManager.IsPlayerTurn && card.GameManager.PlayerMana >=
             card.GetComponent<CardInfoScript>()._selfCard.manacost)
         {
             card.GameManager.PlayerHandCards.Remove(card.GetComponent<CardInfoScript>());
