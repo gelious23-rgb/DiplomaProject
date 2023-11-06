@@ -42,9 +42,20 @@ public class GameManagerScript : MonoBehaviour
     private Button _restartTurnButton;
     [SerializeField]
     private TextMeshProUGUI _playerGameOver,_enemyGameOver;
+    private int _maxMana = 1;
+    private const int maxPlayerHandSize = 6;
+    private const int maxEnemyHandSize = 6;
 
 
-    public int playerMana = 10, enemyMana = 10;
+    private int playerMana = 1, enemyMana = 1;
+
+    public int PlayerMana
+    {
+        get
+        {
+            return playerMana;
+        }
+    }
     [SerializeField]
     private TextMeshProUGUI _playerManaText, _enemyManaText, _playerHealthText, _enemyHealthText;
     public List<CardInfoScript> PlayerHandCards = new List<CardInfoScript>(),
@@ -92,6 +103,21 @@ public class GameManagerScript : MonoBehaviour
     {
         if (deck.Count == 0)
             return;
+        if (hand == enemyHand && EnemyHandCards.Count >= maxEnemyHandSize)
+        {
+            // Log the card that is burned when the enemy hand is full
+            Debug.Log("Enemy's hand is full. Burning card: " + deck[0].name);
+            deck.RemoveAt(0);
+            return;
+        }
+
+        if (hand != enemyHand && PlayerHandCards.Count >= maxPlayerHandSize)
+        {
+            // Log the card that is burned when the player hand is full
+            Debug.Log("Player's hand is full. Burning card: " + deck[0].name);
+            deck.RemoveAt(0);
+            return;
+        }
 
         Card card = deck[0];
 
@@ -156,6 +182,30 @@ public class GameManagerScript : MonoBehaviour
         ChangeTurn();
     }
 
+    private int CalculateDamageToEnemyPlayerForActiveCards()
+    {
+        int damageDealt = 0;
+
+        foreach (var activeCard in PlayerFieldCards.FindAll(x => x._selfCard.canAttack))
+        {
+            damageDealt += activeCard._selfCard.manacost;
+        }
+
+        return damageDealt;
+    }
+
+    private int CalculateDamageToPlayerForActiveCards()
+    {
+        int damageDealt = 0;
+
+        foreach (var activeCard in EnemyFieldCards.FindAll(x => x._selfCard.canAttack))
+        {
+            damageDealt += activeCard._selfCard.manacost;
+        }
+
+        return damageDealt;
+    }
+
     private void EnemyTurn(List<CardInfoScript> cards)
     {
         int count = cards.Count == 1 ? 1 :
@@ -169,7 +219,7 @@ public class GameManagerScript : MonoBehaviour
             List<CardInfoScript> cardList = cards.FindAll(x => enemyMana >= x._selfCard.manacost);
 
             if (cardList.Count == 0)
-                return;
+                break;
 
             ReduceMana(false, cardList[0]._selfCard.manacost);
 
@@ -201,6 +251,33 @@ public class GameManagerScript : MonoBehaviour
     public void ChangeTurn()
     {
         StopAllCoroutines();
+
+        // Check if the current player has active cards and the opponent player has no cards on their board
+        if (IsPlayerTurn)
+        {
+            if (PlayerFieldCards.Exists(x => x._selfCard.canAttack) && EnemyFieldCards.Count == 0)
+            {
+                int damageDealt = CalculateDamageToEnemyPlayerForActiveCards();
+                if (damageDealt > 0)
+                {
+                    Debug.Log("Player 2 takes " + damageDealt + " damage from active cards.");
+                    DealDamageToEnemyHero(damageDealt);
+                }
+            }
+        }
+        else
+        {
+            if (EnemyFieldCards.Exists(x => x._selfCard.canAttack) && PlayerFieldCards.Count == 0)
+            {
+                int damageDealt = CalculateDamageToPlayerForActiveCards();
+                if (damageDealt > 0)
+                {
+                    Debug.Log("Player 1 takes " + damageDealt + " damage from active cards.");
+                    DealDamageToPlayerHero(damageDealt);
+                }
+            }
+        }
+
         _turn++;
 
         _endTurnButton.interactable = IsPlayerTurn;
@@ -208,7 +285,8 @@ public class GameManagerScript : MonoBehaviour
         if (IsPlayerTurn)
         {
             GiveNewCards();
-            playerMana = enemyMana = 10;
+            _maxMana = Mathf.Min(_maxMana + 1, 10);
+            playerMana = enemyMana = _maxMana;
             ShowMana();
         }
 

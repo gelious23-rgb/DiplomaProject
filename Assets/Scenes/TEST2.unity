@@ -497,8 +497,8 @@ MonoBehaviour:
   _restartTurnButton: {fileID: 1682098186}
   _playerGameOver: {fileID: 1063968051}
   _enemyGameOver: {fileID: 1664883711}
-  playerMana: 10
-  enemyMana: 10
+  playerMana: 5
+  enemyMana: 5
   _playerManaText: {fileID: 393326353}
   _enemyManaText: {fileID: 682165029}
   _playerHealthText: {fileID: 1573140017}
