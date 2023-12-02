@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -148,6 +149,8 @@ public class GameManagerScript : MonoBehaviour
             card.DeHighlightCard();
         }
 
+        CheckCardsForAvaliability();
+
         if (IsPlayerTurn)
         {
             foreach (var card in PlayerFieldCards)
@@ -161,25 +164,19 @@ public class GameManagerScript : MonoBehaviour
                 _turnTimeText.text = _turnTime.ToString();
                 yield return new WaitForSeconds(1);
             }
+            ChangeTurn();
         }
         else
         {
             foreach (var card in EnemyFieldCards)
                 card._selfCard.ChangeAttackState(true);
 
-            while (_turnTime-- > 27)
-            {
-                _turnTimeText.text = _turnTime.ToString();
-                yield return new WaitForSeconds(1);
-            }
-
-            if (EnemyHandCards.Count > 0)
-            {
-                EnemyTurn(EnemyHandCards);
-            }
+            
+           StartCoroutine(EnemyTurn(EnemyHandCards));
+            
         }
 
-        ChangeTurn();
+       
     }
 
     private int CalculateDamageToEnemyPlayerForActiveCards()
@@ -206,22 +203,28 @@ public class GameManagerScript : MonoBehaviour
         return damageDealt;
     }
 
-    private void EnemyTurn(List<CardInfoScript> cards)
+    IEnumerator EnemyTurn(List<CardInfoScript> cards)
     {
+        yield return new WaitForSeconds(1);
+
         int count = cards.Count == 1 ? 1 :
             Random.Range(0, cards.Count);
 
         for (int i = 0; i < count; i++)
         {
-            if (EnemyFieldCards.Count > 5 || enemyMana == 0)
-                return;
+            if (EnemyFieldCards.Count > 5 || enemyMana == 0 || EnemyHandCards.Count == 0)
+                break;
 
             List<CardInfoScript> cardList = cards.FindAll(x => enemyMana >= x._selfCard.manacost);
 
             if (cardList.Count == 0)
                 break;
 
+            cardList[0].GetComponent<CardMovementScript>().MovetoField(enemyField);
+
             ReduceMana(false, cardList[0]._selfCard.manacost);
+
+            yield return new WaitForSeconds(.51f);
 
             cardList[0].ShowCardInfo(cardList[0]._selfCard, false);
             cardList[0].transform.SetParent(enemyField);
@@ -232,20 +235,22 @@ public class GameManagerScript : MonoBehaviour
 
         foreach (var activeCard in EnemyFieldCards.FindAll(x => x._selfCard.canAttack))
         {
-            if (PlayerFieldCards.Count == 0)
+            if (PlayerFieldCards.Count != 0)
             {
-                return;// Deal damage to player equel to manacosts;
+                var enemy = PlayerFieldCards[Random.Range(0, PlayerFieldCards.Count)];
+
+                Debug.Log(activeCard._selfCard.name + " ( " + activeCard._selfCard.damage + ";" + activeCard._selfCard.hp +
+                     " --> " + enemy._selfCard.name + " ( " + enemy._selfCard.damage + ";" + enemy._selfCard.hp);
+
+
+                activeCard._selfCard.ChangeAttackState(false);
+                CardsFight(enemy, activeCard);
             }
 
-            var enemy = PlayerFieldCards[Random.Range(0, PlayerFieldCards.Count)];
-
-            Debug.Log(activeCard._selfCard.name + " ( " + activeCard._selfCard.damage + ";" + activeCard._selfCard.hp +
-                 " --> " + enemy._selfCard.name + " ( " + enemy._selfCard.damage + ";" + enemy._selfCard.hp);
-
-
-            activeCard._selfCard.ChangeAttackState(false);
-            CardsFight(enemy, activeCard);
+            
         }
+
+        ChangeTurn();
     }
 
     public void ChangeTurn()
@@ -407,6 +412,18 @@ public class GameManagerScript : MonoBehaviour
 
         // Reload the current scene
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void CheckCardsForAvaliability()
+    {
+        foreach (var card in PlayerHandCards)
+            card.CheckForAvailability(PlayerMana);
+    }
+
+    public void HighliteTargets(bool p_highlite)
+    {
+        foreach (var card in EnemyFieldCards)
+            card.HighlightAsTarget(p_highlite);
     }
 }
 

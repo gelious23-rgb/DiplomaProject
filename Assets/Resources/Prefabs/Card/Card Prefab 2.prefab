@@ -346,6 +346,9 @@ MonoBehaviour:
   _manacost: {fileID: 1931824282114159205}
   _hideGO: {fileID: 4831643719028820697}
   _highliter: {fileID: 7228763500931285428}
+  isPlayer: 0
+  _targetColor: {r: 0.8962264, g: 0.4523407, b: 0.4523407, a: 0.6509804}
+  _normalColor: {r: 0.50980395, g: 0.3882353, b: 0.49411765, a: 1}
 --- !u!114 &-2093959379544132448
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public struct Card
     public string description;
     public int damage, manacost, hp;
     public Sprite image;
-
+    public bool isPlaced;
     public bool canAttack;
 
     public bool isAlive
@@ -28,6 +28,7 @@ public struct Card
         manacost = p_manacost;
         hp = p_hp;
         canAttack = false;
+        isPlaced = false;
     }
 
     public void ChangeAttackState(bool p_canAttack)
