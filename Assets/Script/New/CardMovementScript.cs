@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -140,5 +141,34 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void MovetoField(Transform field)
     {
         transform.DOMove(field.position, .5f);
+    }
+
+    public void MovetoTarget(Transform target)
+    {
+        StartCoroutine(MoveToTargetCor(target));
+    }
+
+    IEnumerator MoveToTargetCor(Transform target)
+    {
+        Vector3 pos = transform.position;
+        Transform parent = transform.parent;
+        int index = transform.GetSiblingIndex();
+
+        transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = false;
+
+        transform.SetParent(GameObject.Find("Canvas").transform);
+
+        transform.DOMove(target.position, .25f);
+
+        yield return new WaitForSeconds(.25f);
+
+        transform.DOMove(pos, .25f);
+
+        yield return new WaitForSeconds(.25f);
+
+        transform.SetParent(parent);
+        transform.SetSiblingIndex(index);
+
+        transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = true;
     }
 }

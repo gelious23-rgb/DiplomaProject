@@ -233,6 +233,8 @@ public class GameManagerScript : MonoBehaviour
             EnemyHandCards.Remove(cardList[0]);
         }
 
+        yield return new WaitForSeconds(1);
+
         foreach (var activeCard in EnemyFieldCards.FindAll(x => x._selfCard.canAttack))
         {
             if (PlayerFieldCards.Count != 0)
@@ -244,12 +246,17 @@ public class GameManagerScript : MonoBehaviour
 
 
                 activeCard._selfCard.ChangeAttackState(false);
+
+                activeCard.GetComponent<CardMovementScript>().MovetoTarget(enemy.transform);
+                yield return new WaitForSeconds(.75f);
+
                 CardsFight(enemy, activeCard);
             }
 
-            
-        }
+            yield return new WaitForSeconds(.2f);
 
+        }
+        yield return new WaitForSeconds(1);
         ChangeTurn();
     }
 
