@@ -85,7 +85,6 @@ public class CardInfoScript : MonoBehaviour
     public void HighlightAsTarget(bool p_highlite)
     {
         
-
         GetComponent<Image>().color = p_highlite ? _targetColor : _normalColor;
     }
 }
