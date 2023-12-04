@@ -34,6 +34,8 @@ public class GameManagerScript : MonoBehaviour
     public Game currentGame;
     public Transform enemyHand, playerHand, enemyField, playerField;
     public GameObject cardPref;
+    [SerializeField]
+    private AI _ai;
     private int _turn, _turnTime = 30;
     private int _maxMana = 1;
     private const int maxPlayerHandSize = 6;
@@ -168,9 +170,16 @@ public class GameManagerScript : MonoBehaviour
             foreach (var card in EnemyFieldCards)
                 card._selfCard.ChangeAttackState(true);
 
-            
-           StartCoroutine(EnemyTurn(EnemyHandCards));
-            
+
+            _ai.MakeTurn();
+
+            while(_turnTime-- > 0)
+            {
+                UIController.Instance.TurnTimeText.text = _turnTime.ToString();
+                yield return new WaitForSeconds(1);
+            }
+
+            ChangeTurn();
         }
 
        
@@ -200,62 +209,7 @@ public class GameManagerScript : MonoBehaviour
         return damageDealt;
     }
 
-    IEnumerator EnemyTurn(List<CardInfoScript> cards)
-    {
-        yield return new WaitForSeconds(1);
-
-        int count = cards.Count == 1 ? 1 :
-            Random.Range(0, cards.Count);
-
-        for (int i = 0; i < count; i++)
-        {
-            if (EnemyFieldCards.Count > 5 || _enemyMana == 0 || EnemyHandCards.Count == 0)
-                break;
-
-            List<CardInfoScript> cardList = cards.FindAll(x => _enemyMana >= x._selfCard.manacost);
-
-            if (cardList.Count == 0)
-                break;
-
-            cardList[0].GetComponent<CardMovementScript>().MovetoField(enemyField);
-
-            ReduceMana(false, cardList[0]._selfCard.manacost);
-
-            yield return new WaitForSeconds(.51f);
-
-            cardList[0].ShowCardInfo(cardList[0]._selfCard, false);
-            cardList[0].transform.SetParent(enemyField);
-
-            EnemyFieldCards.Add(cardList[0]);
-            EnemyHandCards.Remove(cardList[0]);
-        }
-
-        yield return new WaitForSeconds(1);
-
-        foreach (var activeCard in EnemyFieldCards.FindAll(x => x._selfCard.canAttack))
-        {
-            if (PlayerFieldCards.Count != 0)
-            {
-                var enemy = PlayerFieldCards[Random.Range(0, PlayerFieldCards.Count)];
-
-                Debug.Log(activeCard._selfCard.name + " ( " + activeCard._selfCard.damage + ";" + activeCard._selfCard.hp +
-                     " --> " + enemy._selfCard.name + " ( " + enemy._selfCard.damage + ";" + enemy._selfCard.hp);
-
-
-                activeCard._selfCard.ChangeAttackState(false);
-
-                activeCard.GetComponent<CardMovementScript>().MovetoTarget(enemy.transform);
-                yield return new WaitForSeconds(.75f);
-
-                CardsFight(enemy, activeCard);
-            }
-
-            yield return new WaitForSeconds(.2f);
-
-        }
-        yield return new WaitForSeconds(1);
-        ChangeTurn();
-    }
+    
 
     public void ChangeTurn()
     {

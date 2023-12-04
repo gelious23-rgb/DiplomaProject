@@ -492,6 +492,7 @@ MonoBehaviour:
   enemyField: {fileID: 734855163}
   playerField: {fileID: 1679152742}
   cardPref: {fileID: 1489109472383767633, guid: 71b2cbf2f969a394581f4b81045532fb, type: 3}
+  _ai: {fileID: 819172299}
   PlayerHandCards: []
   PlayerFieldCards: []
   EnemyHandCards: []
@@ -1257,6 +1258,7 @@ GameObject:
   - component: {fileID: 819172296}
   - component: {fileID: 819172298}
   - component: {fileID: 819172297}
+  - component: {fileID: 819172299}
   m_Layer: 5
   m_Name: Enemy Image
   m_TagString: Untagged
@@ -1322,6 +1324,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819172295}
   m_CullTransparentMesh: 1
+--- !u!114 &819172299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819172295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43a7aabf8b9c1a47b92c5bc44187d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gm: {fileID: 195757897}
 --- !u!1 &1063968049
 GameObject:
   m_ObjectHideFlags: 0
