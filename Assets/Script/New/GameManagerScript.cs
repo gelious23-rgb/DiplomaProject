@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,31 +34,32 @@ public class GameManagerScript : MonoBehaviour
     public Game currentGame;
     public Transform enemyHand, playerHand, enemyField, playerField;
     public GameObject cardPref;
+    [SerializeField]
+    private AI _ai;
     private int _turn, _turnTime = 30;
-    [SerializeField]
-    private TextMeshProUGUI _turnTimeText;
-    [SerializeField]
-    private Button _endTurnButton;
-    [SerializeField]
-    private Button _restartTurnButton;
-    [SerializeField]
-    private TextMeshProUGUI _playerGameOver,_enemyGameOver;
     private int _maxMana = 1;
     private const int maxPlayerHandSize = 6;
     private const int maxEnemyHandSize = 6;
 
 
-    private int playerMana = 1, enemyMana = 1;
+    private int _playerMana = 1, _enemyMana = 1;
 
     public int PlayerMana
     {
         get
         {
-            return playerMana;
+            return _playerMana;
         }
     }
-    [SerializeField]
-    private TextMeshProUGUI _playerManaText, _enemyManaText, _playerHealthText, _enemyHealthText;
+
+    public int EnemyMana
+    {
+        get
+        {
+            return _enemyMana;
+        }
+    }
+
     public List<CardInfoScript> PlayerHandCards = new List<CardInfoScript>(),
                                 PlayerFieldCards = new List<CardInfoScript>(),
                                 EnemyHandCards = new List<CardInfoScript>(),
@@ -73,9 +75,7 @@ public class GameManagerScript : MonoBehaviour
 
     private void Awake()
     {
-        _restartTurnButton.gameObject.SetActive(false);
-        _playerGameOver.gameObject.SetActive(false);
-        _enemyGameOver.gameObject.SetActive(false);
+        UIController.Instance.HideInterfaceText();
     }
 
     private void Start()
@@ -87,7 +87,7 @@ public class GameManagerScript : MonoBehaviour
         GiveStartCards(currentGame.enemyDeck, enemyHand);
         GiveStartCards(currentGame.playerDeck, playerHand);
 
-        ShowMana();
+        UIController.Instance.ShowMana();
 
         StartCoroutine(TurnFunc());
     }
@@ -141,12 +141,14 @@ public class GameManagerScript : MonoBehaviour
     IEnumerator TurnFunc()
     {
         _turnTime = 30;
-        _turnTimeText.text = _turnTime.ToString();
+        UIController.Instance.TurnTimeText.text = _turnTime.ToString();
 
         foreach (var card in PlayerFieldCards)
         {
             card.DeHighlightCard();
         }
+
+        CheckCardsForAvaliability();
 
         if (IsPlayerTurn)
         {
@@ -158,28 +160,29 @@ public class GameManagerScript : MonoBehaviour
 
             while (_turnTime-- > 0)
             {
-                _turnTimeText.text = _turnTime.ToString();
+                UIController.Instance.TurnTimeText.text = _turnTime.ToString();
                 yield return new WaitForSeconds(1);
             }
+            ChangeTurn();
         }
         else
         {
             foreach (var card in EnemyFieldCards)
                 card._selfCard.ChangeAttackState(true);
 
-            while (_turnTime-- > 27)
+
+            _ai.MakeTurn();
+
+            while(_turnTime-- > 0)
             {
-                _turnTimeText.text = _turnTime.ToString();
+                UIController.Instance.TurnTimeText.text = _turnTime.ToString();
                 yield return new WaitForSeconds(1);
             }
 
-            if (EnemyHandCards.Count > 0)
-            {
-                EnemyTurn(EnemyHandCards);
-            }
+            ChangeTurn();
         }
 
-        ChangeTurn();
+       
     }
 
     private int CalculateDamageToEnemyPlayerForActiveCards()
@@ -206,47 +209,7 @@ public class GameManagerScript : MonoBehaviour
         return damageDealt;
     }
 
-    private void EnemyTurn(List<CardInfoScript> cards)
-    {
-        int count = cards.Count == 1 ? 1 :
-            Random.Range(0, cards.Count);
-
-        for (int i = 0; i < count; i++)
-        {
-            if (EnemyFieldCards.Count > 5 || enemyMana == 0)
-                return;
-
-            List<CardInfoScript> cardList = cards.FindAll(x => enemyMana >= x._selfCard.manacost);
-
-            if (cardList.Count == 0)
-                break;
-
-            ReduceMana(false, cardList[0]._selfCard.manacost);
-
-            cardList[0].ShowCardInfo(cardList[0]._selfCard, false);
-            cardList[0].transform.SetParent(enemyField);
-
-            EnemyFieldCards.Add(cardList[0]);
-            EnemyHandCards.Remove(cardList[0]);
-        }
-
-        foreach (var activeCard in EnemyFieldCards.FindAll(x => x._selfCard.canAttack))
-        {
-            if (PlayerFieldCards.Count == 0)
-            {
-                return;// Deal damage to player equel to manacosts;
-            }
-
-            var enemy = PlayerFieldCards[Random.Range(0, PlayerFieldCards.Count)];
-
-            Debug.Log(activeCard._selfCard.name + " ( " + activeCard._selfCard.damage + ";" + activeCard._selfCard.hp +
-                 " --> " + enemy._selfCard.name + " ( " + enemy._selfCard.damage + ";" + enemy._selfCard.hp);
-
-
-            activeCard._selfCard.ChangeAttackState(false);
-            CardsFight(enemy, activeCard);
-        }
-    }
+    
 
     public void ChangeTurn()
     {
@@ -280,14 +243,14 @@ public class GameManagerScript : MonoBehaviour
 
         _turn++;
 
-        _endTurnButton.interactable = IsPlayerTurn;
+        UIController.Instance.EndTurnButton.interactable = IsPlayerTurn;
 
         if (IsPlayerTurn)
         {
             GiveNewCards();
             _maxMana = Mathf.Min(_maxMana + 1, 10);
-            playerMana = enemyMana = _maxMana;
-            ShowMana();
+            _playerMana = _enemyMana = _maxMana;
+            UIController.Instance.ShowMana();
         }
 
         StartCoroutine(TurnFunc());
@@ -346,67 +309,63 @@ public class GameManagerScript : MonoBehaviour
         Destroy(card.gameObject);
     }
 
-    public void ShowMana()
-    {
-        _playerManaText.text = playerMana.ToString();
-        _enemyManaText.text = enemyMana.ToString();
-    }
+    
 
     public void ReduceMana(bool p_playerMana, int p_manacost)
     {
         if (p_playerMana)
-            playerMana = Mathf.Clamp(playerMana - p_manacost, 0, int.MaxValue);
+            _playerMana = Mathf.Clamp(_playerMana - p_manacost, 0, int.MaxValue);
         else
-            enemyMana = Mathf.Clamp(enemyMana - p_manacost, 0, int.MaxValue);
+            _enemyMana = Mathf.Clamp(_enemyMana - p_manacost, 0, int.MaxValue);
 
-        ShowMana();
+        UIController.Instance.ShowMana();
     }
 
     private void DealDamageToEnemyHero(int damage)
     {
         // Reduce the enemy hero's health and update the UI
-        int currentHealth = int.Parse(_enemyHealthText.text);
+        int currentHealth = int.Parse(UIController.Instance.enemyHealthText.text);
         currentHealth -= damage;
         if(currentHealth <=0)
         {
-            GameOver(true);
+            UIController.Instance.GameOver(true);
         }
-        _enemyHealthText.text = currentHealth.ToString();
+        UIController.Instance.enemyHealthText.text = currentHealth.ToString();
     }
 
     private void DealDamageToPlayerHero(int damage)
     {
         // Reduce the player hero's health and update the UI
-        int currentHealth = int.Parse(_playerHealthText.text);
+        int currentHealth = int.Parse(UIController.Instance.playerHealthText.text);
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            GameOver(false);
+            UIController.Instance.GameOver(false);
         }
-        _playerHealthText.text = currentHealth.ToString();
+        UIController.Instance.playerHealthText.text = currentHealth.ToString();
     }
 
-    private void GameOver(bool p_bool)
-    {
-        Time.timeScale = 0;
-
-        if (p_bool)
-            _playerGameOver.gameObject.SetActive(true);
-        else
-            _enemyGameOver.gameObject.SetActive(true);
-
-        _restartTurnButton.gameObject.SetActive(true);
-    }
+    
     public void RestartGame()
     {
-        // Unpause the game
+        
         Time.timeScale = 1;
 
-        // Get the name of the currently loaded scene (assuming it's the scene you want to restart)
         string currentSceneName = SceneManager.GetActiveScene().name;
 
-        // Reload the current scene
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void CheckCardsForAvaliability()
+    {
+        foreach (var card in PlayerHandCards)
+            card.CheckForAvailability(PlayerMana);
+    }
+
+    public void HighliteTargets(bool p_highlite)
+    {
+        foreach (var card in EnemyFieldCards)
+            card.HighlightAsTarget(p_highlite);
     }
 }
 

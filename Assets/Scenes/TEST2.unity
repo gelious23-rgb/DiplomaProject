@@ -492,17 +492,7 @@ MonoBehaviour:
   enemyField: {fileID: 734855163}
   playerField: {fileID: 1679152742}
   cardPref: {fileID: 1489109472383767633, guid: 71b2cbf2f969a394581f4b81045532fb, type: 3}
-  _turnTimeText: {fileID: 2038146894}
-  _endTurnButton: {fileID: 1898489759}
-  _restartTurnButton: {fileID: 1682098186}
-  _playerGameOver: {fileID: 1063968051}
-  _enemyGameOver: {fileID: 1664883711}
-  playerMana: 5
-  enemyMana: 5
-  _playerManaText: {fileID: 393326353}
-  _enemyManaText: {fileID: 682165029}
-  _playerHealthText: {fileID: 1573140017}
-  _enemyHealthText: {fileID: 2062387266}
+  _ai: {fileID: 819172299}
   PlayerHandCards: []
   PlayerFieldCards: []
   EnemyHandCards: []
@@ -1268,6 +1258,7 @@ GameObject:
   - component: {fileID: 819172296}
   - component: {fileID: 819172298}
   - component: {fileID: 819172297}
+  - component: {fileID: 819172299}
   m_Layer: 5
   m_Name: Enemy Image
   m_TagString: Untagged
@@ -1333,6 +1324,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819172295}
   m_CullTransparentMesh: 1
+--- !u!114 &819172299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819172295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43a7aabf8b9c1a47b92c5bc44187d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gm: {fileID: 195757897}
 --- !u!1 &1063968049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,6 +1474,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063968049}
   m_CullTransparentMesh: 1
+--- !u!1 &1128984506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128984507}
+  - component: {fileID: 1128984508}
+  m_Layer: 5
+  m_Name: UIContorller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1128984507
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128984506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1489301150}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1128984508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128984506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ea16f269e9f8e4f9869235ffda7316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gm: {fileID: 195757897}
+  playerGameOver: {fileID: 1063968051}
+  enemyGameOver: {fileID: 1664883711}
+  _turnTimeText: {fileID: 2038146894}
+  _endTurnButton: {fileID: 1898489759}
+  _restartTurnButton: {fileID: 1682098186}
+  playerManaText: {fileID: 393326353}
+  enemyManaText: {fileID: 682165029}
+  playerHealthText: {fileID: 1573140017}
+  enemyHealthText: {fileID: 2062387266}
 --- !u!1 &1336179562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,6 +1718,7 @@ RectTransform:
   - {fileID: 1682098185}
   - {fileID: 1063968050}
   - {fileID: 1664883710}
+  - {fileID: 1128984507}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

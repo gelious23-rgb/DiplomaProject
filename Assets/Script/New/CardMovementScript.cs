@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -56,11 +58,22 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
         //store current parent
         _defaultParent = _defaultTempCardParent = transform.parent;
 
-        _isDraggable = (_defaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_HAND || _defaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_BOARD) &&
-            _gameManager.IsPlayerTurn;
+        _isDraggable = GameManager.IsPlayerTurn && (
+                                                     (DefaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_HAND &&
+                                                     GameManager.PlayerMana >= GetComponent<CardInfoScript>()._selfCard.manacost) ||
+                                                     (
+                                                      DefaultParent.GetComponent<DropPlaceScript>().Type == FieldType.PLAYER_BOARD &&
+                                                      GetComponent<CardInfoScript>()._selfCard.canAttack
+                                                     )
+
+                                                    );
 
         if (!_isDraggable)
             return;
+
+        
+        if(GetComponent<CardInfoScript>()._selfCard.canAttack)
+            GameManager.HighliteTargets(true);
 
         TempCardGO.transform.SetParent(_defaultParent);
         TempCardGO.transform.SetSiblingIndex(transform.GetSiblingIndex());
@@ -92,6 +105,8 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
         if (!_isDraggable)
             return;
 
+        GameManager.HighliteTargets(false);
+
         transform.SetParent(_defaultParent);
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -121,5 +136,39 @@ public class CardMovementScript : MonoBehaviour, IBeginDragHandler, IDragHandler
         }
 
         TempCardGO.transform.SetSiblingIndex(newIndex);
+    }
+
+    public void MovetoField(Transform field)
+    {
+        transform.DOMove(field.position, .5f);
+    }
+
+    public void MovetoTarget(Transform target)
+    {
+        StartCoroutine(MoveToTargetCor(target));
+    }
+
+    IEnumerator MoveToTargetCor(Transform target)
+    {
+        Vector3 pos = transform.position;
+        Transform parent = transform.parent;
+        int index = transform.GetSiblingIndex();
+
+        transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = false;
+
+        transform.SetParent(GameObject.Find("Canvas").transform);
+
+        transform.DOMove(target.position, .25f);
+
+        yield return new WaitForSeconds(.25f);
+
+        transform.DOMove(pos, .25f);
+
+        yield return new WaitForSeconds(.25f);
+
+        transform.SetParent(parent);
+        transform.SetSiblingIndex(index);
+
+        transform.parent.GetComponent<HorizontalLayoutGroup>().enabled = true;
     }
 }

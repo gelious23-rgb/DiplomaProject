@@ -18,6 +18,10 @@ public class CardInfoScript : MonoBehaviour
     [SerializeField]
     private GameObject _hideGO,_highliter;
     public bool isPlayer;
+    [SerializeField]
+    private Color  _targetColor;
+    [SerializeField]
+    private Color _normalColor;
 
     public GameObject Highliter
     {
@@ -71,5 +75,16 @@ public class CardInfoScript : MonoBehaviour
     public void DeHighlightCard()
     {
         _highliter.SetActive(false);
+    }
+
+    public void CheckForAvailability(int p_currentMana)
+    {
+        GetComponent<CanvasGroup>().alpha = p_currentMana >= _selfCard.manacost ? 1 : .5f;
+    }
+
+    public void HighlightAsTarget(bool p_highlite)
+    {
+        
+        GetComponent<Image>().color = p_highlite ? _targetColor : _normalColor;
     }
 }
