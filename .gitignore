@@ -76,3 +76,5 @@ Library/
 Logs/
 
 UserSettings/
+
+/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
