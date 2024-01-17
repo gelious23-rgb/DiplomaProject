@@ -5,7 +5,6 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject gameUI;
     public GameObject settingsMenuUI;
     public GameObject popupSurrenderMenu;
     public GameObject popupQuitMenu;
@@ -28,7 +27,6 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        gameUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f; // Zatrzymuje czas gry, aby wszystko siê zatrzyma³o
         GameIsPaused = true;
@@ -36,7 +34,6 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        gameUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -66,8 +63,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Surrender()
     {
-        Time.timeScale = 1f;
         Debug.Log("Surrender");
+        Time.timeScale = 1f;
     }
 
     public void PopUpQuit()
@@ -83,6 +80,6 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quit");
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }

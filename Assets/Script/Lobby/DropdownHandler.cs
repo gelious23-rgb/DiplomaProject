@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class DropdownHandler : MonoBehaviour
 {
@@ -12,12 +13,18 @@ public class DropdownHandler : MonoBehaviour
     private Image image1;
     [SerializeField]
     private Image image2;
+    [SerializeField]
+    private Sprite angelBorder;
+    [SerializeField]
+    private Sprite DemonBorder;
+
 
     private void Start()
     {
         // Przypisanie metod do zdarzeñ OnValueChanged dla obu dropdownów
         dropdown1.onValueChanged.AddListener(OnDropdown1ValueChanged);
         dropdown2.onValueChanged.AddListener(OnDropdown2ValueChanged);
+        dropdown2.value = 2;
     }
 
     private void OnDropdown1ValueChanged(int index)
@@ -25,14 +32,18 @@ public class DropdownHandler : MonoBehaviour
         // Sprawdzenie wybranej opcji w dropdownie 1
         string selectedOption = dropdown1.options[index].text;
 
-        // Zmiana koloru obrazka w zale¿noœci od wyboru
+        image1.color = (selectedOption == "Angels") ? Color.blue : Color.red;
+
         if (selectedOption == "Angels")
         {
-            image1.color = Color.blue; // Zmiana koloru obrazka dla dropdownu 1
+            Image dropdownImage = dropdown1.GetComponent<Image>();
+            dropdownImage.sprite = angelBorder;
+
         }
         else if (selectedOption == "Demons")
         {
-            image1.color = Color.red; // Zmiana koloru obrazka dla dropdownu 1
+            Image dropdownImage = dropdown1.GetComponent<Image>();
+            dropdownImage.sprite = DemonBorder;
         }
     }
 
@@ -41,14 +52,17 @@ public class DropdownHandler : MonoBehaviour
         // Sprawdzenie wybranej opcji w dropdownie 2
         string selectedOption = dropdown2.options[index].text;
 
-        // Zmiana koloru obrazka w zale¿noœci od wyboru
+        image2.color = (selectedOption == "Angels") ? Color.blue : Color.red;
+
         if (selectedOption == "Angels")
         {
-            image2.color = Color.blue; // Zmiana koloru obrazka dla dropdownu 2
+            Image dropdownImage = dropdown2.GetComponent<Image>();
+            dropdownImage.sprite = angelBorder;
         }
         else if (selectedOption == "Demons")
         {
-            image2.color = Color.red; // Zmiana koloru obrazka dla dropdownu 2
+            Image dropdownImage = dropdown2.GetComponent<Image>();
+            dropdownImage.sprite = DemonBorder;
         }
     }
 }
