@@ -8,17 +8,26 @@ public class VolumeController : MonoBehaviour
     public AudioSource music;
     public Slider volumeSlider;
     private bool isMuted;
+    [SerializeField] private Image muteButton;
+    [SerializeField] private Sprite unmuted;
+    [SerializeField] private Sprite muted;
+
 
     private float musicVolume = 1f;
 
     void Start()
     {
-        music = GetComponent<AudioSource>();
-        volumeSlider.value= musicVolume;
         UpdateVolumeText();
 
+        music = GetComponent<AudioSource>();
+        volumeSlider.value= musicVolume;
         isMuted = PlayerPrefs.GetInt("MUTED") == 1;
         AudioListener.pause = isMuted;
+
+        if (!isMuted)
+        {
+            music.Play();
+        }
     }
 
     void Update()
@@ -49,5 +58,6 @@ public class VolumeController : MonoBehaviour
         isMuted = !isMuted;
         AudioListener.pause = isMuted;
         PlayerPrefs.SetInt("MUTED", isMuted? 1 : 0);
+        muteButton.sprite = isMuted? muted: unmuted;
     }
 }
