@@ -5,18 +5,14 @@ using Unity.VisualScripting;
 
 public class DropdownHandler : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Dropdown dropdown1;
-    [SerializeField]
-    private TMP_Dropdown dropdown2;
-    [SerializeField]
-    private Image image1;
-    [SerializeField]
-    private Image image2;
-    [SerializeField]
-    private Sprite angelBorder;
-    [SerializeField]
-    private Sprite DemonBorder;
+    [SerializeField] private TMP_Dropdown dropdown1;
+    [SerializeField] private TMP_Dropdown dropdown2;
+    [SerializeField] private Image image1;
+    [SerializeField] private Image image2;
+    [SerializeField] private Sprite angelBorder;
+    [SerializeField] private Sprite demonBorder;
+    [SerializeField] private Image Player1Frame;
+    [SerializeField] private Image Player2Frame;
 
 
     private void Start()
@@ -38,12 +34,14 @@ public class DropdownHandler : MonoBehaviour
         {
             Image dropdownImage = dropdown1.GetComponent<Image>();
             dropdownImage.sprite = angelBorder;
+            Player1Frame.sprite = angelBorder;
 
         }
         else if (selectedOption == "Demons")
         {
             Image dropdownImage = dropdown1.GetComponent<Image>();
-            dropdownImage.sprite = DemonBorder;
+            dropdownImage.sprite = demonBorder;
+            Player1Frame.sprite = demonBorder;
         }
     }
 
@@ -58,11 +56,13 @@ public class DropdownHandler : MonoBehaviour
         {
             Image dropdownImage = dropdown2.GetComponent<Image>();
             dropdownImage.sprite = angelBorder;
+            Player2Frame.sprite = angelBorder;
         }
         else if (selectedOption == "Demons")
         {
             Image dropdownImage = dropdown2.GetComponent<Image>();
-            dropdownImage.sprite = DemonBorder;
+            dropdownImage.sprite = demonBorder;
+            Player2Frame.sprite = demonBorder;
         }
     }
 }
