@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b2205f223f384497e766da3bab67e, type: 3}
-  m_Name: Bael
+  m_Name: Star of the Morning
   m_EditorClassIdentifier: 
-  name: Bael
-  description: <i><i>Gluttony</i></i>
-  CardType: 2
-  cardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
-  hp: 6
-  attack: 5
-  manacost: 3
+  name: Star of the Morning
+  description: "When used on a \u201CMan\u201D, \u201CHeroic\u201D or \u201CPowers\u201D
+    card, increase their MaxAtk by 2. When used on \u201CRelic\u201D card, increase
+    effect based on Relic. "
+  CardType: 0
+  cardImage: {fileID: 0}
+  hp: 0
+  attack: 0
+  manacost: 0

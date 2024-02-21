@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b2205f223f384497e766da3bab67e, type: 3}
-  m_Name: Bael
+  m_Name: Beast
   m_EditorClassIdentifier: 
-  name: Bael
-  description: <i><i>Gluttony</i></i>
-  CardType: 2
-  cardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
-  hp: 6
-  attack: 5
-  manacost: 3
+  name: Beast
+  description: 'All cards on the field receive 1 damage when it is played. If alive
+    for  3 turns, kills one enemy card every turn. '
+  CardType: 4
+  cardImage: {fileID: 21300000, guid: 09523a0ef2822b74fb5fc9bc03b134ea, type: 3}
+  hp: 11
+  attack: 6
+  manacost: 5

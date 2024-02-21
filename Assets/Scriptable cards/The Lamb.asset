@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b2205f223f384497e766da3bab67e, type: 3}
-  m_Name: Bael
+  m_Name: The Lamb
   m_EditorClassIdentifier: 
-  name: Bael
-  description: <i><i>Gluttony</i></i>
-  CardType: 2
-  cardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
-  hp: 6
-  attack: 5
-  manacost: 3
+  name: The Lamb
+  description: "<i><i>Pride</i></i>. If alive for 3 turns, deal 30% hp to it\u2019s
+    owner and opponent."
+  CardType: 4
+  cardImage: {fileID: 21300000, guid: bff090f22fbccec4eae815d7eddf516e, type: 3}
+  hp: 22
+  attack: 3
+  manacost: 7
