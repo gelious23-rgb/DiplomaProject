@@ -2,20 +2,25 @@ using Script.Characters;
 using Script.Characters.Player;
 using Script.Game;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Script.Card
 {
-    public class CardMove : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class CardMove : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
 
         private Camera _mainCamera;
         private Vector3 _offset;
         private Transform _defaultParent,_defaultTempCardParent;
         private bool _isDraggable;
-        
-        [SerializeField] private GameObject _tempCardGo;
+       [SerializeField] private GameObject infoPanel;
+
+       [SerializeField]
+       private TextMeshProUGUI infoTEXT;
+
+       [SerializeField] private GameObject _tempCardGo;
 
         [SerializeField] private CardInfoDisplay CardInfoDisplay;
 
@@ -72,7 +77,7 @@ namespace Script.Card
 
         private void HighlightTargetsIfCanAttack()
         {
-            if(CardInfoDisplay.CharacterCard.CanAttack)
+            if(CardInfoDisplay.CanAttack)
                 TurnBehaviour.HighlightTargets(true);
         }
 
@@ -136,13 +141,23 @@ namespace Script.Card
         }
 
         private bool IsPlayerBoardWithAttackCapability(CardDrop cardDrop) => cardDrop.Type == CharacterFieldType.PLAYER_BOARD &&
-                                                                             CardInfoDisplay.CharacterCard.CanAttack;
+                                                                             CardInfoDisplay.CanAttack;
         private bool IsPlayerBoard() => _defaultParent.GetComponent<CardDrop>().Type != CharacterFieldType.PLAYER_BOARD;
         private bool IsPlayerHandWithEnoughMana(CardDrop cardDrop) => cardDrop.Type == CharacterFieldType.PLAYER_HAND &&
-                                                                      PlayerMana.CurrentPlayerMana >= CardInfoDisplay.CharacterCard.Manacost;
+                                                                      PlayerMana.CurrentPlayerMana >= CardInfoDisplay.CharacterCard.manacost;
 
+        
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            infoPanel.SetActive(true);
+            infoTEXT.text = GetComponent<CardInfoDisplay>()._description.text;
 
+        }
 
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            infoPanel.SetActive(false);
+        }
     }
 
 }

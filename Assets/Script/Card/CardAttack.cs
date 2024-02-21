@@ -30,9 +30,9 @@ namespace Script.Card
 
             CardInfoDisplay cardInfoDis = eventData.pointerDrag.GetComponent<CardInfoDisplay>();
 
-            if(cardInfoDis && cardInfoDis.CharacterCard.CanAttack && transform.parent == _enemyAI.EnemyField)
+            if(cardInfoDis && cardInfoDis.CanAttack && transform.parent == _enemyAI.EnemyField)
             {
-                cardInfoDis.CharacterCard.ChangeAttackState(false);
+                cardInfoDis.ChangeAttackState(false);
                 
                 if (cardInfoDis.IsPlayer)
                     cardInfoDis.DeHighlightCard();

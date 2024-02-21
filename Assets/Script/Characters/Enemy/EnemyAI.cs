@@ -45,7 +45,7 @@ namespace Script.Characters.Enemy
         
         private IEnumerator HandleActiveCardsAttack()
         {
-            foreach (var activeCard in EnemySpawnerCards.EnemyFieldCards.FindAll(x => x.CharacterCard.CanAttack))
+            foreach (var activeCard in EnemySpawnerCards.EnemyFieldCards.FindAll(x => x.CanAttack))
             {
                 CardMoveAnimation activeCardMoveAnimation = activeCard.GetComponent<CardMoveAnimation>();
 
@@ -53,7 +53,7 @@ namespace Script.Characters.Enemy
                 {
                     var enemy = PlayerSpawnerCards.PlayerFieldCards[Random.Range(0, PlayerSpawnerCards.PlayerFieldCards.Count)];
 
-                    activeCard.CharacterCard.ChangeAttackState(false);
+                    activeCard.ChangeAttackState(false);
                     activeCardMoveAnimation.MovetoTarget(enemy.transform);
                     yield return new WaitForSeconds(.75f);
 
@@ -71,13 +71,13 @@ namespace Script.Characters.Enemy
                 if (EnemySpawnerCards.EnemyFieldCards.Count > 5 || _enemyMana.CurrentEnemyMana == 0 || EnemySpawnerCards.EnemyHandCards.Count == 0)
                     break;
 
-                List<CardInfoDisplay> cardList = cards.FindAll(x => _enemyMana.CurrentEnemyMana >= x.CharacterCard.Manacost);
+                List<CardInfoDisplay> cardList = cards.FindAll(x => _enemyMana.CurrentEnemyMana >= x.CharacterCard.manacost);
 
                 if (cardList.Count == 0)
                     break;
 
                 cardList[0].GetComponent<CardMoveAnimation>().MovetoField(EnemyField);
-                _enemyMana.ReduceMana(cardList[0].CharacterCard.Manacost);
+                _enemyMana.ReduceMana(cardList[0].CharacterCard.manacost);
 
                 yield return new WaitForSeconds(.51f);
 

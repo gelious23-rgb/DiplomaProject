@@ -35,14 +35,14 @@ namespace Script.Card
             CardInfoDisplay cardInfo = cardMove.GetComponent<CardInfoDisplay>();
 
             if(cardMove && _playerSpawnerCards.PlayerFieldCards.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
-               cardInfo.CharacterCard.Manacost && !cardMove.GetComponent<CardInfoDisplay>().CharacterCard.IsPlaced)
+               cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
             { 
                 _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
                 _playerSpawnerCards.PlayerFieldCards.Add(cardInfo);
                 cardMove.DefaultParent = transform;
 
-                cardInfo.CharacterCard.IsPlaced = true;
-                _playerMana.ReduceMana(cardInfo.CharacterCard.Manacost);
+                cardInfo.IsPlaced = true;
+                _playerMana.ReduceMana(cardInfo.CharacterCard.manacost);
                _turnBehaviour.CheckCardsForAvailability();
             }
 

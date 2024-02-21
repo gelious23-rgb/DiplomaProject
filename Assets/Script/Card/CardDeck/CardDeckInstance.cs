@@ -6,17 +6,25 @@ namespace Script.Card.CardDeck
 {
     public abstract class CardDeckInstance
     {
-        public List<CharacterCard> EnemyDeck;
-        public List<CharacterCard> PlayerDeck;
+        public List<Card> EnemyDeck;
+        public List<Card> PlayerDeck;
 
-        protected List<CharacterCard> GiveDeckCard()
+        protected List<Card> GiveDeckCard()
         {
-            List<CharacterCard> list = new List<CharacterCard>();
-            for(int i = 0; i < 15; i ++)
+           // Debug.Log(GetCardLibrary().AllCards.Count + "All cards count");
+            List<Card> list = new List<Card>();
+            for(int i = 0; i < GetCardLibrary().AllCards.Count; i ++)
             {
-                list.Add(CardInstance.AllCards[Random.Range(0, CardInstance.AllCards.Count)]);
+                list.Add(GetCardLibrary().AllCards[Random.Range(0, GetCardLibrary().AllCards.Count)]);
             }
             return list;
+        }
+
+        private ScriptableCardHolder GetCardLibrary()
+        {
+           var  library = GameObject.FindGameObjectWithTag("CardLibrary");
+
+           return library.GetComponent<ScriptableCardHolder>();
         }
     }
 }

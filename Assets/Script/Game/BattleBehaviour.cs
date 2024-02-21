@@ -14,19 +14,19 @@ namespace Script.Game
         public void CardsFight(CardInfoDisplay playerCard, CardInfoDisplay enemyCard)
         {
             if (TurnBehaviour.IsPlayerTurn)
-                enemyCard.CharacterCard.GetDamage(playerCard.CharacterCard.Damage);
+                enemyCard.GetDamage(playerCard.ATK);
             else
-                playerCard.CharacterCard.GetDamage(enemyCard.CharacterCard.Damage);
+                playerCard.GetDamage(enemyCard.ATK);
             
             CheckAlivePlayerCardOnBoard(playerCard);
             CheckAliveEnemyCardOnBoard(enemyCard);
         }
         private void CheckAliveEnemyCardOnBoard(CardInfoDisplay enemyCard)
         {
-            if (!enemyCard.CharacterCard.IsAlive)
+            if (!enemyCard.IsAlive)
             {
                 CardDeath.DestroyCard(enemyCard);
-                int damageDealt = enemyCard.CharacterCard.Manacost;
+                int damageDealt = enemyCard.CharacterCard.manacost;
                 _calculateDamage.DealDamageToEnemyHero(damageDealt);
             }
             else
@@ -34,10 +34,10 @@ namespace Script.Game
         }
         private void CheckAlivePlayerCardOnBoard(CardInfoDisplay playerCard)
         {
-            if (!playerCard.CharacterCard.IsAlive)
+            if (!playerCard.IsAlive)
             {
                 CardDeath.DestroyCard(playerCard);
-                int damageDealt = playerCard.CharacterCard.Manacost;
+                int damageDealt = playerCard.CharacterCard.manacost;
                 _calculateDamage.DealDamageToPlayerHero(damageDealt);
             }
             else

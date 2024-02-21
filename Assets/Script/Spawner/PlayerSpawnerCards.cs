@@ -21,7 +21,7 @@ namespace Script.Spawner
             CurrentPlayerCardDeckInstance = new PlayerCardDeckInstance();
             GiveStartCards(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
         }
-        protected override void GiveStartCards(List<CharacterCard> deck, Transform hand)
+        protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
         {
             int i = 0;
             while (i++ < 4)
@@ -29,14 +29,14 @@ namespace Script.Spawner
         }
 
 
-        protected override void GiveCardToHand(List<CharacterCard> deck, Transform hand)
+        protected override void GiveCardToHand(List<Card.Card> deck, Transform hand)
         {
             if (deck.Count == 0)
                 return;
             if (LogAndBurnCardsIfHandIsFull(deck, hand))
                 return;
 
-            CharacterCard characterCard = deck.FirstOrDefault();
+            Card.Card characterCard = deck.FirstOrDefault();
             if (characterCard == null)
                 return;
 
@@ -49,7 +49,7 @@ namespace Script.Spawner
             CurrentPlayerCardDeckInstance ??= new PlayerCardDeckInstance();
             GiveCardToHand(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
         }
-        protected override void SetupCard(CharacterCard characterCard, Transform hand)
+        protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
             cardGameObj.transform.SetParent(hand, false);
@@ -62,7 +62,7 @@ namespace Script.Spawner
                 PlayerHandCards.Add(cardInfoDisplay);
             }
         }
-        protected override bool LogAndBurnCardsIfHandIsFull(List<CharacterCard> deck, Transform hand)
+        protected override bool LogAndBurnCardsIfHandIsFull(List<Card.Card> deck, Transform hand)
         {
             if (hand == PlayerHand && PlayerHandCards.Count >= _maxPlayerHandSize)
             {
@@ -71,12 +71,12 @@ namespace Script.Spawner
             }
             return false;
         }
-        protected override void LogAndBurnCard(List<CharacterCard> deck, string message)
+        protected override void LogAndBurnCard(List<Card.Card> deck, string message)
         {
-            CharacterCard characterCard = deck.FirstOrDefault();
+            Card.Card characterCard = deck.FirstOrDefault();
             if (characterCard != null)
             {
-                Debug.Log(message + characterCard.Name);
+                Debug.Log(message + characterCard.name);
                 deck.Remove(characterCard);
             }   
         }
