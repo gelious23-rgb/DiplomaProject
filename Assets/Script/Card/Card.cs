@@ -1,3 +1,5 @@
+using Script.Card.CardEffects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Card
@@ -20,5 +22,31 @@ namespace Script.Card
         {
             Tool, Man, Powers, Relic, Heroic
         };
+
+        private void Start()
+        {
+            CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
+        }
+        
+        void OnTurnStart()
+        {
+
+            switch (CardType)
+            { 
+                case Types.Tool:
+                    break;
+                case Types.Man:
+                    Debug.Log("CounterAttack added");
+                    this.AddComponent<CounterAttack>();
+                    break;
+                case Types.Heroic:
+                    break;
+                case Types.Powers:
+                    break;
+                case Types.Relic:
+                    break;
+
+            }
+        }
     }
 }
