@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b2205f223f384497e766da3bab67e, type: 3}
-  m_Name: Bael
+  m_Name: Martyr
   m_EditorClassIdentifier: 
-  name: Bael
-  description: <i><i>Gluttony</i></i>
-  CardType: 2
-  cardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
-  hp: 6
-  attack: 5
-  manacost: 3
+  name: Martyr
+  description: '<i><b><i><b>Counterattack</b></i></b></i>. When hit, additionally
+    deal 1 damage to an attacker even if received lethal damage. '
+  CardType: 1
+  cardImage: {fileID: 21300000, guid: a13219d2725dba544a6a0126234ea59f, type: 3}
+  hp: 4
+  attack: 1
+  manacost: 1

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5b2205f223f384497e766da3bab67e, type: 3}
-  m_Name: Bael
+  m_Name: Eden Fruit
   m_EditorClassIdentifier: 
-  name: Bael
-  description: <i><i>Gluttony</i></i>
-  CardType: 2
-  cardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
-  hp: 6
-  attack: 5
-  manacost: 3
+  name: Eden Fruit
+  description: Grants <i>Miracle</i> for 1 turn to random ally each turn.
+  CardType: 3
+  cardImage: {fileID: 21300000, guid: 08f2a7dc5fd5f584890b9e20a252a3a4, type: 3}
+  hp: 11
+  attack: 0
+  manacost: 5
