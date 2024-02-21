@@ -151,6 +151,7 @@ namespace Script.Card
         {
             infoPanel.SetActive(true);
             infoTEXT.text = GetComponent<CardInfoDisplay>()._description.text;
+            infoTEXT.GetComponent<PopupText>().PupUP();
 
         }
 
