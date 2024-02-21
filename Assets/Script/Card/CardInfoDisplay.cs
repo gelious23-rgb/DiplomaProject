@@ -8,11 +8,18 @@ namespace Script.Card
     public class CardInfoDisplay : MonoBehaviour
     {
 
-        public CharacterCard CharacterCard;
+        public Card CharacterCard;
         [SerializeField]
         private Image _sprite;
+
         [SerializeField]
-        private TextMeshProUGUI _name, _description, _type;
+        private TextMeshProUGUI _name;
+
+        [SerializeField] public TextMeshProUGUI _description;
+
+        [SerializeField]
+        private TextMeshProUGUI _type;
+
         [SerializeField]
         private TextMeshProUGUI _attack, _hp, _manacost;
         
@@ -24,26 +31,42 @@ namespace Script.Card
         [SerializeField]
         private Color _normalColor;
         public Image _Image;
+        public bool CanAttack;
+        public bool IsPlaced;
+       [HideInInspector] public int HP;
+       [HideInInspector] public int ATK;
+        public bool IsAlive => HP > 0;
+        public void ChangeAttackState(bool canAttack)
+        {
+            CanAttack = canAttack;
+        }
 
-        public void ShowCardInfo(CharacterCard characterCard, bool isPlayer)
+        public void GetDamage(int dmg)
+        {
+            HP -= dmg;
+        }
+
+        public void ShowCardInfo(Card characterCard, bool isPlayer)
         {
             IsPlayer = isPlayer;
             _hideGO.SetActive(false);
 
             CharacterCard = characterCard;
+            HP = characterCard.hp;
+            ATK = characterCard.attack;
 
-            _sprite.sprite = characterCard.Image;
+            _sprite.sprite = characterCard.cardImage;
             _sprite.preserveAspect = true;
-            _name.text = characterCard.Name;
-            _description.text = characterCard.Description;
-            _type.text = characterCard.Type;
+            _name.text = characterCard.name;
+            _description.text = characterCard.description;
+            _type.text = characterCard.CardType.ToString();
         
         
 
             RefreshData();
         }
 
-        public void HideCardInfo(CharacterCard characterCard)
+        public void HideCardInfo(Card characterCard)
         {
             CharacterCard = characterCard;
             _hideGO.SetActive(true);
@@ -52,9 +75,9 @@ namespace Script.Card
 
         public void RefreshData()
         {
-            _attack.text = CharacterCard.Damage.ToString();
-            _hp.text = CharacterCard.Hp.ToString();
-            _manacost.text = CharacterCard.Manacost.ToString();
+            _attack.text = ATK.ToString();
+            _hp.text = HP.ToString();
+            _manacost.text = CharacterCard.manacost.ToString();
         }
 
 
@@ -72,7 +95,7 @@ namespace Script.Card
             }
             else
             {
-                GetComponent<CanvasGroup>().alpha = currentMana >= CharacterCard.Manacost ? 1 : .5f;
+                GetComponent<CanvasGroup>().alpha = currentMana >= CharacterCard.manacost ? 1 : .5f;
             }
 
         }

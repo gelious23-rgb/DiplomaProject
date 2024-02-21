@@ -72,7 +72,7 @@ namespace Script.Game
         {
             foreach (var card in PlayerSpawnerCards.PlayerFieldCards)
             {
-                card.CharacterCard.ChangeAttackState(true);
+                card.ChangeAttackState(true);
                 card.HighlightCard();
             }
         }
@@ -80,7 +80,7 @@ namespace Script.Game
         private void HandleEnemyTurn()
         {
             foreach (var card in EnemySpawnerCards.EnemyFieldCards)
-                card.CharacterCard.ChangeAttackState(true);
+                card.ChangeAttackState(true);
 
             _enemyAI.MakeTurn();
         }

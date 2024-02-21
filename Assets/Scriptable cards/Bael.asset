@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Bael
   description: <i><i>Gluttony</i></i>
   CardType: 2
-  cardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
+  cardImage: {fileID: 21300000, guid: fcf3448fd630b174aa8ac6f06148eb87, type: 3}
   hp: 6
   attack: 5
   manacost: 3

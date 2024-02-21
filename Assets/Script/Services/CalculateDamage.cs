@@ -25,16 +25,16 @@ namespace Script.Services
         { 
             int damageDealt = 0;
             
-            foreach (var activeCard in _playerSpawnerCards.PlayerFieldCards.FindAll(x => x.CharacterCard.CanAttack))
-                damageDealt += activeCard.CharacterCard.Manacost;
+            foreach (var activeCard in _playerSpawnerCards.PlayerFieldCards.FindAll(x => x.CanAttack))
+                damageDealt += activeCard.CharacterCard.manacost;
             return damageDealt; 
         }
         private int CalculateDamageToPlayerForActiveCards() 
         {
             int damageDealt = 0;
 
-            foreach (var activeCard in EnemySpawnerCards.EnemyFieldCards.FindAll(x => x.CharacterCard.CanAttack))
-                damageDealt += activeCard.CharacterCard.Manacost;
+            foreach (var activeCard in EnemySpawnerCards.EnemyFieldCards.FindAll(x => x.CanAttack))
+                damageDealt += activeCard.CharacterCard.manacost;
             return damageDealt; 
         } 
         
@@ -66,7 +66,7 @@ namespace Script.Services
 
         private void CalculateDamageForPlayerTurn()
         {
-            if (_playerSpawnerCards.PlayerFieldCards.Exists(x => x.CharacterCard.CanAttack) && EnemySpawnerCards.EnemyFieldCards.Count == 0)
+            if (_playerSpawnerCards.PlayerFieldCards.Exists(x => x.CanAttack) && EnemySpawnerCards.EnemyFieldCards.Count == 0)
             {
                 int damageDealt = CalculateDamageToEnemyForActiveCards();
                 if (damageDealt > 0)
@@ -76,7 +76,7 @@ namespace Script.Services
 
         private void CalculateDamageForEnemyTurn()
         {
-            if (EnemySpawnerCards.EnemyFieldCards.Exists(x => x.CharacterCard.CanAttack) && _playerSpawnerCards.PlayerFieldCards.Count == 0)
+            if (EnemySpawnerCards.EnemyFieldCards.Exists(x => x.CanAttack) && _playerSpawnerCards.PlayerFieldCards.Count == 0)
             {
                 int damageDealt = CalculateDamageToPlayerForActiveCards();
                 if (damageDealt > 0)
