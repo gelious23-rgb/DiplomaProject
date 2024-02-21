@@ -1,26 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using TMPro;
 
-
-namespace Script.Card
+[CreateAssetMenu(fileName = "New Card", menuName = "Cards")]
+public class Card : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "New Card", menuName = "Cards")]
-    public class Card : ScriptableObject
-    {
-        public new string Name;
-        public int Hp;
-        public int Attack;
-        public int Manacost;
-        
-        [TextArea]  
-        public string Description;
-        public  Types CardType;
-        public Sprite CardImage;
-        
-        [System.Serializable]
-        public enum Types
-        {
-            Tool, Man, Powers, Relic, Heroic
-        };
-    }
+    public new string name;
+    public string description;
+    public string cardType;
+
+    public Sprite cardImage;
+
+    public int hp;
+    public int attack;
+    public int manacost;
 }

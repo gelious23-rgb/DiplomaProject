@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 1489109472383767638}
   - component: {fileID: -6045418693925280293}
   - component: {fileID: -2093959379544132448}
+  - component: {fileID: 7060730677177867327}
   m_Layer: 5
   m_Name: Card Prefab 2
   m_TagString: Untagged
@@ -313,6 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3804b059873540e41b71658133282fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tempCardGo: {fileID: 4519870075534421929, guid: ccc201210cbcb2740bf85372286a1206, type: 3}
+  CardInfoDisplay: {fileID: -6045418693925280293}
 --- !u!225 &1489109472383767638
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -346,9 +349,10 @@ MonoBehaviour:
   _manacost: {fileID: 1931824282114159205}
   _hideGO: {fileID: 4831643719028820697}
   _highliter: {fileID: 7228763500931285428}
-  isPlayer: 0
+  IsPlayer: 0
   _targetColor: {r: 0.8962264, g: 0.4523407, b: 0.4523407, a: 0.6509804}
   _normalColor: {r: 0.50980395, g: 0.3882353, b: 0.49411765, a: 1}
+  _Image: {fileID: 1489109472383767635}
 --- !u!114 &-2093959379544132448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +363,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f364a00e847caf44f8e103710aa7464e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7060730677177867327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489109472383767633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06253940401248c4951c742927530fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1764524866873473800

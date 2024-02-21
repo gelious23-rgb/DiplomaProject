@@ -20,7 +20,7 @@ namespace Script.UI.Menu
         [SerializeField] private TextMeshProUGUI DescUI;
         private ScrollRect Scroll;
         private RectTransform Scroll_Content; 
-        [SerializeField] private List<Card.Card> AllCards = new List<Card.Card>();
+        [SerializeField] private List<Card.CharacterCard> AllCards = new List<Card.CharacterCard>();
     
 
         void Start()
@@ -36,18 +36,18 @@ namespace Script.UI.Menu
 
         }
 
-        private void Spawn(Card.Card cardSC)
+        private void Spawn(Card.CharacterCard characterCardSc)
         {
             var card = Instantiate(CardUI, Content.transform);
             var cardSc = card.GetComponent<CardCompendiumSC>();
         
-            cardSc.Name.text = cardSC.Name;
-            cardSc.Desc.text = cardSC.Description;
-            cardSc.Artwork.sprite = cardSC.CardImage;
-            cardSc.Type.text = cardSC.CardType.ToString();
-            cardSc.Hp.text = cardSC.Hp.ToString();
-            cardSc.Atk.text = cardSC.Attack.ToString();
-            cardSc.Cost.text = cardSC.Manacost.ToString();
+            cardSc.Name.text = characterCardSc.Name;
+            cardSc.Desc.text = characterCardSc.Description;
+            cardSc.Artwork.sprite = characterCardSc.Image;
+            cardSc.Type.text = characterCardSc.Type.ToString();
+            cardSc.Hp.text = characterCardSc.Hp.ToString();
+            cardSc.Atk.text = characterCardSc.Damage.ToString();
+            cardSc.Cost.text = characterCardSc.Manacost.ToString();
         
             cardSc.Onclick.onClick.AddListener(()=>OnClickCard(card));
         }

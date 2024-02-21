@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea5b2205f223f384497e766da3bab67e, type: 3}
+  m_Script: {fileID: 11500000, guid: 41dd9c0c44a34e7284418c952068ea5d, type: 3}
   m_Name: Bael
   m_EditorClassIdentifier: 
   Name: Bael
-  Hp: 6
-  Attack: 5
-  Manacost: 3
+  Type: Powers
   Description: Gluttony
-  CardType: 2
-  CardImage: {fileID: 21300000, guid: ff5d4cc61b069a047a26e5436c2430ee, type: 3}
+  Damage: 5
+  Manacost: 3
+  Hp: 6
+  IsPlaced: 0
+  CanAttack: 0

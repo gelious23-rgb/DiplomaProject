@@ -58,12 +58,11 @@ namespace Script.Services.UI
             for (int i = 0; i < _resolutionList.Count; i++)
             {
                 string resolutionOption = _resolutionList[i].width + "x" + _resolutionList[i].height + " " +
-                                          _resolutionList[i].refreshRate + Hz;
+                                          _resolutionList[i].refreshRate + Hz; 
                 options.Add(resolutionOption);
+                
                 if (_resolutionList[i].width == Screen.width && _resolutionList[i].height == Screen.height)
-                {
                     _resolutionIndex = i;
-                }
             }
 
             return options;
