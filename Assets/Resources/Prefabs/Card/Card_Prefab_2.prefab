@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 5247586804200315630}
   - component: {fileID: 8603098049169163493}
   - component: {fileID: 7346556363437831212}
+  - component: {fileID: 8438862151458370619}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -421,7 +422,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.5634, y: 0.5634}
-  m_SizeDelta: {x: 270.9927, y: 226.9183}
+  m_SizeDelta: {x: 291.7272, y: 250.2446}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8603098049169163493
 CanvasRenderer:
@@ -451,7 +452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: some long text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -496,7 +497,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 3
+  m_overflowMode: 4
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -520,6 +521,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8438862151458370619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505462869061396593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff472b1f579918b44ae0d24f8d49db36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descexp: {fileID: 11400000, guid: ee69a8edba596f14281afd303d7e783e, type: 2}
+  text: {fileID: 7346556363437831212}
 --- !u!1 &1764524866873473800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,8 +1859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 256.44955, y: 78.01381}
-  m_SizeDelta: {x: 90.8991, y: -12.3876}
+  m_AnchoredPosition: {x: 117.36719, y: 270.49463}
+  m_SizeDelta: {x: 111.6335, y: 22.6017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5210149259572365129
 CanvasRenderer:
