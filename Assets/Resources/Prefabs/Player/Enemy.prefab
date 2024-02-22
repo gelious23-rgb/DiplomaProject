@@ -737,11 +737,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43a7aabf8b9c1a47b92c5bc44187d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnBehaviour: {fileID: 0}
+  _turnBehaviour: {fileID: 5064058028099989030, guid: 363cdfc32ad6d5f4a8be616edaff977f, type: 3}
   EnemySpawnerCards: {fileID: 5876503861331612545}
-  PlayerSpawnerCards: {fileID: 0}
+  PlayerSpawnerCards: {fileID: 3825830637099633100, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
   _enemyMana: {fileID: 5876503861331612547}
-  _battleBehaviour: {fileID: 0}
+  _battleBehaviour: {fileID: 631714634621064793, guid: f4b387e753937204a9c1bd9ea84a1908, type: 3}
   EnemyField: {fileID: 5876503860864638684}
 --- !u!114 &5876503861331612549
 MonoBehaviour:
