@@ -60,7 +60,7 @@ namespace Script.Card.CardEffects
         }
         protected virtual void OnTurnStart()
         {
-            throw new NotImplementedException();
+            Debug.Log("On turn start worked");
         }
         protected virtual void OnTurnEnd()
         {
