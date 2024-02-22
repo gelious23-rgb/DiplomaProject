@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: -6045418693925280293}
   - component: {fileID: -2093959379544132448}
   - component: {fileID: 7060730677177867327}
+  - component: {fileID: 685209046763413181}
   m_Layer: 5
   m_Name: Card_Prefab_2
   m_TagString: Untagged
@@ -361,6 +362,7 @@ MonoBehaviour:
   IsPlaced: 0
   HP: 0
   ATK: 0
+  DamageResistance: 0
 --- !u!114 &-2093959379544132448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +387,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06253940401248c4951c742927530fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &685209046763413181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489109472383767633}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.20880505, b: 0.6415094, a: 1}
+  m_EffectDistance: {x: 3.06, y: -3.05}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1505462869061396593
 GameObject:
   m_ObjectHideFlags: 0
