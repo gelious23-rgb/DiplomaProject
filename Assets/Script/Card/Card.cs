@@ -1,3 +1,5 @@
+using Script.Card.CardEffects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Card
@@ -20,5 +22,37 @@ namespace Script.Card
         {
             Tool, Man, Powers, Relic, Heroic
         };
+
+        public void OnStart()
+        {
+             
+            
+        }
+        
+       public Types GetCardType()
+        {
+
+            switch (CardType)
+            { 
+                case Types.Tool:
+                    return Types.Tool;
+                    break;
+                case Types.Man:
+                    return Types.Man;
+                    break;
+                case Types.Heroic:
+                    return Types.Heroic;
+                    break;
+                case Types.Powers:
+                    return Types.Powers;
+                    break;
+                case Types.Relic:
+                    return Types.Relic;
+                    break;
+
+            }
+
+            return CardType;
+        }
     }
 }

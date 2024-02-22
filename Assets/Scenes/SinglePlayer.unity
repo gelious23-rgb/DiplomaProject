@@ -1181,6 +1181,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a8c3f68fc1d444d8e8e1a1d369c79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1492798035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5064058028099989029, guid: 363cdfc32ad6d5f4a8be616edaff977f, type: 3}
+  m_PrefabInstance: {fileID: 5064058029296002164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebbf5cee7af42d6be5998155e2dfeae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1856806121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1617,7 +1628,7 @@ PrefabInstance:
     - target: {fileID: 631714634621064793, guid: f4b387e753937204a9c1bd9ea84a1908, type: 3}
       propertyPath: _calculateDamage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1492798035}
     - target: {fileID: 631714634621064795, guid: f4b387e753937204a9c1bd9ea84a1908, type: 3}
       propertyPath: m_Name
       value: BattleBehaviour

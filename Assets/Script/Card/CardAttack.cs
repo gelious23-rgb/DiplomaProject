@@ -37,7 +37,7 @@ namespace Script.Card
                 if (cardInfoDis.IsPlayer)
                     cardInfoDis.DeHighlightCard();
 
-                _battleBehaviour.CardsFight(cardInfoDis,cardInfoScript);
+                _battleBehaviour.CardAttacking(cardInfoDis,cardInfoScript);
             }
 
         }

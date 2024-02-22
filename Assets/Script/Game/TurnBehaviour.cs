@@ -1,4 +1,5 @@
 using System.Collections;
+using Script.Card.CardEffects;
 using Script.Characters.Enemy;
 using Script.Characters.Player;
 using Script.Services;
@@ -33,11 +34,13 @@ namespace Script.Game
         {
             _turn = 0;
             StartCoroutine(TurnFunc());
+            
         }
         
         IEnumerator TurnFunc()
         {
             PrepareTurn();
+            
             
             if (IsPlayerTurn)
                 HandlePlayerTurn();
@@ -51,6 +54,7 @@ namespace Script.Game
 
         public void ChangeTurn()
         {
+            CardEffectHandler.OnTurnEnd.Invoke();
             StopAllCoroutines();
 
             _calculateDamage.CheckAmountCardsForCalculateDamage();

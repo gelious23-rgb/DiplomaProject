@@ -1,4 +1,6 @@
 
+using System;
+using Script.Card.CardEffects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,15 +37,53 @@ namespace Script.Card
         public bool IsPlaced;
        [HideInInspector] public int HP;
        [HideInInspector] public int ATK;
+      [HideInInspector] public int DamageResistance = 0;
         public bool IsAlive => HP > 0;
+
+        private void Start()
+        {
+           
+            CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
+            CardEffectHandler.OnTurnStart.AddListener(test);
+        }
+           [ContextMenu("force start")]
+        private void OnTurnStart()
+        {
+            AddPassive(CharacterCard.GetCardType());
+        }
+
+        private void test()
+        {
+            Debug.Log("Test success");
+        }
+
+        private void AddPassive(Card.Types Name)
+        {
+            switch (Name)
+            {
+                case Card.Types.Man: gameObject.AddComponent<CounterAttack>();
+                    break;
+                case Card.Types.Powers: gameObject.AddComponent<Protection>();
+                    break;
+
+            }
+        }
+
         public void ChangeAttackState(bool canAttack)
         {
             CanAttack = canAttack;
         }
 
-        public void GetDamage(int dmg)
+        public virtual void TakeDamage(int dmg, CardInfoDisplay damageSource)
         {
-            HP -= dmg;
+            
+            if (DamageResistance > dmg)
+            {
+                DamageResistance = dmg;
+            }
+            Debug.Log(this.CharacterCard.name +" prot is "+DamageResistance);
+            Debug.Log(dmg-DamageResistance + " damage taken  by " + this.CharacterCard.name);
+            HP -= dmg-DamageResistance;
         }
 
         public void ShowCardInfo(Card characterCard, bool isPlayer)
