@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Script.Card.CardEffects
 {
@@ -14,19 +13,7 @@ namespace Script.Card.CardEffects
                           + target.ATK + " damage");
                 damageSource.TakeDamage(target.ATK, damageSource);
             }
-=======
-﻿namespace Script.Card.CardEffects
-{
-    public class CounterAttack : Effect
-    {
-        protected override void OnBeingHit(CardInfoDisplay target)
-        {
-            if (GetCard().IsAlive == true)
-            {
-                BattleBehaviour.CardsForceFight(GetCard(), target);
-            }
-
->>>>>>> 6af6e68b54f96baeaf263203283ac3c9dbdd654d
         }
     }
+
 }

@@ -23,7 +23,6 @@ namespace Script.Card
             Tool, Man, Powers, Relic, Heroic
         };
 
-<<<<<<< HEAD
         public void OnStart()
         {
              
@@ -31,20 +30,11 @@ namespace Script.Card
         }
         
        public Types GetCardType()
-=======
-        private void Start()
-        {
-            CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
-        }
-        
-        void OnTurnStart()
->>>>>>> 6af6e68b54f96baeaf263203283ac3c9dbdd654d
-        {
+       {
 
             switch (CardType)
             { 
                 case Types.Tool:
-<<<<<<< HEAD
                     return Types.Tool;
                     break;
                 case Types.Man:
@@ -63,21 +53,7 @@ namespace Script.Card
             }
 
             return CardType;
-=======
-                    break;
-                case Types.Man:
-                    Debug.Log("CounterAttack added");
-                    this.AddComponent<CounterAttack>();
-                    break;
-                case Types.Heroic:
-                    break;
-                case Types.Powers:
-                    break;
-                case Types.Relic:
-                    break;
 
-            }
->>>>>>> 6af6e68b54f96baeaf263203283ac3c9dbdd654d
         }
     }
 }
