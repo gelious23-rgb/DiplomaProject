@@ -1,6 +1,7 @@
 using Script.Characters.Enemy;
 using Script.Characters.Player;
 using Script.Game;
+using Script.Logic;
 using Script.Spawner;
 
 using UnityEngine;
@@ -19,6 +20,11 @@ namespace Script.Services
         [SerializeField] private EnemySpawnerCards EnemySpawnerCards;
         
         [SerializeField] private TurnBehaviour _turnBehaviour;
+
+        public void DealDamageToCharacterDirectly(IHealth character, int damage)
+        {
+            character.TakeDamage(damage);
+        }
 
 
         private int CalculateDamageToEnemyForActiveCards() 

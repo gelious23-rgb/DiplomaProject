@@ -2,6 +2,7 @@
 using Script.Card.CardDeck;
 using System.Collections.Generic;
 using System.Linq;
+using Script.Characters.Player;
 using UnityEngine;
 
 namespace Script.Spawner
@@ -55,6 +56,7 @@ namespace Script.Spawner
             cardGameObj.transform.SetParent(hand, false);
             
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
+            cardInfoDisplay.owner = GetComponent<PlayerHealth>();
 
             if (hand == PlayerHand)
             {

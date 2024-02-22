@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Script.Card.CardEffects
 {
@@ -15,5 +15,4 @@ namespace Script.Card.CardEffects
             }
         }
     }
-
 }

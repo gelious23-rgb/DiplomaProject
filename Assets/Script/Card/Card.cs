@@ -30,7 +30,7 @@ namespace Script.Card
         }
         
        public Types GetCardType()
-       {
+        {
 
             switch (CardType)
             { 
@@ -53,7 +53,6 @@ namespace Script.Card
             }
 
             return CardType;
-
         }
     }
 }

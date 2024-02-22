@@ -1,6 +1,7 @@
 
 using System;
 using Script.Card.CardEffects;
+using Script.Logic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,13 +39,14 @@ namespace Script.Card
        [HideInInspector] public int HP;
        [HideInInspector] public int ATK;
       [HideInInspector] public int DamageResistance = 0;
+      public IHealth owner;
         public bool IsAlive => HP > 0;
 
         private void Start()
         {
            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
-            CardEffectHandler.OnTurnStart.AddListener(test);
+           
         }
            [ContextMenu("force start")]
         private void OnTurnStart()
@@ -52,10 +54,7 @@ namespace Script.Card
             AddPassive(CharacterCard.GetCardType());
         }
 
-        private void test()
-        {
-            Debug.Log("Test success");
-        }
+        
 
         private void AddPassive(Card.Types Name)
         {

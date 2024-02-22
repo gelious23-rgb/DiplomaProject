@@ -14,7 +14,6 @@ namespace Script.Card.CardEffects
             CardEffectHandler.Effects.Add(this);
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
             CardEffectHandler.OnTurnEnd.AddListener(OnTurnEnd);
-
            // CardEffectHandler.OnAttack.AddListener(OnAttack);
           //  CardEffectHandler.OnBeingHit.AddListener(OnBeingHit); 
         }
@@ -23,12 +22,11 @@ namespace Script.Card.CardEffects
         {
             BattleBehaviour = FindObjectOfType<BattleBehaviour>();
         }
-        
+
         public CardInfoDisplay GetCard()
         {
             return GetComponent<CardInfoDisplay>();
         }
-
 
         public virtual void OnAttack(CardInfoDisplay target, CardInfoDisplay self)
         {
@@ -49,7 +47,6 @@ namespace Script.Card.CardEffects
             {
                 
                 Destroy(this);
-
             }
             
         }

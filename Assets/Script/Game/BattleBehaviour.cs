@@ -9,9 +9,9 @@ namespace Script.Game
     {
         [SerializeField] private TurnBehaviour TurnBehaviour;
         
-        [SerializeField] private CardDeath CardDeath;
+        [SerializeField] internal CardDeath CardDeath;
         
-        [SerializeField] private CalculateDamage _calculateDamage;
+        [SerializeField] internal CalculateDamage _calculateDamage;
 
        /* public void CardsFight(CardInfoDisplay playerCard, CardInfoDisplay enemyCard)
         {
@@ -84,6 +84,5 @@ namespace Script.Game
             else
                 playerCard.RefreshData();
         }
-        /*public void CardsForceFight(CardInfoDisplay Card, CardInfoDisplay target) => Card.TakeDamage(target.ATK);*/
     }
 }

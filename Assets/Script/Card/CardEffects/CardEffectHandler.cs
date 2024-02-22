@@ -10,10 +10,8 @@ namespace Script.Card.CardEffects
         
         public static UnityEvent OnTurnStart = new UnityEvent();
         public static UnityEvent OnTurnEnd = new UnityEvent();
-        
         public static UnityEvent<CardInfoDisplay, CardInfoDisplay> OnAttack = new UnityEvent<CardInfoDisplay, CardInfoDisplay>();
         public static UnityEvent<CardInfoDisplay, CardInfoDisplay> OnBeingHit = new UnityEvent<CardInfoDisplay,CardInfoDisplay>();
-
 
     }
 }
