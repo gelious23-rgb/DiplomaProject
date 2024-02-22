@@ -1192,14 +1192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebbf5cee7af42d6be5998155e2dfeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-=======
---- !u!224 &1606252520 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5876503860864638684, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-  m_PrefabInstance: {fileID: 5876503861285211888}
-  m_PrefabAsset: {fileID: 0}
->>>>>>> 6af6e68b54f96baeaf263203283ac3c9dbdd654d
 --- !u!1001 &1856806121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1297,37 +1289,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccc201210cbcb2740bf85372286a1206, type: 3}
---- !u!1 &1888278300
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1888278301}
-  m_Layer: 0
-  m_Name: Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1888278301
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888278300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.503416, y: -11.370713, z: 44.799927}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1909845043 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4031606025345388583, guid: 0bba8a2803e14fd429512fc51b8ad9eb, type: 3}
@@ -1993,30 +1954,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 432447420}
     m_Modifications:
-    - target: {fileID: 5876503860603461226, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-      propertyPath: EnemyField
-      value: 
-      objectReference: {fileID: 1606252520}
-    - target: {fileID: 5876503860603461226, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-      propertyPath: _enemyMana
-      value: 
-      objectReference: {fileID: 50077043}
-    - target: {fileID: 5876503860603461226, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-      propertyPath: _turnBehaviour
-      value: 
-      objectReference: {fileID: 1492798034}
-    - target: {fileID: 5876503860603461226, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-      propertyPath: _battleBehaviour
-      value: 
-      objectReference: {fileID: 1107107703}
-    - target: {fileID: 5876503860603461226, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-      propertyPath: EnemySpawnerCards
-      value: 
-      objectReference: {fileID: 50077041}
-    - target: {fileID: 5876503860603461226, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
-      propertyPath: PlayerSpawnerCards
-      value: 
-      objectReference: {fileID: 1347836513}
     - target: {fileID: 5876503861331612544, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
