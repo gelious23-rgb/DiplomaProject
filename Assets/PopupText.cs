@@ -20,7 +20,7 @@ public class PopupText : MonoBehaviour
             if (text.text.Contains(Keyword))
             {
                // Debug.Log("contains keyword" + " " +Keyword);
-               text.text = text.text.Replace(text.text, text.text + "\n " + Keyword +
+               text.text = text.text.Replace(text.text, text.text + "\n "  +
                                              " - " + descexp.Explanations[index] + "\n");
             }
         }

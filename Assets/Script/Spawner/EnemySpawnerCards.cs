@@ -2,6 +2,7 @@
 using Script.Card.CardDeck;
 using System.Collections.Generic;
 using System.Linq;
+using Script.Characters.Enemy;
 using UnityEngine;
 
 namespace Script.Spawner
@@ -53,6 +54,7 @@ namespace Script.Spawner
             GameObject cardGameObj = Instantiate(cardPref, hand, false);
 
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
+            cardInfoDisplay.owner = GetComponent<EnemyHealth>();
 
             if (hand == EnemyHand)
             {

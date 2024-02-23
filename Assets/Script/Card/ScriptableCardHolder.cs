@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Script.Card.CardEffects;
+using Script.UI.Text;
 using UnityEngine;
 
 namespace Script.Card
@@ -8,6 +9,8 @@ namespace Script.Card
     public class ScriptableCardHolder : MonoBehaviour
     {
         public List<Card> AllCards = new List<Card>();
+        public DescExplanations keywords; 
+        public List<Card> AllAllCards = new List<Card>();
 
         public void Start()
         {

@@ -49,6 +49,10 @@ namespace Script.Lobby
         {
             //Compedium script
         }
+        public void RunSinglePlayer()
+        {
+            SceneManager.LoadScene(2);
+        }
 
     }
 }

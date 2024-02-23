@@ -1,4 +1,5 @@
-﻿using Script.Spawner;
+﻿using Script.Card.CardEffects;
+using Script.Spawner;
 using UnityEngine;
 
 namespace Script.Card
@@ -11,8 +12,8 @@ namespace Script.Card
         private EnemySpawnerCards _enemySpawnerCards;
 
         public void DestroyCard(CardInfoDisplay card)
-        {
-
+        { 
+            CardEffectHandler.OnDeath.Invoke(card);
                 card.GetComponent<CardMove>().OnEndDrag(null);
 
                 if (_enemySpawnerCards.EnemyFieldCards.Exists(x => x == card))

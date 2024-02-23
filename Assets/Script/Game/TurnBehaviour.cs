@@ -57,10 +57,9 @@ namespace Script.Game
 
         public void ChangeTurn()
         {
-            CardEffectHandler.OnTurnEnd.Invoke();
             StopAllCoroutines();
+            TurnEnd();
 
-            CardEffectHandler.OnTurnEnd.Invoke();
             
             _calculateDamage.CheckAmountCardsForCalculateDamage();
             _turn++;
@@ -77,6 +76,14 @@ namespace Script.Game
             }
             StartCoroutine(TurnFunc());
         }
+
+        private void TurnEnd()
+        {
+            CardEffectHandler.OnTurnEnd.Invoke();
+            Debug.Log("Turn ended");
+
+        }
+
         private void HandlePlayerTurn()
         {
             foreach (var card in PlayerSpawnerCards.PlayerFieldCards)
