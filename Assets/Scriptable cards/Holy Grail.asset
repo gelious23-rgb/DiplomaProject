@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Holy Grail
   m_EditorClassIdentifier: 
   name: Holy Grail
-  description: 'Grants Elixir to all allies every turn. If alive for 3 turns, also
-    grant 2 blessings for atk&hp. Wine. '
+  description: 'Grants <i>Elixir</i> to all allies every turn. If alive for 3 turns,
+    also grant 2 blessings for atk&hp. <i>Wine<i>. '
   CardType: 3
   cardImage: {fileID: 0}
   hp: 12
   attack: 6
   manacost: 6
+  Effects: []

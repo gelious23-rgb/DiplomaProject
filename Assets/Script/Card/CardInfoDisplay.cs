@@ -36,22 +36,27 @@ namespace Script.Card
         public Image _Image;
         public bool CanAttack;
         public bool IsPlaced;
-       [HideInInspector] public int HP;
+         public int HP;
        [HideInInspector] public int ATK;
       [HideInInspector] public int DamageResistance = 0;
       public IHealth owner;
         public bool IsAlive => HP > 0;
 
-        private void Start()
+        internal void Start()
         {
            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
            
         }
            [ContextMenu("force start")]
-        private void OnTurnStart()
+           internal void OnTurnStart()
         {
             AddPassive(CharacterCard.GetCardType());
+            foreach (var effect in CharacterCard.Effects)
+            {
+               var actualEffect = effect.GetComponent<Effect>();
+                gameObject.AddComponent(actualEffect.GetType());
+            }
         }
 
         

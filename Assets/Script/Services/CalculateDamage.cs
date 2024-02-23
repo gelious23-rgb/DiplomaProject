@@ -20,6 +20,10 @@ namespace Script.Services
         [SerializeField] private EnemySpawnerCards EnemySpawnerCards;
         
         [SerializeField] private TurnBehaviour _turnBehaviour;
+        public void DealDamageToCharacterDirectly(IHealth character, int damage)
+        {
+            character.TakeDamage(damage);
+        }
 
         public void DealDamageToCharacterDirectly(IHealth character, int damage)
         {

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Script.Card.CardEffects;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +19,8 @@ namespace Script.Card
         public int hp;
         public int attack;
         public int manacost;
+        [SerializeReference]
+        public List<GameObject> Effects = new List<GameObject>();
         [System.Serializable]
         public enum Types
         {

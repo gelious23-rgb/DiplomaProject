@@ -8,13 +8,21 @@ namespace Script.Card.CardEffects
           {
                if (target.HP <= Mathf.RoundToInt(target.CharacterCard.hp * 0.5f))
                {
-                    BattleBehaviour.CardDeath.DestroyCard(target);
-                    Debug.Log("Executed "+target.CharacterCard.name);
                     BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(target.owner,
                          target.CharacterCard.manacost);
+                    BattleBehaviour.CardDeath.DestroyCard(target);
+                    Debug.Log("Executed "+target.CharacterCard.name);
+                    
+
                     Debug.Log(target.owner +  "suffered " +target.CharacterCard.manacost + " damage" );
                    
                }
           }
+          
+          protected override void OnTurnEnd()
+          {
+               base.OnTurnEnd();
+          }
+
      }
 }

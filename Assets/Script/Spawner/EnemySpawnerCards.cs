@@ -3,7 +3,7 @@ using Script.Card.CardDeck;
 using System.Collections.Generic;
 using System.Linq;
 using Script.Characters.Enemy;
-using Script.Characters.Player;
+
 using UnityEngine;
 
 namespace Script.Spawner

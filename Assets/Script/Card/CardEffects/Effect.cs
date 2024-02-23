@@ -21,7 +21,14 @@ namespace Script.Card.CardEffects
         protected void OnEnable()
         {
             BattleBehaviour = FindObjectOfType<BattleBehaviour>();
+            DoOnEnable();
         }
+
+        public virtual void DoOnEnable()
+        {
+            
+        }
+
 
         public CardInfoDisplay GetCard()
         {
@@ -35,7 +42,8 @@ namespace Script.Card.CardEffects
 
         public virtual void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
-            throw new NotImplementedException();
+            Debug.Log("On being hit worked");
+
         }
         protected virtual void OnTurnStart()
         {
@@ -43,14 +51,10 @@ namespace Script.Card.CardEffects
         }
         protected virtual void OnTurnEnd()
         {
-            if (DestroyOnTurnEnd == true) 
-            {
-                
-                Destroy(this);
-            }
-            
+            Destroy(this);
+
         }
-        protected bool DestroyOnTurnEnd { get; set; }
+       
 
     }
 }
