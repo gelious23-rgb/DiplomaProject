@@ -25,6 +25,11 @@ namespace Script.Services
             character.TakeDamage(damage);
         }
 
+        public void DealDamageToCharacterDirectly(IHealth character, int damage)
+        {
+            character.TakeDamage(damage);
+        }
+
 
         private int CalculateDamageToEnemyForActiveCards() 
         { 

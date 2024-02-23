@@ -13,13 +13,16 @@ namespace Script.Card.CardEffects
                     BattleBehaviour.CardDeath.DestroyCard(target);
                     Debug.Log("Executed "+target.CharacterCard.name);
                     
+
                     Debug.Log(target.owner +  "suffered " +target.CharacterCard.manacost + " damage" );
                    
                }
           }
+          
           protected override void OnTurnEnd()
           {
                base.OnTurnEnd();
           }
+
      }
 }

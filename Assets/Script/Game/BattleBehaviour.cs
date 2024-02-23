@@ -85,5 +85,6 @@ namespace Script.Game
                 playerCard.RefreshData();
         }
        // public void CardsForceFight(CardInfoDisplay Card, CardInfoDisplay target) => Card.GetDamage(target.ATK);
+
     }
 }

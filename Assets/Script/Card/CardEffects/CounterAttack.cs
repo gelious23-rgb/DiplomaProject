@@ -13,10 +13,12 @@ namespace Script.Card.CardEffects
                           + target.ATK + " damage");
                 damageSource.TakeDamage(target.ATK, damageSource);
             }
+
         }
         protected override void OnTurnEnd()
         {
             base.OnTurnEnd();
+
         }
     }
 }

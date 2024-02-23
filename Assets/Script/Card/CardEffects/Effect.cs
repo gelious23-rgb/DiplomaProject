@@ -29,6 +29,7 @@ namespace Script.Card.CardEffects
             
         }
 
+
         public CardInfoDisplay GetCard()
         {
             return GetComponent<CardInfoDisplay>();
@@ -42,6 +43,7 @@ namespace Script.Card.CardEffects
         public virtual void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
             Debug.Log("On being hit worked");
+
         }
         protected virtual void OnTurnStart()
         {
@@ -50,6 +52,7 @@ namespace Script.Card.CardEffects
         protected virtual void OnTurnEnd()
         {
             Destroy(this);
+
         }
        
 

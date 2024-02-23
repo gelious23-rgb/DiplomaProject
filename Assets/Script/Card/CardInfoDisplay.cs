@@ -46,7 +46,7 @@ namespace Script.Card
         {
            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
-            CardEffectHandler.OnTurnStart.AddListener(test);
+           
         }
            [ContextMenu("force start")]
            internal void OnTurnStart()
@@ -59,10 +59,7 @@ namespace Script.Card
             }
         }
 
-        private void test()
-        {
-            Debug.Log("Test success");
-        }
+        
 
         private void AddPassive(Card.Types Name)
         {
