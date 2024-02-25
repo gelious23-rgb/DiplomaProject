@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Seraphim
   m_EditorClassIdentifier: 
   name: Seraph
-  description: 'Execution '
+  description: '<i>Execution</i> '
   CardType: 2
   cardImage: {fileID: 21300000, guid: b7ac2bd55dbff074c9741a91c52c220b, type: 3}
   hp: 6

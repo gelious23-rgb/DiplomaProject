@@ -14,15 +14,31 @@ namespace Script.Card
         public void DestroyCard(CardInfoDisplay card)
         { 
             CardEffectHandler.OnDeath.Invoke(card);
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            if (card.TryGetComponent<SisyphusEffect>(out var sisyphusEffect) == false)
+            {
                 card.GetComponent<CardMove>().OnEndDrag(null);
 
-                if (_enemySpawnerCards.EnemyFieldCards.Exists(x => x == card))
-                    _enemySpawnerCards.EnemyFieldCards.Remove(card);
+                if (_enemySpawnerCards.Board.Exists(x => x == card))
+                    _enemySpawnerCards.Board.Remove(card);
 
-                if (_playerSpawnerCards.PlayerFieldCards.Exists(x => x == card))
-                    _playerSpawnerCards.PlayerFieldCards.Remove(card);
+                if (_playerSpawnerCards.Board.Exists(x => x == card))
+                    _playerSpawnerCards.Board.Remove(card);
 
                 Destroy(card.gameObject);
+            }
+            else
+            {
+                if (_playerSpawnerCards.Board.Contains(card))
+                {
+                    sisyphusEffect.SisyphusRevive(_playerSpawnerCards.GetCardOfType(Card.Types.Powers));
+                }
+                else if (_enemySpawnerCards.Board.Contains(card))
+                {
+                    sisyphusEffect.SisyphusRevive(_enemySpawnerCards.GetCardOfType(Card.Types.Powers));
+                }
+            }
+                
                 
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using Script.Card;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,20 @@ namespace Script.Spawner
     public abstract class SpawnerCards : MonoBehaviour
     {
         public GameObject cardPref;
+        [SerializeField]public List<CardInfoDisplay> Board = new List<CardInfoDisplay>();
+
+        public CardInfoDisplay GetCardOfType(Card.Card.Types type)
+        {
+            foreach (var cardInfo in Board)
+            {
+                if (cardInfo.CharacterCard.CardType == type)
+                {
+                    return cardInfo;
+                }
+            }
+
+            return null;
+        }
 
 
 

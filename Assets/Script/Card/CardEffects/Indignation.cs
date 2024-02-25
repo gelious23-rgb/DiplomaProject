@@ -7,7 +7,7 @@ namespace Script.Card.CardEffects
         private int atkCount = 0;
          
         
-        public override void OnAttack(CardInfoDisplay target, CardInfoDisplay self)
+        public override void OnAttack(CardInfoDisplay self, CardInfoDisplay target)
         {
             if(self == GetCard())
             if (atkCount < 2)

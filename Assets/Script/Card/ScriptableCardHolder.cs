@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Script.Card.CardEffects;
@@ -11,11 +12,15 @@ namespace Script.Card
         public List<Card> AllCards = new List<Card>();
         public DescExplanations keywords; 
         public List<Card> AllAllCards = new List<Card>();
+        [SerializeReference]
+        internal List<Effect> AddABLE_Effects = new List<Effect>();
+
 
         public void Start()
         {
             StartCoroutine(StartCor());
             Debug.Log("STart");
+            
         }
 
         private IEnumerator StartCor()

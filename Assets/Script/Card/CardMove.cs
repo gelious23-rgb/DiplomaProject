@@ -149,9 +149,18 @@ namespace Script.Card
         
         public void OnPointerEnter(PointerEventData eventData)
         {
+            CardInfoDisplay card = GetComponent<CardInfoDisplay>();
             infoPanel.SetActive(true);
-            infoTEXT.text = GetComponent<CardInfoDisplay>()._description.text;
-            infoTEXT.GetComponent<PopupText>().PupUP();
+            infoTEXT.text = card._description.text;
+            if (card.CharacterCard.CardType == Card.Types.Man && !card._description.text.Contains("Counterattack"))
+            {
+                infoTEXT.text = "Counterattack" + "\n"+ card._description.text;
+            }
+            if (card.CharacterCard.CardType == Card.Types.Powers && !card._description.text.Contains("Protection"))
+            {
+                infoTEXT.text = "Protection" + "\n"+ card._description.text;
+            }
+            infoTEXT.GetComponent<PopupText>().PopUp(infoTEXT.text);
 
         }
 

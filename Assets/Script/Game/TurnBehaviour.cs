@@ -1,5 +1,7 @@
 using Script.Card.CardEffects;
 using System.Collections;
+using System.Collections.Generic;
+using Script.Card;
 using Script.Card.CardEffects;
 using Script.Characters.Enemy;
 using Script.Characters.Player;
@@ -28,6 +30,7 @@ namespace Script.Game
         [SerializeField] private UiTimer TimerReset;
         [SerializeField] private EndTurnButton _endTurnButton;
         [SerializeField] private CalculateDamage _calculateDamage;
+        private CardDeath CardDeath;
 
         public bool IsPlayerTurn => _turn % 2 == 0;
 
@@ -35,7 +38,8 @@ namespace Script.Game
         {
             _turn = 0;
             StartCoroutine(TurnFunc());
-            
+            CardDeath = FindObjectOfType<CardDeath>();
+
         }
         
         IEnumerator TurnFunc()
@@ -80,13 +84,15 @@ namespace Script.Game
         private void TurnEnd()
         {
             CardEffectHandler.OnTurnEnd.Invoke();
+            
             Debug.Log("Turn ended");
 
         }
 
+
         private void HandlePlayerTurn()
         {
-            foreach (var card in PlayerSpawnerCards.PlayerFieldCards)
+            foreach (var card in PlayerSpawnerCards.Board)
             {
                 card.ChangeAttackState(true);
                 card.HighlightCard();
@@ -95,7 +101,7 @@ namespace Script.Game
 
         private void HandleEnemyTurn()
         {
-            foreach (var card in EnemySpawnerCards.EnemyFieldCards)
+            foreach (var card in EnemySpawnerCards.Board)
                 card.ChangeAttackState(true);
 
             _enemyAI.MakeTurn();
@@ -104,7 +110,7 @@ namespace Script.Game
         private void PrepareTurn()
         {
             TimerReset.ResetTime();
-            foreach (var card in PlayerSpawnerCards.PlayerFieldCards)
+            foreach (var card in PlayerSpawnerCards.Board)
                 card.DeHighlightCard();
 
             CheckCardsForAvailability();
@@ -125,7 +131,7 @@ namespace Script.Game
         }
         public void HighlightTargets(bool highlight)
         {
-            foreach (var card in EnemySpawnerCards.EnemyFieldCards)
+            foreach (var card in EnemySpawnerCards.Board)
                 card.HighlightAsTarget(highlight);
         }
 

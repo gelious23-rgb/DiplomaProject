@@ -40,6 +40,7 @@ namespace Script.Card
        [HideInInspector] public int ATK;
       [HideInInspector] public int DamageResistance = 0;
       public IHealth owner;
+      public GameObject BuffSpriteSpace;
         public bool IsAlive => HP > 0;
 
         internal void Start()
@@ -50,14 +51,19 @@ namespace Script.Card
         }
            [ContextMenu("force start")]
            internal void OnTurnStart()
-        {
+         {
             AddPassive(CharacterCard.GetCardType());
             foreach (var effect in CharacterCard.Effects)
             {
                var actualEffect = effect.GetComponent<Effect>();
-                gameObject.AddComponent(actualEffect.GetType());
+               if(!CheckIfHasPassive(gameObject, actualEffect)){gameObject.AddComponent(actualEffect.GetType());}
             }
-        }
+         }
+
+           private bool CheckIfHasPassive(GameObject obj, Effect passive)
+           {
+               return obj.TryGetComponent(passive.GetType(), out Component _); 
+           }
 
         
 
@@ -65,11 +71,20 @@ namespace Script.Card
         {
             switch (Name)
             {
-                case Card.Types.Man: gameObject.AddComponent<CounterAttack>();
+                case Card.Types.Man:
+                    if (!CheckIfHasPassive(gameObject, new CounterAttack()))
+                    {
+                        gameObject.AddComponent<CounterAttack>();
+                        
+                    }
                     break;
-                case Card.Types.Powers: gameObject.AddComponent<Protection>();
+                case Card.Types.Powers:
+                    if (!CheckIfHasPassive(gameObject, new Protection()))
+                    {
+                        gameObject.AddComponent<Protection>();
+                        
+                    }
                     break;
-
             }
         }
 
@@ -122,6 +137,7 @@ namespace Script.Card
             _attack.text = ATK.ToString();
             _hp.text = HP.ToString();
             _manacost.text = CharacterCard.manacost.ToString();
+            
         }
 
 

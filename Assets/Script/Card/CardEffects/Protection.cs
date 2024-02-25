@@ -6,13 +6,20 @@ namespace Script.Card.CardEffects
     public class Protection : Effect
     {
         public float multiplier = 0.5f;
+        public override void DoOnEnable()
+        {
+            GetCard().gameObject.GetComponent<Outline>().effectColor = Color.cyan;
+        }
+
         protected override void OnTurnStart()
         {
-            GetCard().gameObject.GetComponent<Outline>().enabled = true;
+           
         }
 
         public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
+            Debug.Log(target.CharacterCard.name +" is a target " +
+                      damageSource.CharacterCard.name + " is an attacker");
             if (target == GetCard())
             {
                 var value = Mathf.RoundToInt(target.ATK * multiplier);
@@ -23,13 +30,13 @@ namespace Script.Card.CardEffects
 
         private void OnDestroy()
         {
-            GetCard().gameObject.GetComponent<Outline>().enabled = false;
+            GetCard().gameObject.GetComponent<Outline>().effectColor = Color.clear;
             GetCard().DamageResistance = 0;
         }
 
         protected override void OnTurnEnd()
         {
-            base.OnTurnEnd();
+            //base.OnTurnEnd();
         }
     }
 }

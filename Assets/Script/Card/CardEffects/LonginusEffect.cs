@@ -25,7 +25,7 @@ namespace Script.Card.CardEffects
             
                 var player = GameObject.Find("Player").GetComponent<PlayerSpawnerCards>();
                 var enemy = GameObject.Find("Enemy").GetComponent<EnemySpawnerCards>();
-                if (player.PlayerFieldCards.Contains(this.GetCard()))
+                if (player.Board.Contains(this.GetCard()))
                 {
                     var lanceObj  =Instantiate(player.cardPref, player.PlayerHand);
                     var lanceSC = lanceObj.GetComponent<CardInfoDisplay>();
@@ -33,10 +33,10 @@ namespace Script.Card.CardEffects
                     lanceSC.Start();
                     lanceSC.OnTurnStart();
                     lanceSC.ShowCardInfo(lance, true);
-                    player.PlayerHandCards.Add(lanceSC);
+                    ((SpawnerCards) player).Board.Add(lanceSC);
                 
                 }
-                else if (enemy.EnemyFieldCards.Contains(this.GetCard()))
+                else if (enemy.Board.Contains(this.GetCard()))
                 {
                     var lanceObj  =Instantiate(enemy.cardPref, GameObject.Find("Enemy Hand").transform);
                     var lanceSC = lanceObj.GetComponent<CardInfoDisplay>();

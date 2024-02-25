@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using Script.Card.CardEffects;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +38,7 @@ namespace Script.Card
         private IEnumerator AnimateMoveToTarget(Transform target)
         {
             transform.DOMove(target.position, .25f);
+            
             yield return new WaitForSeconds(.25f);
         }
 

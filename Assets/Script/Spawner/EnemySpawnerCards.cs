@@ -5,6 +5,7 @@ using System.Linq;
 using Script.Characters.Enemy;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Spawner
 {
@@ -13,9 +14,10 @@ namespace Script.Spawner
         [SerializeField]private Transform EnemyHand;
         private const int _maxEnemyHandSize = 6;
         private EnemyCardDeckInstance CurrentEnemyCardDeckInstance;
-        public List<CardInfoDisplay> EnemyHandCards = new List<CardInfoDisplay>(),
-            EnemyFieldCards = new List<CardInfoDisplay>();
 
+        public List<CardInfoDisplay> EnemyHandCards = new List<CardInfoDisplay>();
+
+ 
         void Start()
         {
             CurrentEnemyCardDeckInstance = new EnemyCardDeckInstance();
@@ -54,6 +56,7 @@ namespace Script.Spawner
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref, hand, false);
+            cardGameObj.name = characterCard.name;
 
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
             cardInfoDisplay.owner = GetComponent<EnemyHealth>();
