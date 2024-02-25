@@ -19,13 +19,17 @@ namespace Script.Card.CardEffects
                 if (GetCard().HP <= 0)
                 {
                     Debug.Log("Martyr effect 2");
-                    attacker.TakeDamage(1, GetCard());
+                   if(attacker !=null && attacker.IsAlive){ attacker.TakeDamage(1, GetCard());}
                 }
             }
         }
         public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
             attacker = damageSource;
+            if (attacker.IsAlive == false)
+            {
+                attacker = null;
+            }
         }
         protected override void OnTurnEnd()
         {

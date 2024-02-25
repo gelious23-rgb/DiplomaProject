@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: The Lamb
   m_EditorClassIdentifier: 
   name: The Lamb
-  description: "<i><i>Pride</i></i>. If alive for 3 turns, deal 30% hp to it\u2019s
-    owner and opponent."
+  description: "<i><i>Pride</i></i>. If alive for 3 turns, deal damage equal to remaining
+    HP to it\u2019s owner and opponent every turn."
   CardType: 4
   cardImage: {fileID: 21300000, guid: bff090f22fbccec4eae815d7eddf516e, type: 3}
   hp: 22
   attack: 3
   manacost: 7
+  Effects:
+  - {fileID: 7091424676658577303, guid: 78775b05724f7d74d813009595b27dad, type: 3}
+  - {fileID: 5361845926175621079, guid: 4cef1b04650c5004e811135c3fb6b49b, type: 3}
+  - {fileID: 6246817587639920322, guid: 4bf48ef6f0b8583468973c38b17ac16b, type: 3}

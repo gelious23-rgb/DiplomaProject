@@ -42,9 +42,9 @@ namespace Script.Game
             }
             CardEffectHandler.OnBeingHit.Invoke(target, attaker);
             CardEffectHandler.OnAttack.Invoke(attaker, target);
-            Debug.Log(target.CharacterCard.name + "is being hit by " + attaker.CharacterCard.name);
+            Debug.Log(attaker.CharacterCard.name +" is an attacker "+ target.CharacterCard.name + " is a target");
             target.TakeDamage(attaker.ATK, attaker);
-            Debug.Log(attaker.CharacterCard.name + "deals " + attaker.ATK + " damage to " + target.CharacterCard.name);
+            Debug.Log(attaker.CharacterCard.name + "deals " + attaker.ATK + " pure damage to " + target.CharacterCard.name);
             CheckAlivePlayerCardOnBoard(target);
             CheckAliveEnemyCardOnBoard(attaker);
             foreach (var effectClass in attaker.GetComponents<Effect>())
@@ -57,12 +57,14 @@ namespace Script.Game
             }
         }
 
+        
+
         /*public void CardsForceFight(CardInfoDisplay Card, CardInfoDisplay target)
         { 
            // CardEffectHandler.OnBeingHit.Invoke(Card, target);
             Card.TakeDamage(target.ATK, target);
         }*/
-        private void CheckAliveEnemyCardOnBoard(CardInfoDisplay enemyCard)
+        public void CheckAliveEnemyCardOnBoard(CardInfoDisplay enemyCard)
         {
             if (!enemyCard.IsAlive)
             {
@@ -73,7 +75,7 @@ namespace Script.Game
             else
                 enemyCard.RefreshData();
         }
-        private void CheckAlivePlayerCardOnBoard(CardInfoDisplay playerCard)
+        public void CheckAlivePlayerCardOnBoard(CardInfoDisplay playerCard)
         {
             if (!playerCard.IsAlive)
             {

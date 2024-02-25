@@ -15,8 +15,10 @@ MonoBehaviour:
   name: Sisyphus
   description: 'Upon death, revive at the cost of death of one <color=red><color=red>Powers</color></color>
     card '
-  CardType: 3
-  cardImage: {fileID: 21300000, guid: ad68fbc4d4eaff14ebdbd3eb1f6252ca, type: 3}
+  CardType: 4
+  cardImage: {fileID: 21300000, guid: 08a73d1b49eedd647a72c3423df7bbf7, type: 3}
   hp: 8
   attack: 5
   manacost: 5
+  Effects:
+  - {fileID: 2449199686400258210, guid: 9136a22cefa317942b8a1d444bce12a2, type: 3}

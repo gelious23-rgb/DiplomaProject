@@ -1,3 +1,4 @@
+using Script.Card.CardEffects;
 using Script.Characters;
 using Script.Characters.Player;
 using Script.Game;
@@ -29,16 +30,18 @@ namespace Script.Card
 
         public void OnDrop(PointerEventData eventData)
         {
+           
             if (!IsPlayerBoard()) return;
-
+           
             CardMove cardMove = eventData.pointerDrag.GetComponent<CardMove>();
             CardInfoDisplay cardInfo = cardMove.GetComponent<CardInfoDisplay>();
+            CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
 
-            if(cardMove && _playerSpawnerCards.PlayerFieldCards.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
+            if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
                cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
-            { 
-                _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
-                _playerSpawnerCards.PlayerFieldCards.Add(cardInfo);
+            {
+                 _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
+                _playerSpawnerCards.Board.Add(cardInfo);
                 cardMove.DefaultParent = transform;
 
                 cardInfo.IsPlaced = true;

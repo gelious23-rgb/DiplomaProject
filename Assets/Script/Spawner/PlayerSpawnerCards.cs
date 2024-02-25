@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Script.Characters.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Spawner
 {
@@ -14,8 +15,9 @@ namespace Script.Spawner
 
         private PlayerCardDeckInstance CurrentPlayerCardDeckInstance;
 
-        public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>(),
-            PlayerFieldCards = new List<CardInfoDisplay>();
+        public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>();
+
+        
 
         void Start()
         {
@@ -54,6 +56,7 @@ namespace Script.Spawner
         {
             GameObject cardGameObj = Instantiate(cardPref);
             cardGameObj.transform.SetParent(hand, false);
+            cardGameObj.name = characterCard.name;
             
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
             cardInfoDisplay.owner = GetComponent<PlayerHealth>();

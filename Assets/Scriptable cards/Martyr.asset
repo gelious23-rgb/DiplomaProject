@@ -16,7 +16,7 @@ MonoBehaviour:
   description: '<i><b><i><b>Counterattack</b></i></b></i>. When hit, additionally
     deal 1 damage to an attacker even if received lethal damage. '
   CardType: 1
-  cardImage: {fileID: 21300000, guid: a13219d2725dba544a6a0126234ea59f, type: 3}
+  cardImage: {fileID: 21300000, guid: 54ccba84f2df22c4292280680825ddc2, type: 3}
   hp: 4
   attack: 1
   manacost: 1

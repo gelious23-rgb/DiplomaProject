@@ -6,6 +6,8 @@ namespace Script.Card.CardEffects
     {
         public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
+            BattleBehaviour.CheckAliveEnemyCardOnBoard(target);
+            BattleBehaviour.CheckAlivePlayerCardOnBoard(target);
             if (this.GetCard().IsAlive && target == GetCard())
             {
                 Debug.Log(target.CharacterCard.name + " is attacked by " +
@@ -17,7 +19,7 @@ namespace Script.Card.CardEffects
         }
         protected override void OnTurnEnd()
         {
-            base.OnTurnEnd();
+           // base.OnTurnEnd();
 
         }
     }

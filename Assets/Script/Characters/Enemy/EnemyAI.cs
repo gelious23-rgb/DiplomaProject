@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Script.Card;
+using Script.Card.CardEffects;
 using Script.Game;
 using Script.Spawner;
 using UnityEngine;
@@ -45,13 +46,13 @@ namespace Script.Characters.Enemy
         
         private IEnumerator HandleActiveCardsAttack()
         {
-            foreach (var activeCard in EnemySpawnerCards.EnemyFieldCards.FindAll(x => x.CanAttack))
+            foreach (var activeCard in EnemySpawnerCards.Board.FindAll(x => x.CanAttack))
             {
                 CardMoveAnimation activeCardMoveAnimation = activeCard.GetComponent<CardMoveAnimation>();
 
-                if (PlayerSpawnerCards.PlayerFieldCards.Count != 0)
+                if (PlayerSpawnerCards.Board.Count != 0)
                 {
-                    var enemy = PlayerSpawnerCards.PlayerFieldCards[Random.Range(0, PlayerSpawnerCards.PlayerFieldCards.Count)];
+                    var enemy = PlayerSpawnerCards.Board[Random.Range(0, PlayerSpawnerCards.Board.Count)];
 
                     activeCard.ChangeAttackState(false);
                     activeCardMoveAnimation.MovetoTarget(enemy.transform);
@@ -68,7 +69,7 @@ namespace Script.Characters.Enemy
         {
             for (int i = 0; i < count; i++)
             {
-                if (EnemySpawnerCards.EnemyFieldCards.Count > 5 || _enemyMana.CurrentEnemyMana == 0 || EnemySpawnerCards.EnemyHandCards.Count == 0)
+                if (EnemySpawnerCards.Board.Count > 5 || _enemyMana.CurrentEnemyMana == 0 || EnemySpawnerCards.EnemyHandCards.Count == 0)
                     break;
 
                 List<CardInfoDisplay> cardList = cards.FindAll(x => _enemyMana.CurrentEnemyMana >= x.CharacterCard.manacost);
@@ -78,13 +79,14 @@ namespace Script.Characters.Enemy
 
                 cardList[0].GetComponent<CardMoveAnimation>().MovetoField(EnemyField);
                 _enemyMana.ReduceMana(cardList[0].CharacterCard.manacost);
+                CardEffectHandler.OnBeingPlayed.Invoke(cardList[0]);
 
                 yield return new WaitForSeconds(.51f);
 
                 cardList[0].ShowCardInfo(cardList[0].CharacterCard, false);
                 cardList[0].transform.SetParent(EnemyField);
 
-                EnemySpawnerCards.EnemyFieldCards.Add(cardList[0]);
+                EnemySpawnerCards.Board.Add(cardList[0]);
                 EnemySpawnerCards.EnemyHandCards.Remove(cardList[0]);
             }
         }

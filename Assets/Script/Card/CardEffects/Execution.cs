@@ -1,11 +1,26 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Card.CardEffects
 {
      public class Execution : Effect
      {
-          public override void OnAttack(CardInfoDisplay target, CardInfoDisplay self)
+          private GameObject BuffIcon;
+          
+          public override void DoOnEnable()
           {
+               BuffIcon = GetCard().BuffSpriteSpace.transform.GetChild(2).gameObject;
+               BuffIcon.SetActive(true);
+
+          }
+
+          public override void OnAttack(CardInfoDisplay self, CardInfoDisplay target)
+          {
+               Debug.Log("Self is " +self.CharacterCard.name);
+               Debug.Log("Target is " +target.CharacterCard.name);
+               Debug.Log("Execution check " + "\n" + "Target hp must be less than "
+                         + Mathf.RoundToInt(target.CharacterCard.hp * 0.5f));
                if (target.HP <= Mathf.RoundToInt(target.CharacterCard.hp * 0.5f))
                {
                     BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(target.owner,
@@ -22,6 +37,7 @@ namespace Script.Card.CardEffects
           protected override void OnTurnEnd()
           {
                base.OnTurnEnd();
+               BuffIcon.SetActive(false);
           }
 
      }

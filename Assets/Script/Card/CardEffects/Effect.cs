@@ -6,16 +6,28 @@ using UnityEngine;
 
 namespace Script.Card.CardEffects
 {
+     
     public class Effect : MonoBehaviour
     {
         public BattleBehaviour BattleBehaviour;
+        public bool destrotOnTurnEnd=false;
         protected void Start()
         {
-            CardEffectHandler.Effects.Add(this);
+            if (CardEffectHandler.Effects.Contains(this) == false)
+            {
+                CardEffectHandler.Effects.Add(this);
+            }
+            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
             CardEffectHandler.OnTurnEnd.AddListener(OnTurnEnd);
+            CardEffectHandler.OnBeingPlayed.AddListener(OnBeingPlayed);
            // CardEffectHandler.OnAttack.AddListener(OnAttack);
           //  CardEffectHandler.OnBeingHit.AddListener(OnBeingHit); 
+        }
+
+        public virtual void OnBeingPlayed(CardInfoDisplay self)
+        {
+             
         }
 
         protected void OnEnable()
@@ -35,7 +47,7 @@ namespace Script.Card.CardEffects
             return GetComponent<CardInfoDisplay>();
         }
 
-        public virtual void OnAttack(CardInfoDisplay target, CardInfoDisplay self)
+        public virtual void OnAttack(CardInfoDisplay self, CardInfoDisplay target)
         {
             Debug.Log("On attack worked");
         }
@@ -51,7 +63,7 @@ namespace Script.Card.CardEffects
         }
         protected virtual void OnTurnEnd()
         {
-            Destroy(this);
+          if(destrotOnTurnEnd){Destroy(this);}
 
         }
        

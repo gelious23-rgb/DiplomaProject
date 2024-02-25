@@ -16,8 +16,8 @@ MonoBehaviour:
   description: 'Grants <i>Elixir</i> to all allies every turn. If alive for 3 turns,
     also grant 2 blessings for atk&hp. <i>Wine<i>. '
   CardType: 3
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 2e989aa548b085c4c8472059f3a9ceb7, type: 3}
   hp: 12
-  attack: 6
+  attack: 0
   manacost: 6
   Effects: []
