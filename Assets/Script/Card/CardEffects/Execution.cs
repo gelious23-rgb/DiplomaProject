@@ -21,7 +21,7 @@ namespace Script.Card.CardEffects
                Debug.Log("Target is " +target.CharacterCard.name);
                Debug.Log("Execution check " + "\n" + "Target hp must be less than "
                          + Mathf.RoundToInt(target.CharacterCard.hp * 0.5f));
-               if (target.HP <= Mathf.RoundToInt(target.CharacterCard.hp * 0.5f))
+               if (target.CurrentHP <= Mathf.RoundToInt(target.CharacterCard.hp * 0.5f))
                {
                     BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(target.owner,
                          target.CharacterCard.manacost);

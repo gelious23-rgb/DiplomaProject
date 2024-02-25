@@ -8,8 +8,8 @@ namespace Script.Card.CardEffects
         {
             if (sacrifice != null)
             {
-                GetCard().HP = GetCard().CharacterCard.hp;
-                sacrifice.HP = 0;
+                GetCard().CurrentHP = GetCard().CharacterCard.hp;
+                sacrifice.CurrentHP = 0;
                 BattleBehaviour.CheckAliveEnemyCardOnBoard(sacrifice);
                 BattleBehaviour.CheckAlivePlayerCardOnBoard(sacrifice);
                 BattleBehaviour.CardDeath.DestroyCard(sacrifice);
@@ -19,7 +19,7 @@ namespace Script.Card.CardEffects
 
             if (sacrifice == null)
             {
-                GetCard().HP = 0;
+                GetCard().CurrentHP = 0;
                 BattleBehaviour.CheckAlivePlayerCardOnBoard(GetCard());
                 BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());
                 BattleBehaviour.CardDeath.DestroyCard(GetCard());

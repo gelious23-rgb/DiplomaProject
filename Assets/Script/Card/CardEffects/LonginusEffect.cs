@@ -33,7 +33,7 @@ namespace Script.Card.CardEffects
                     lanceSC.Start();
                     lanceSC.OnTurnStart();
                     lanceSC.ShowCardInfo(lance, true);
-                    ((SpawnerCards) player).Board.Add(lanceSC);
+                    player.PlayerHandCards.Add(lanceSC);
                 
                 }
                 else if (enemy.Board.Contains(this.GetCard()))
@@ -43,7 +43,7 @@ namespace Script.Card.CardEffects
                     lanceSC.CharacterCard = lance;
                     lanceSC.Start();
                     lanceSC.OnTurnStart();
-                    lanceSC.ShowCardInfo(lance, false);
+                   // lanceSC.ShowCardInfo(lance, false);
                     enemy.EnemyHandCards.Add(lanceSC);
                 
                 }

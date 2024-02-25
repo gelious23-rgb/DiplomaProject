@@ -18,8 +18,7 @@ namespace Script.Card.CardEffects
 
         public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
-            Debug.Log(target.CharacterCard.name +" is a target " +
-                      damageSource.CharacterCard.name + " is an attacker");
+          
             if (target == GetCard())
             {
                 var value = Mathf.RoundToInt(target.ATK * multiplier);
