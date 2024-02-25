@@ -8,7 +8,7 @@ namespace Script.Card.CardEffects
         {
             BattleBehaviour.CheckAliveEnemyCardOnBoard(target);
             BattleBehaviour.CheckAlivePlayerCardOnBoard(target);
-            if (this.GetCard().IsAlive && target == GetCard())
+            if (this.GetCard().CurrentHP>0 && target == GetCard())
             {
                 Debug.Log(target.CharacterCard.name + " is attacked by " +
                           damageSource.CharacterCard.name + " " + target.CharacterCard.name + " counterattacks for "

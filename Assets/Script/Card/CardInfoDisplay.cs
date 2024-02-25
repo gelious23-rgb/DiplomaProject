@@ -4,6 +4,7 @@ using Script.Card.CardEffects;
 using Script.Logic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Script.Card
@@ -36,18 +37,79 @@ namespace Script.Card
         public Image _Image;
         public bool CanAttack;
         public bool IsPlaced;
-         public int HP;
-       [HideInInspector] public int ATK;
-      [HideInInspector] public int DamageResistance = 0;
+
+        private int _maxHp;
+
+        public int MaxHp
+        {
+            get
+            {
+                var blessing = GetComponent<Blessing>();
+                if (blessing == null || blessing.HpBlessing == 0)
+                {
+                    Debug.Log("No blessings, returning normal value: " + _maxHp);
+                    return _maxHp;
+                }
+                else if (blessing!=null && blessing.HpBlessing != 0)
+                {
+                    _maxHp = _maxHp+ blessing.HpBlessing;
+                    Heal(blessing.HpBlessing);
+                    Debug.Log("Hp blessing = "+blessing.HpBlessing + " MaxHp = "+ _maxHp);
+                    return _maxHp;
+                }
+                else
+                {
+                    return _maxHp;
+                }
+                
+            }
+            set
+            {
+                var blessing = GetComponent<Blessing>();
+                if (blessing != null && blessing.HpBlessing != 0)
+                {
+                    _maxHp = value + blessing.HpBlessing;
+                    RefreshData();
+                }
+                else
+                {
+                    
+                    _maxHp = value;
+                }
+                
+            }
+        }
+
+         [FormerlySerializedAs("HP")] public int CurrentHP;
+      public int ATK;
+       public int DamageResistance = 0;
       public IHealth owner;
       public GameObject BuffSpriteSpace;
-        public bool IsAlive => HP > 0;
+        public bool IsAlive => CurrentHP > 0;
 
         internal void Start()
         {
            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
-           
+            MaxHp = CurrentHP;
+
+        }
+
+        public int Heal(int healAmount) //returns OverHeal amount
+        {
+            var healValue = CurrentHP +healAmount;
+            if (healValue > _maxHp)
+            {
+                CurrentHP = _maxHp;
+                RefreshData();
+                return healValue - _maxHp;
+            }
+            else
+            {
+                CurrentHP += healAmount;
+                RefreshData();
+                return 0;
+            }
         }
            [ContextMenu("force start")]
            internal void OnTurnStart()
@@ -62,7 +124,15 @@ namespace Script.Card
 
            private bool CheckIfHasPassive(GameObject obj, Effect passive)
            {
-               return obj.TryGetComponent(passive.GetType(), out Component _); 
+               if (passive.GetType() == typeof(Blessing))
+               {
+                   return false;
+               }
+               else
+               {
+                   return obj.TryGetComponent(passive.GetType(), out Component _);
+               }
+                
            }
 
         
@@ -102,7 +172,7 @@ namespace Script.Card
             }
             Debug.Log(this.CharacterCard.name +" prot is "+DamageResistance);
             Debug.Log(dmg-DamageResistance + " damage taken  by " + this.CharacterCard.name);
-            HP -= dmg-DamageResistance;
+            CurrentHP -= dmg-DamageResistance;
         }
 
         public void ShowCardInfo(Card characterCard, bool isPlayer)
@@ -111,7 +181,7 @@ namespace Script.Card
             _hideGO.SetActive(false);
 
             CharacterCard = characterCard;
-            HP = characterCard.hp;
+            CurrentHP = characterCard.hp;
             ATK = characterCard.attack;
 
             _sprite.sprite = characterCard.cardImage;
@@ -135,7 +205,7 @@ namespace Script.Card
         public void RefreshData()
         {
             _attack.text = ATK.ToString();
-            _hp.text = HP.ToString();
+            _hp.text = CurrentHP.ToString();
             _manacost.text = CharacterCard.manacost.ToString();
             
         }

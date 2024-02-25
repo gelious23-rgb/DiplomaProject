@@ -16,7 +16,7 @@ namespace Script.Card.CardEffects
             if (self == GetCard())
             {
                 Debug.Log("Martyr effect 1");
-                if (GetCard().HP <= 0)
+                if (GetCard().CurrentHP <= 0)
                 {
                     Debug.Log("Martyr effect 2");
                    if(attacker !=null && attacker.IsAlive){ attacker.TakeDamage(1, GetCard());}

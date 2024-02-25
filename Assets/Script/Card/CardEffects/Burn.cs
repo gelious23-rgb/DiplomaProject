@@ -22,9 +22,9 @@ namespace Script.Card.CardEffects
 
         protected override void OnTurnEnd()
         {
-             GetCard().HP-=burnPower;
+             GetCard().CurrentHP-=burnPower;
              GetCard().RefreshData();
-             if (GetCard().HP == 0)
+             if (GetCard().CurrentHP == 0)
              { 
                  BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());
                  BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());

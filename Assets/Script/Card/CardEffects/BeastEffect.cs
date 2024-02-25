@@ -19,37 +19,39 @@ namespace Script.Card.CardEffects
 
         protected override void OnTurnEnd()
         {
-            CardTurnsAlive++;
-
-            if (CardTurnsAlive > 3)
+            if (GetCard().IsPlaced)
             {
-                CardInfoDisplay Sacrifice = null;
-                if (enemyCards.Board.Contains(GetCard()))
+                CardTurnsAlive++;
+
+                if (CardTurnsAlive > 3)
                 {
-                  Sacrifice = playerCards.Board[Random.Range(0, playerCards.Board.Count + 1)];
-                  BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
-                  BeastTurnsStarved = 0;
-                }
-                else if (playerCards.Board.Contains(GetCard()))
-                {
-                  Sacrifice =enemyCards.Board[Random.Range(0, enemyCards.Board.Count + 1)];
-                  BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
-                  BeastTurnsStarved = 0;
-                }
-                else if (Sacrifice == null)
-                {
-                    Debug.Log("Nothing for the beast to destroy");
-                    if (BeastTurnsStarved > 1)
+                    CardInfoDisplay Sacrifice = null;
+                    if (enemyCards.Board.Contains(GetCard()))
                     {
-                        BattleBehaviour.CardDeath.DestroyCard(GetCard());
+                        Sacrifice = playerCards.Board[Random.Range(0, playerCards.Board.Count + 1)];
+                        BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
+                        BeastTurnsStarved = 0;
                     }
-                    else
+                    else if (playerCards.Board.Contains(GetCard()))
                     {
-                        BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(GetCard().owner,GetCard().CharacterCard.manacost);
-                        BeastTurnsStarved++;
+                        Sacrifice =enemyCards.Board[Random.Range(0, enemyCards.Board.Count + 1)];
+                        BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
+                        BeastTurnsStarved = 0;
+                    }
+                    else if (Sacrifice == null)
+                    {
+                        Debug.Log("Nothing for the beast to destroy");
+                        if (BeastTurnsStarved > 1)
+                        {
+                            BattleBehaviour.CardDeath.DestroyCard(GetCard());
+                        }
+                        else
+                        {
+                            BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(GetCard().owner,GetCard().CharacterCard.manacost);
+                            BeastTurnsStarved++;
+                        }
                     }
                 }
-               
             }
         }
 
@@ -59,11 +61,11 @@ namespace Script.Card.CardEffects
             {
                 foreach (var card in playerCards.Board)
                 {
-                     card.HP=-1;   
+                     card.CurrentHP=-1;   
                 }
                 foreach (var card in enemyCards.Board)
                 {
-                    card.HP=-1;   
+                    card.CurrentHP=-1;   
                 }
             }
         }

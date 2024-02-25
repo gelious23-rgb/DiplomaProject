@@ -10,8 +10,8 @@ namespace Script.Card.CardEffects
             CardTurnsAlive++;
             if (CardTurnsAlive > 3)
             {
-                BattleBehaviour._calculateDamage.DealDamageToEnemyHero(GetCard().HP);
-                BattleBehaviour._calculateDamage.DealDamageToPlayerHero(GetCard().HP);
+                BattleBehaviour._calculateDamage.DealDamageToEnemyHero(GetCard().CurrentHP);
+                BattleBehaviour._calculateDamage.DealDamageToPlayerHero(GetCard().CurrentHP);
             }
         }
     }

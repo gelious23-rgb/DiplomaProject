@@ -19,9 +19,9 @@ namespace Script.Card.CardEffects
 
         public override void OnAttack(CardInfoDisplay self, CardInfoDisplay target)
         {
-            GetCard().HP -= bleedPower;
+            GetCard().CurrentHP -= bleedPower;
             GetCard().RefreshData();
-            if (GetCard().HP == 0)
+            if (GetCard().CurrentHP == 0)
             { 
                 BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());
                BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());
