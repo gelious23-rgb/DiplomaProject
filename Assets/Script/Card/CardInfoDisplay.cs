@@ -50,7 +50,7 @@ namespace Script.Card
                     Debug.Log("No blessings, returning normal value: " + _maxHp);
                     return _maxHp;
                 }
-                else if (blessing!=null && blessing.HpBlessing != 0)
+                if (blessing!=null && blessing.HpBlessing != 0)
                 {
                     _maxHp = _maxHp+ blessing.HpBlessing;
                     Heal(blessing.HpBlessing);
@@ -61,7 +61,7 @@ namespace Script.Card
                 {
                     return _maxHp;
                 }
-                
+
             }
             set
             {
@@ -80,21 +80,6 @@ namespace Script.Card
             }
         }
 
-         [FormerlySerializedAs("HP")] public int CurrentHP;
-      public int ATK;
-       public int DamageResistance = 0;
-      public IHealth owner;
-      public GameObject BuffSpriteSpace;
-        public bool IsAlive => CurrentHP > 0;
-
-        internal void Start()
-        {
-           
-            CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
-            MaxHp = CurrentHP;
-
-        }
-
         public int Heal(int healAmount) //returns OverHeal amount
         {
             var healValue = CurrentHP +healAmount;
@@ -111,6 +96,22 @@ namespace Script.Card
                 return 0;
             }
         }
+         [FormerlySerializedAs("HP")] public int CurrentHP;
+      public int ATK;
+       public int DamageResistance = 0;
+      public IHealth owner;
+      public GameObject BuffSpriteSpace;
+        public bool IsAlive => CurrentHP > 0;
+
+        internal void Start()
+        {
+           
+            CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
+            MaxHp = CurrentHP;
+
+        }
+
+
            [ContextMenu("force start")]
            internal void OnTurnStart()
          {
