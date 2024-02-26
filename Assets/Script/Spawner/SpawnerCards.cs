@@ -1,12 +1,13 @@
 using Script.Card;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Script.Spawner
 {
-    public abstract class SpawnerCards : MonoBehaviour
+    public abstract class SpawnerCards : NetworkBehaviour
     {
         public GameObject cardPref;
 

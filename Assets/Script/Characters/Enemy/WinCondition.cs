@@ -1,12 +1,13 @@
 using Script.UI.Panel;
 using UnityEngine;
 
-namespace Script.Characters.Player
+namespace Script.Characters.Enemy
 {
-    public class PlayerDeath : MonoBehaviour, ICharacterDeath
+    public class WinCondition : MonoBehaviour
     {
+
         [SerializeField] private WinPanel WinPanel;
-        public void Death( int currentHealth)
+        public void Death( ref int currentHealth)
         {
             if (currentHealth <= 0)
                 WinPanel.Show();

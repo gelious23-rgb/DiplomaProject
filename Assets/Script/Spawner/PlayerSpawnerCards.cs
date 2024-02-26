@@ -2,6 +2,11 @@
 using Script.Card.CardDeck;
 using System.Collections.Generic;
 using System.Linq;
+<<<<<<< Updated upstream
+=======
+using Script.Characters.Player;
+using Unity.Netcode;
+>>>>>>> Stashed changes
 using UnityEngine;
 
 namespace Script.Spawner
@@ -49,7 +54,7 @@ namespace Script.Spawner
             CurrentPlayerCardDeckInstance ??= new PlayerCardDeckInstance();
             GiveCardToHand(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
         }
-        protected override void SetupCard(Card.Card characterCard, Transform hand)
+        /*protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
             cardGameObj.transform.SetParent(hand, false);
@@ -61,7 +66,34 @@ namespace Script.Spawner
                 cardInfoDisplay.ShowCardInfo(characterCard, true);
                 PlayerHandCards.Add(cardInfoDisplay);
             }
+        }*/
+        
+        protected override void SetupCard(Card.Card characterCard, Transform hand)
+        {
+            GameObject cardGameObj = Instantiate(cardPref);
+            NetworkObject networkObject = cardGameObj.GetComponent<NetworkObject>();
+            NetworkObject parentNetworkObject = hand.GetComponent<NetworkObject>();
+
+            if (parentNetworkObject != null)
+            {
+                networkObject.Spawn(); // Spawn the NetworkObject before setting its parent
+                networkObject.transform.SetParent(parentNetworkObject.transform, false);
+            }
+            else
+            {
+                Debug.Log("Parent is not a NetworkObject.");
+            }
+
+            CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
+            cardInfoDisplay.owner = GetComponent<PlayerHealth>();
+
+            if (hand == PlayerHand)
+            {
+                cardInfoDisplay.ShowCardInfo(characterCard, true);
+                PlayerHandCards.Add(cardInfoDisplay);
+            }
         }
+        
         protected override bool LogAndBurnCardsIfHandIsFull(List<Card.Card> deck, Transform hand)
         {
             if (hand == PlayerHand && PlayerHandCards.Count >= _maxPlayerHandSize)

@@ -1,13 +1,13 @@
-
 using System;
 using Script.Card.CardEffects;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Card
 {
-    public class CardInfoDisplay : MonoBehaviour
+   public class CardInfoDisplay : MonoBehaviour
     {
 
         public Card CharacterCard;
@@ -35,15 +35,24 @@ namespace Script.Card
         public Image _Image;
         public bool CanAttack;
         public bool IsPlaced;
+<<<<<<< Updated upstream
        [HideInInspector] public int HP;
        [HideInInspector] public int ATK;
       [HideInInspector] public int DamageResistance = 0;
+=======
+        public int HP;
+        [HideInInspector] public int ATK; 
+        [HideInInspector] public int DamageResistance = 0; 
+        public IHealth owner; 
+        public GameObject BuffSpriteSpace;
+>>>>>>> Stashed changes
         public bool IsAlive => HP > 0;
 
         private void Start()
         {
            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
+<<<<<<< Updated upstream
             CardEffectHandler.OnTurnStart.AddListener(test);
         }
            [ContextMenu("force start")]
@@ -51,6 +60,25 @@ namespace Script.Card
         {
             AddPassive(CharacterCard.GetCardType());
         }
+=======
+           
+        }
+           [ContextMenu("force start")]
+           internal void OnTurnStart()
+         {
+            AddPassive(CharacterCard.GetCardType());
+            foreach (var effect in CharacterCard.Effects)
+            {
+               var actualEffect = effect.GetComponent<Effect>();
+               if(!CheckIfHasPassive(gameObject, actualEffect)){gameObject.AddComponent(actualEffect.GetType());}
+            }
+         }
+
+           private bool CheckIfHasPassive(GameObject obj, Effect passive)
+           {
+               return obj.TryGetComponent(passive.GetType(), out Component _); 
+           }
+>>>>>>> Stashed changes
 
         private void test()
         {
@@ -61,11 +89,20 @@ namespace Script.Card
         {
             switch (Name)
             {
-                case Card.Types.Man: gameObject.AddComponent<CounterAttack>();
+                case Card.Types.Man:
+                    if (!CheckIfHasPassive(gameObject, new CounterAttack()))
+                    {
+                        gameObject.AddComponent<CounterAttack>();
+                        
+                    }
                     break;
-                case Card.Types.Powers: gameObject.AddComponent<Protection>();
+                case Card.Types.Powers:
+                    if (!CheckIfHasPassive(gameObject, new Protection()))
+                    {
+                        gameObject.AddComponent<Protection>();
+                        
+                    }
                     break;
-
             }
         }
 
@@ -118,6 +155,7 @@ namespace Script.Card
             _attack.text = ATK.ToString();
             _hp.text = HP.ToString();
             _manacost.text = CharacterCard.manacost.ToString();
+            
         }
 
 
@@ -144,3 +182,4 @@ namespace Script.Card
 
     }
 }
+

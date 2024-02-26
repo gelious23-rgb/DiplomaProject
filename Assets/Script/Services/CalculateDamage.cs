@@ -4,6 +4,7 @@ using Script.Game;
 using Script.Spawner;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace Script.Services
@@ -11,15 +12,25 @@ namespace Script.Services
     public class CalculateDamage : MonoBehaviour
     {
         [SerializeField] private PlayerHealth _playerHealth;
-        [SerializeField] private PlayerDeath _playerDeath;
+        [FormerlySerializedAs("_playerDeath")]
+        [SerializeField] private LoseCondition loseCondition;
         [SerializeField] private PlayerSpawnerCards _playerSpawnerCards;
 
-        [SerializeField] private EnemyDeath _enemyDeath;
+        [FormerlySerializedAs("_enemyDeath")]
+        [SerializeField] private WinCondition winCondition;
         [SerializeField] private EnemyHealth _enemyHealth;
         [SerializeField] private EnemySpawnerCards EnemySpawnerCards;
         
         [SerializeField] private TurnBehaviour _turnBehaviour;
+<<<<<<< Updated upstream
 
+=======
+        public void DealDamageToCharacterDirectly(IHealth character, int damage)
+        {
+            character.TakeDamage(damage);
+        }
+        
+>>>>>>> Stashed changes
 
         private int CalculateDamageToEnemyForActiveCards() 
         { 
@@ -44,7 +55,7 @@ namespace Script.Services
             int currentEnemyHealth = _enemyHealth.CurrentHealth;
             _enemyHealth.TakeDamage(damage);
             _enemyHealth.Show();
-            _enemyDeath.Death(ref currentEnemyHealth);
+            winCondition.Death(ref currentEnemyHealth);
 
         }
         
@@ -53,7 +64,7 @@ namespace Script.Services
             int currentPlayerHealth = _playerHealth.CurrentHealth;
             _playerHealth.TakeDamage(damage);
             _playerHealth.Show();
-            _playerDeath.Death( currentPlayerHealth);
+            loseCondition.Death( currentPlayerHealth);
         }
 
         public void CheckAmountCardsForCalculateDamage()
