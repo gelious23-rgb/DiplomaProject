@@ -218,8 +218,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 171eb1b6286a14f4c9cd1e06d788a744, type: 2}
   - {fileID: 11400000, guid: c8c884ca0e40e224695442ec912a46f0, type: 2}
   - {fileID: 11400000, guid: 5d329064b9f742743ac55d3935102eea, type: 2}
-  AddABLE_Effects:
-  - {fileID: 7940069903149826712, guid: 1150bff13896f59478674c98539a3bb8, type: 3}
 --- !u!224 &50077040 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5876503861331612544, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}

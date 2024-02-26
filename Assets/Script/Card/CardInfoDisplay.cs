@@ -2,6 +2,7 @@
 using System;
 using Script.Card.CardEffects;
 using Script.Logic;
+using Script.Spawner;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -52,8 +53,7 @@ namespace Script.Card
                 }
                 else if (blessing!=null && blessing.HpBlessing != 0)
                 {
-                    _maxHp = _maxHp+ blessing.HpBlessing;
-                    Heal(blessing.HpBlessing);
+                    
                     Debug.Log("Hp blessing = "+blessing.HpBlessing + " MaxHp = "+ _maxHp);
                     return _maxHp;
                 }
@@ -65,25 +65,20 @@ namespace Script.Card
             }
             set
             {
-                var blessing = GetComponent<Blessing>();
-                if (blessing != null && blessing.HpBlessing != 0)
-                {
-                    _maxHp = value + blessing.HpBlessing;
-                    RefreshData();
-                }
-                else
-                {
-                    
-                    _maxHp = value;
-                }
-                
+                _maxHp = value;
+                RefreshData();
+                Debug.Log("Max Hp private is set to "+_maxHp);
+                Debug.Log("Max Hp public is set to" + MaxHp);
+
             }
         }
 
          [FormerlySerializedAs("HP")] public int CurrentHP;
       public int ATK;
        public int DamageResistance = 0;
-      public IHealth owner;
+      public IHealth OwnerHp;
+      public SpawnerCards owner;
+      
       public GameObject BuffSpriteSpace;
         public bool IsAlive => CurrentHP > 0;
 
@@ -91,23 +86,26 @@ namespace Script.Card
         {
            
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
-            MaxHp = CurrentHP;
+            MaxHp = CharacterCard.hp;
+            CurrentHP = MaxHp;
 
         }
 
         public int Heal(int healAmount) //returns OverHeal amount
         {
-            var healValue = CurrentHP +healAmount;
-            if (healValue > _maxHp)
+             
+            if (healAmount+CurrentHP > _maxHp)
             {
                 CurrentHP = _maxHp;
                 RefreshData();
-                return healValue - _maxHp;
+                Debug.Log("Current MaxHp of "+CharacterCard.name +" is "+_maxHp + "check1");
+                return healAmount+CurrentHP - _maxHp;
             }
             else
             {
                 CurrentHP += healAmount;
                 RefreshData();
+                Debug.Log("Current MaxHp of "+CharacterCard.name +" is "+_maxHp+ "check2");
                 return 0;
             }
         }
@@ -119,6 +117,11 @@ namespace Script.Card
             {
                var actualEffect = effect.GetComponent<Effect>();
                if(!CheckIfHasPassive(gameObject, actualEffect)){gameObject.AddComponent(actualEffect.GetType());}
+            }
+
+            if (CharacterCard.GetCardType() == Card.Types.Tool || CharacterCard.GetCardType() == Card.Types.Relic)
+            {
+                CanAttack = false;
             }
          }
 

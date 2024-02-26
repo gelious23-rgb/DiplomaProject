@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: The Lamb
   m_EditorClassIdentifier: 
   name: The Lamb
-  description: "<i><i>Pride</i></i>. If alive for 3 turns, deal damage equal to remaining
-    HP to it\u2019s owner and opponent every turn."
+  description: "<i><i>Pride</i></i>. If alive for 3 turns, deal damage equal to its
+    cost to it\u2019s owner and opponent every turn."
   CardType: 4
   cardImage: {fileID: 21300000, guid: bff090f22fbccec4eae815d7eddf516e, type: 3}
   hp: 22

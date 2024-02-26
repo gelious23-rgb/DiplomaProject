@@ -47,7 +47,7 @@ namespace Script.Card.CardEffects
                         }
                         else
                         {
-                            BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(GetCard().owner,GetCard().CharacterCard.manacost);
+                            BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(GetCard().OwnerHp,GetCard().CharacterCard.manacost);
                             BeastTurnsStarved++;
                         }
                     }
@@ -61,13 +61,19 @@ namespace Script.Card.CardEffects
             {
                 foreach (var card in playerCards.Board)
                 {
-                     card.CurrentHP=-1;   
+                     card.CurrentHP-=1;  
+                     card.RefreshData();
                 }
                 foreach (var card in enemyCards.Board)
                 {
-                    card.CurrentHP=-1;   
+                    card.CurrentHP-=1;   
+                    card.RefreshData();
                 }
+                self.CurrentHP += 1;
+                self.RefreshData();
             }
+
+           
         }
     }
 }

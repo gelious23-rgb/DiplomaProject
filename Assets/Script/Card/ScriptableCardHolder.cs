@@ -6,6 +6,7 @@ using Script.Spawner;
 using Script.UI.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Script.Card
 {
@@ -36,11 +37,37 @@ namespace Script.Card
 
             var  Carddobj = Instantiate(sp.cardPref, sp.PlayerHand.transform);
             var Cardd = Carddobj.GetComponent<CardInfoDisplay>();
-          Cardd.CharacterCard = AllCards[7];
+          Cardd.CharacterCard = AllCards[2];
           Cardd.OnTurnStart();
           Cardd.RefreshData();
           Cardd.ShowCardInfo(Cardd.CharacterCard, true);
-          sp.Board.Add(Cardd);
+          sp.PlayerHandCards.Add(Cardd);
         }
+        public void GiveCardToPlayerHand(int index)
+        {
+            var sp = FindObjectOfType<PlayerSpawnerCards>();
+
+            var  Carddobj = Instantiate(sp.cardPref, sp.PlayerHand.transform);
+            var Cardd = Carddobj.GetComponent<CardInfoDisplay>();
+            Cardd.CharacterCard = AllCards[index];
+            Cardd.OnTurnStart();
+            Cardd.RefreshData();
+            Cardd.ShowCardInfo(Cardd.CharacterCard, true);
+            sp.PlayerHandCards.Add(Cardd);
+        }
+        public void GiveCardToEnemyHand(int index)
+        {
+            
+            var sp = FindObjectOfType<EnemySpawnerCards>();
+
+            var  Carddobj = Instantiate(sp.cardPref, sp.EnemyHand.transform);
+            var Cardd = Carddobj.GetComponent<CardInfoDisplay>();
+            Cardd.CharacterCard = AllCards[index];
+            Cardd.OnTurnStart();
+            Cardd.RefreshData();
+            Cardd.ShowCardInfo(Cardd.CharacterCard, true);
+            sp.EnemyHandCards.Add(Cardd);
+        }
+       
     }
 }

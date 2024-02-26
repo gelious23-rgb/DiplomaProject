@@ -15,9 +15,11 @@ MonoBehaviour:
   name: 'Crown of thorns '
   description: Grants 2 hp <i>Blessings</i> for all allies. Every time ally receives
     damage, restore 1 hp for that ally and increase its attack by +1. If ally dies
-    when crown is on the field, draw 1 card
+    when crown is on the field, add 1 card to hand
   CardType: 3
   cardImage: {fileID: 21300000, guid: e514db7c9cec6674db9ef925e4220ad8, type: 3}
   hp: 10
   attack: 0
   manacost: 5
+  Effects:
+  - {fileID: 1911782226498374544, guid: 8c907f45d46f88f4d84ed4ca5a759bb7, type: 3}

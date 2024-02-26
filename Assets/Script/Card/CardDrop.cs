@@ -35,13 +35,14 @@ namespace Script.Card
            
             CardMove cardMove = eventData.pointerDrag.GetComponent<CardMove>();
             CardInfoDisplay cardInfo = cardMove.GetComponent<CardInfoDisplay>();
-            CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
+            
 
             if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
                cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
             {
                  _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
                 _playerSpawnerCards.Board.Add(cardInfo);
+                CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
                 cardMove.DefaultParent = transform;
 
                 cardInfo.IsPlaced = true;
