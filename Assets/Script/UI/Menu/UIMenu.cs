@@ -21,7 +21,9 @@ namespace Script.UI.Menu
         private ScrollRect Scroll;
         private RectTransform Scroll_Content; 
         [SerializeField] private List<Card.Card> AllCards = new List<Card.Card>();
-    
+        private bool IsDeckmode = false;
+       [SerializeField] private List<Card.Card> VirDeck = new List<Card.Card>();
+
 
         void Start()
         {
@@ -36,11 +38,16 @@ namespace Script.UI.Menu
 
         }
 
+        public void ToggleDeckMode()
+        {
+            IsDeckmode = !IsDeckmode;
+        }
+
         private void Spawn(Card.Card characterCardSc)
         {
             var card = Instantiate(CardUI, Content.transform);
             var cardSc = card.GetComponent<CardCompendiumSC>();
-        
+            cardSc.charCard = characterCardSc;
             cardSc.Name.text = characterCardSc.name;
             cardSc.Desc.text = characterCardSc.description;
             cardSc.Artwork.sprite = characterCardSc.cardImage;
@@ -65,8 +72,28 @@ namespace Script.UI.Menu
                                                                    " - " + descexp.Explanations[index]+ "\n");
                 }
             }
+
+            if (IsDeckmode)
+            {
+                VirDeck.Add(this_.gameObject.GetComponent<CardCompendiumSC>().GetCHCard());
+                Debug.Log(this_.gameObject.GetComponent<CardCompendiumSC>().GetCHCard().name+" added to deck");
+            }
          
         
+        }
+
+       
+          [ContextMenu("Make deck file")]
+        public void SaveVirDeck()
+        {
+            SavingHandler.SaveDeck(SavingHandler.CreateDeckFile(VirDeck));
+        }
+
+        [ContextMenu("Load deck file")]
+        public void LoadVirDeck()
+        {
+            VirDeck.Clear();
+            VirDeck = SavingHandler.LoadDeck().Deck;
         }
 
     

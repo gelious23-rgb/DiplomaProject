@@ -44,7 +44,7 @@ namespace Script.Game
         
         IEnumerator TurnFunc()
         {
-            CardEffectHandler.OnTurnStart.Invoke();
+            if(_turn % 2 == 0){CardEffectHandler.OnTurnStart.Invoke();}
             
                 PrepareTurn();
             
@@ -83,9 +83,13 @@ namespace Script.Game
 
         private void TurnEnd()
         {
-            CardEffectHandler.OnTurnEnd.Invoke();
+            if (_turn % 2 == 0)
+            {
+                CardEffectHandler.OnTurnEnd.Invoke();
+                Debug.Log("Turn ended");
+            }
             
-            Debug.Log("Turn ended");
+            
 
         }
 

@@ -7,64 +7,85 @@ namespace Script.Card.CardEffects
 {
     public class CrownEffect : Effect
     {
-        public List<CardInfoDisplay> board = new List<CardInfoDisplay>();
+       // public List<CardInfoDisplay> board = new List<CardInfoDisplay>();
         
         protected override void OnTurnStart()
         {
            CardEffectHandler.OnBeingHit.AddListener(OnAllyHit);
-           DeckUpdate();
+          if(GetCard().IsPlaced){ DeckUpdate();}
+        }
+
+        protected override void OnTurnEnd()
+        {
+            CardEffectHandler.OnBeingHit.RemoveListener(OnAllyHit);
         }
 
         public override void DoOnEnable()
         {
             CardEffectHandler.OnDeath.AddListener(DrawCard);
             CardEffectHandler.OnBeingPlayed.AddListener(OnAllyBeingPlayed);
-            DeckUpdate();
+             
+            //DeckUpdate();
         }
 
-        private void DeckUpdate()
+        private List<CardInfoDisplay> DeckUpdate()
         {
-            board.Clear();
-            foreach (var card in GetCard().GetComponent<SpawnerCards>().Board)
-            {
-                board.Add(card);
-            }
+            var cardd = GetCard();
+            var spawner = cardd.owner.gameObject.GetComponent<SpawnerCards>();
+            var spawnerBoard = spawner.Board;
+            List<CardInfoDisplay> returnboard = new List<CardInfoDisplay>();
+            returnboard  = spawnerBoard;
+            //board.Clear();
+            
+
+            return returnboard;
+            
         }
 
         public override void OnBeingPlayed(CardInfoDisplay self)
         {
             if (self == GetCard())
             {
-                DeckUpdate();
+                //DeckUpdate();
              //    board = GetCard().owner.Board;
                 
-                foreach (var card in board)
+                foreach (var card in DeckUpdate())
                 {
-                    Blessing CrownHpBless = card.AddComponent<Blessing>();
-                    CrownHpBless.HpBlessing = 2;
-                    CrownHpBless.ApplyBlessings();
+                    if (card != GetCard())
+                    {
+                        Blessing CrownHpBless = card.AddComponent<Blessing>();
+                        CrownHpBless.HpBlessing = 2;
+                        CrownHpBless.ApplyBlessings();
+                    }
                 }
             }
         }
 
         private void OnAllyBeingPlayed(CardInfoDisplay ally)
         {
-            if (ally.owner == GetCard().owner)
+            if (GetCard().IsPlaced && ally!= GetCard())
             {
-                Blessing CrownHpBless = ally.AddComponent<Blessing>();
-                CrownHpBless.HpBlessing = 2;
-                CrownHpBless.ApplyBlessings();
+                if (ally.owner == GetCard().owner)
+                {
+                    Blessing CrownHpBless = ally.AddComponent<Blessing>();
+                    CrownHpBless.HpBlessing = 2;
+                    CrownHpBless.ApplyBlessings();
+                }
             }
         }
 
         private void OnAllyHit(CardInfoDisplay ally, CardInfoDisplay damageSource)
         {
-            if (ally.owner.Board.Contains(GetCard()))
+            Debug.Log("Crown atatck blessing activated " + "Target is "+ally.CharacterCard.name + "Offender is " + damageSource.CharacterCard.name);
+            if (ally.owner.Board.Contains(GetCard()) && ally!= GetCard())
             {
                 Blessing crownAtkBless = ally.AddComponent<Blessing>();
                 crownAtkBless.ATKBlessing = 1;
                 crownAtkBless.HpBlessing = 1;
                 crownAtkBless.ApplyBlessings();
+                Bleed crownBleed = ally.AddComponent<Bleed>();
+                crownBleed.bleedPower = 1;
+                crownBleed.destrotOnTurnEnd = true;
             }
         }
 

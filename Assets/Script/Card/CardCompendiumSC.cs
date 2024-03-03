@@ -13,5 +13,11 @@ namespace Script.Card
         public TextMeshProUGUI Atk;
         public TextMeshProUGUI Cost;
         public Image Artwork;
+        public Card charCard;
+
+        public Card GetCHCard()
+        {
+            return charCard;
+        }
     }
 }

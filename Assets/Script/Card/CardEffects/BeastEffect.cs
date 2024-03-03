@@ -28,13 +28,13 @@ namespace Script.Card.CardEffects
                     CardInfoDisplay Sacrifice = null;
                     if (enemyCards.Board.Contains(GetCard()))
                     {
-                        Sacrifice = playerCards.Board[Random.Range(0, playerCards.Board.Count + 1)];
+                        Sacrifice = playerCards.Board[Random.Range(0, playerCards.Board.Count)];
                         BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
                         BeastTurnsStarved = 0;
                     }
                     else if (playerCards.Board.Contains(GetCard()))
                     {
-                        Sacrifice =enemyCards.Board[Random.Range(0, enemyCards.Board.Count + 1)];
+                        Sacrifice =enemyCards.Board[Random.Range(0, enemyCards.Board.Count)];
                         BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
                         BeastTurnsStarved = 0;
                     }

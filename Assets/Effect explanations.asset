@@ -34,14 +34,14 @@ MonoBehaviour:
   - Protection
   Explanations:
   - If target has 50% hp or less, it is instantly destroyed
-  - Stackable, deals 1 dmg per stack at the end of turn
-  - Stackable, when afflicted card attacks, deal 1 damage per stack. Disappears at
-    the end of a turn
-  - Can not be stacked, only strongest value applies. Reduces max Atk by effect value,
-    at the end of the turn return to normal values
-  - Can not be stacked, only strongest value applies. Reduces max Hp by effect value,
-    Hp is restored by the reduced value  at the end of the turn if target is alive
-  - apply burn when hit and on attack
+  - Deals 1 dmg per stack at the end of turn, then halves. Dissapears if at 0 at
+    the end of the turn.
+  - When afflicted card attacks, deal 1 damage per stack, then halves. Dissapears
+    if at 0.
+  - Reduces max Atk by effect value, at the end of the turn return to normal values
+  - Reduces max Hp by effect value, Hp is restored by the reduced value  at the end
+    of the turn if target is alive
+  - Apply burn when hit and on attack
   - upon receiving lethal damage, do not die and restore hp to max once
   - restore all hp to max at the end of a turn
   - receive +Effect value Atk and|or Hp at the end of a turn
@@ -50,8 +50,9 @@ MonoBehaviour:
     tool, 12hp 0 atk, when killed, restores 7 hp to a player that killed it"
   - while the creature with this effect is alive, ally cards on the left and right
     receive +1 atk. When it dies, they restore 3 hp
-  - receive +1 atk per 2 hp restored. Overheal counts
-  - after being hit, gain atk equal to effect value
+  - Heal for half attack value on attack. Receive +1 atk per 2 hp restored. Overheal
+    counts
+  - after being hit, double attack for 1 turn next turn.
   - "\u201Cprotection\u201D is equal to atk instead of half atk if the attacker has
     less attack"
   - block X damage once

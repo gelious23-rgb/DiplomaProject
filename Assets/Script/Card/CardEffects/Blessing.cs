@@ -19,6 +19,7 @@ namespace Script.Card.CardEffects
             GetCard().Heal(HpBlessing);
             GetCard().ATK += ATKBlessing;
             GetCard().RefreshData();
+            GetCard().Bufflist.CallBufflist();
         }
 
         private protected void CheckAmount()
@@ -56,9 +57,11 @@ namespace Script.Card.CardEffects
                 {
                     GetCard().ATK +=-ATKBlessing;
                 }
+                GetCard().Bufflist.CallBufflist();
             }
            
             GetCard().RefreshData();
+          
             base.OnTurnEnd();
         }
     }

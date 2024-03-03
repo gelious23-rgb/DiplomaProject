@@ -27,7 +27,8 @@ namespace Script.Card
 
         [SerializeField]
         private TextMeshProUGUI _attack, _hp, _manacost;
-        
+
+        public CardBufflist Bufflist;
         [SerializeField]
         private GameObject _hideGO,_highliter;
         public bool IsPlayer;
@@ -48,13 +49,13 @@ namespace Script.Card
                 var blessing = GetComponent<Blessing>();
                 if (blessing == null || blessing.HpBlessing == 0)
                 {
-                    Debug.Log("No blessings, returning normal value: " + _maxHp);
+                  // Debug.Log("No blessings, returning normal value: " + _maxHp);
                     return _maxHp;
                 }
                 else if (blessing!=null && blessing.HpBlessing != 0)
                 {
                     
-                    Debug.Log("Hp blessing = "+blessing.HpBlessing + " MaxHp = "+ _maxHp);
+                  //  Debug.Log("Hp blessing = "+blessing.HpBlessing + " MaxHp = "+ _maxHp);
                     return _maxHp;
                 }
                 else
@@ -67,8 +68,8 @@ namespace Script.Card
             {
                 _maxHp = value;
                 RefreshData();
-                Debug.Log("Max Hp private is set to "+_maxHp);
-                Debug.Log("Max Hp public is set to" + MaxHp);
+               // Debug.Log("Max Hp private is set to "+_maxHp);
+               // Debug.Log("Max Hp public is set to" + MaxHp);
 
             }
         }
