@@ -14,8 +14,9 @@ namespace Script.Card
         public void DestroyCard(CardInfoDisplay card)
         { 
             CardEffectHandler.OnDeath.Invoke(card);
+            
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            if (card.TryGetComponent<SisyphusEffect>(out var sisyphusEffect) == false)
+            if (card.TryGetComponent<SisyphusEffect>(out var sisyphusEffect_) == false)
             {
                 card.GetComponent<CardMove>().OnEndDrag(null);
 
@@ -25,9 +26,16 @@ namespace Script.Card
                 if (_playerSpawnerCards.Board.Exists(x => x == card))
                     _playerSpawnerCards.Board.Remove(card);
 
-                Destroy(card.gameObject);
+                if (chechForMiracle(card) == null)
+                {
+                    Destroy(card.gameObject);
+                }
+                else
+                {
+                    card.Heal(card.MaxHp);
+                }
             }
-            else
+            else if (card.TryGetComponent<SisyphusEffect>(out var sisyphusEffect) == true)
             {
                 if (_playerSpawnerCards.Board.Contains(card))
                 {
@@ -38,8 +46,18 @@ namespace Script.Card
                     sisyphusEffect.SisyphusRevive(_enemySpawnerCards.GetCardOfType(Card.Types.Powers));
                 }
             }
-                
-                
+        }
+
+        private Miracle chechForMiracle(CardInfoDisplay card)
+        {
+            if (card.TryGetComponent<Miracle>(out var thisMiracle) == true)
+            {
+                return thisMiracle;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -28,13 +28,13 @@ namespace Script.Card.CardEffects
                     CardInfoDisplay Sacrifice = null;
                     if (enemyCards.Board.Contains(GetCard()))
                     {
-                        Sacrifice = playerCards.Board[Random.Range(0, playerCards.Board.Count + 1)];
+                        Sacrifice = playerCards.Board[Random.Range(0, playerCards.Board.Count)];
                         BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
                         BeastTurnsStarved = 0;
                     }
                     else if (playerCards.Board.Contains(GetCard()))
                     {
-                        Sacrifice =enemyCards.Board[Random.Range(0, enemyCards.Board.Count + 1)];
+                        Sacrifice =enemyCards.Board[Random.Range(0, enemyCards.Board.Count)];
                         BattleBehaviour.CardDeath.DestroyCard(Sacrifice);
                         BeastTurnsStarved = 0;
                     }
@@ -47,7 +47,7 @@ namespace Script.Card.CardEffects
                         }
                         else
                         {
-                            BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(GetCard().owner,GetCard().CharacterCard.manacost);
+                            BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(GetCard().OwnerHp,GetCard().CharacterCard.manacost);
                             BeastTurnsStarved++;
                         }
                     }
@@ -61,13 +61,19 @@ namespace Script.Card.CardEffects
             {
                 foreach (var card in playerCards.Board)
                 {
-                     card.CurrentHP=-1;   
+                     card.CurrentHP-=1;  
+                     card.RefreshData();
                 }
                 foreach (var card in enemyCards.Board)
                 {
-                    card.CurrentHP=-1;   
+                    card.CurrentHP-=1;   
+                    card.RefreshData();
                 }
+                self.CurrentHP += 1;
+                self.RefreshData();
             }
+
+           
         }
     }
 }

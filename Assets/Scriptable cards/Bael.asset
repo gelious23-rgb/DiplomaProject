@@ -19,3 +19,5 @@ MonoBehaviour:
   hp: 6
   attack: 5
   manacost: 3
+  Effects:
+  - {fileID: 6135291957925873404, guid: 8b4e6140356ba2e4884055678b8e977f, type: 3}

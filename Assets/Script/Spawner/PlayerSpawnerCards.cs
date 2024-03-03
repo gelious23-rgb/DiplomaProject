@@ -23,6 +23,7 @@ namespace Script.Spawner
         {
             CurrentPlayerCardDeckInstance = new PlayerCardDeckInstance();
             GiveStartCards(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
+            IsPlayer = true;
         }
         protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
         {
@@ -32,7 +33,7 @@ namespace Script.Spawner
         }
 
 
-        protected override void GiveCardToHand(List<Card.Card> deck, Transform hand)
+        public override void GiveCardToHand(List<Card.Card> deck, Transform hand)
         {
             if (deck.Count == 0)
                 return;
@@ -59,7 +60,8 @@ namespace Script.Spawner
             cardGameObj.name = characterCard.name;
             
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
-            cardInfoDisplay.owner = GetComponent<PlayerHealth>();
+            cardInfoDisplay.OwnerHp = GetComponent<PlayerHealth>();
+            cardInfoDisplay.owner = this;
 
             if (hand == PlayerHand)
             {

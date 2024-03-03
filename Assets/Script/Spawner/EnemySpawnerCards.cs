@@ -11,7 +11,7 @@ namespace Script.Spawner
 {
     public class EnemySpawnerCards : SpawnerCards
     {
-        [SerializeField]private Transform EnemyHand;
+        [SerializeField] internal Transform EnemyHand;
         private const int _maxEnemyHandSize = 6;
         private EnemyCardDeckInstance CurrentEnemyCardDeckInstance;
 
@@ -22,6 +22,7 @@ namespace Script.Spawner
         {
             CurrentEnemyCardDeckInstance = new EnemyCardDeckInstance();
             GiveStartCards(CurrentEnemyCardDeckInstance.EnemyDeck, EnemyHand);
+            IsPlayer = false;
         }
         
         protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
@@ -33,7 +34,7 @@ namespace Script.Spawner
         }
 
 
-        protected override void GiveCardToHand(List<Card.Card> deck, Transform hand)
+        public override void GiveCardToHand(List<Card.Card> deck, Transform hand)
         {
             if (deck.Count == 0)
                 return;
@@ -59,7 +60,8 @@ namespace Script.Spawner
             cardGameObj.name = characterCard.name;
 
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
-            cardInfoDisplay.owner = GetComponent<EnemyHealth>();
+            cardInfoDisplay.OwnerHp = GetComponent<EnemyHealth>();
+            cardInfoDisplay.owner = this;
 
             if (hand == EnemyHand)
             {

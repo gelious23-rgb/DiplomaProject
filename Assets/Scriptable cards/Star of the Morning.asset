@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Star of the Morning
   m_EditorClassIdentifier: 
   name: Star of the Morning
-  description: "When used on a \u201CMan\u201D, \u201CHeroic\u201D or \u201CPowers\u201D
-    card, increase their MaxAtk by 2. When used on \u201CRelic\u201D card, increase
-    effect based on Relic. "
+  description: 'When used on a card, increase their Atk by 2.  '
   CardType: 0
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 059d400b6006b8c41a0d88711600294f, type: 3}
   hp: 0
   attack: 0
   manacost: 0
+  Effects:
+  - {fileID: 3804724555874935324, guid: 2dccbe2f203a2874a8254fe5981e0bec, type: 3}

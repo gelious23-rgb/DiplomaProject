@@ -16,8 +16,10 @@ namespace Script.Card.CardEffects
         protected internal void ApplyBlessings()
         {
             GetCard().MaxHp += HpBlessing;
+            GetCard().Heal(HpBlessing);
             GetCard().ATK += ATKBlessing;
             GetCard().RefreshData();
+            GetCard().Bufflist.CallBufflist();
         }
 
         private protected void CheckAmount()
@@ -35,7 +37,31 @@ namespace Script.Card.CardEffects
 
         protected override void OnTurnEnd()
         {
+            if (destrotOnTurnEnd)
+            {
+                if (HpBlessing > 0)
+                {
+                    GetCard().MaxHp -= HpBlessing;
+                    //  GetCard().CurrentHP += HpBlessing;
+                }
+                else if(HpBlessing <0)
+                {
+                    GetCard().MaxHp +=-HpBlessing;
+                }
+                if (ATKBlessing > 0)
+                {
+                    GetCard().ATK -= ATKBlessing;
+                    //  GetCard().CurrentHP += HpBlessing;
+                }
+                else if(ATKBlessing <0)
+                {
+                    GetCard().ATK +=-ATKBlessing;
+                }
+                GetCard().Bufflist.CallBufflist();
+            }
+           
             GetCard().RefreshData();
+          
             base.OnTurnEnd();
         }
     }

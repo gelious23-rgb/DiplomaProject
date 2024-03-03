@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Crux
   m_EditorClassIdentifier: 
   name: Crux
-  description: "When used on a \u201C<color=blue>Man</color>\u201D, \u201C<color=purple>Heroic</color>\u201D
-    or \u201C<color=red>Powers</color>\u201D card, increase their MaxHp by 2. When
-    used on \u201C<color=yellow>Relic</color>\u201D card, enhance it. "
+  description: 'When used on a card, increase their MaxHp by 2.  '
   CardType: 0
   cardImage: {fileID: 21300000, guid: 268ae080ec9834645a8c1d7411572440, type: 3}
   hp: 0
   attack: 0
   manacost: 0
+  Effects:
+  - {fileID: 2482257669654684496, guid: 10857161664fdd745a40a77236a0a866, type: 3}

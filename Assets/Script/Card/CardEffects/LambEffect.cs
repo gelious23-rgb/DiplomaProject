@@ -7,12 +7,16 @@ namespace Script.Card.CardEffects
         private int CardTurnsAlive =0;
         protected override void OnTurnEnd()
         {
-            CardTurnsAlive++;
-            if (CardTurnsAlive > 3)
+            if (GetCard().IsPlaced)
             {
-                BattleBehaviour._calculateDamage.DealDamageToEnemyHero(GetCard().CurrentHP);
-                BattleBehaviour._calculateDamage.DealDamageToPlayerHero(GetCard().CurrentHP);
+                CardTurnsAlive++;
+                if (CardTurnsAlive > 3)
+                {
+                    BattleBehaviour._calculateDamage.DealDamageToEnemyHero(GetCard().CharacterCard.manacost);
+                    BattleBehaviour._calculateDamage.DealDamageToPlayerHero(GetCard().CharacterCard.manacost);
+                }
             }
+           
         }
     }
 }

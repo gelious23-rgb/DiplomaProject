@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Longinus
   m_EditorClassIdentifier: 
   name: Longinus
-  description: "<i><b><i><b>Counterattack</b></i></b></i>. When destroying a card,
-    every ally receives +1 atk +1hp. On death, add \u201CHoly lance\u201D to hand"
+  description: "<i><b>Counterattack</b></i>. When destroying a card, every ally receives
+    +1 atk +1hp. On death, add \u201CHoly lance\u201D to hand"
   CardType: 4
   cardImage: {fileID: 21300000, guid: 47c38e100a02fd3428177c4ca5e81f3a, type: 3}
   hp: 8

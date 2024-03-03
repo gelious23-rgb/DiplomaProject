@@ -23,13 +23,13 @@ namespace Script.Card.CardEffects
                          + Mathf.RoundToInt(target.CharacterCard.hp * 0.5f));
                if (target.CurrentHP <= Mathf.RoundToInt(target.CharacterCard.hp * 0.5f))
                {
-                    BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(target.owner,
+                    BattleBehaviour._calculateDamage.DealDamageToCharacterDirectly(target.OwnerHp,
                          target.CharacterCard.manacost);
                     BattleBehaviour.CardDeath.DestroyCard(target);
                     Debug.Log("Executed "+target.CharacterCard.name);
                     
 
-                    Debug.Log(target.owner +  "suffered " +target.CharacterCard.manacost + " damage" );
+                    Debug.Log(target.OwnerHp +  "suffered " +target.CharacterCard.manacost + " damage" );
                    
                }
           }

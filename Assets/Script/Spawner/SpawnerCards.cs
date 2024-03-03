@@ -11,6 +11,7 @@ namespace Script.Spawner
     {
         public GameObject cardPref;
         [SerializeField]public List<CardInfoDisplay> Board = new List<CardInfoDisplay>();
+        public bool IsPlayer;
 
         public CardInfoDisplay GetCardOfType(Card.Card.Types type)
         {
@@ -28,10 +29,9 @@ namespace Script.Spawner
 
 
         protected abstract void GiveStartCards(List<Card.Card> deck, Transform hand);
-  
 
 
-        protected abstract void GiveCardToHand(List<Card.Card> deck, Transform hand);
+        public abstract void GiveCardToHand(List<Card.Card> deck, Transform hand);
 
         public abstract void GiveNewCards();
         protected abstract void  SetupCard(Card.Card characterCard, Transform hand);
