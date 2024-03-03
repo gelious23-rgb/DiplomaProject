@@ -52,7 +52,7 @@ namespace Script.Card
                   // Debug.Log("No blessings, returning normal value: " + _maxHp);
                     return _maxHp;
                 }
-                else if (blessing!=null && blessing.HpBlessing != 0)
+                if (blessing!=null && blessing.HpBlessing != 0)
                 {
                     
                   //  Debug.Log("Hp blessing = "+blessing.HpBlessing + " MaxHp = "+ _maxHp);
@@ -62,7 +62,7 @@ namespace Script.Card
                 {
                     return _maxHp;
                 }
-                
+
             }
             set
             {
@@ -73,6 +73,7 @@ namespace Script.Card
 
             }
         }
+
 
          [FormerlySerializedAs("HP")] public int CurrentHP;
       public int ATK;
@@ -92,6 +93,7 @@ namespace Script.Card
 
         }
 
+
         public int Heal(int healAmount) //returns OverHeal amount
         {
              
@@ -110,6 +112,9 @@ namespace Script.Card
                 return 0;
             }
         }
+ 
+
+
            [ContextMenu("force start")]
            internal void OnTurnStart()
          {
