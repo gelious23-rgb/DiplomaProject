@@ -5,22 +5,26 @@ namespace Script.Card.CardEffects
 {
     public class HolyGrailEffect : Effect
     {
-        public override void OnBeingPlayed(CardInfoDisplay self)
-        {
-            GetCard().AddComponent<WineEffect>();
-            AddElixirToAll();
-        }
 
-        protected override void OnTurnStart()
+        protected override void OnTurnEnd()
         {
-            AddElixirToAll();
+            if (GetCard().IsPlaced)
+            {
+                AddElixirToAll();
+            }
+
         }
 
         private void AddElixirToAll()
         {
             foreach (var card in GetCard().owner.Board)
             {
-                card.AddComponent<ElixirEffect>();
+                /*card.AddComponent<ElixirEffect>();*/
+                if (card != GetCard())
+                {
+                    ElixirEffect elixir = card.AddComponent<ElixirEffect>();
+                    elixir.destroyOnTurnEnd = true;
+                }
             }
         }
     }

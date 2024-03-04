@@ -11,7 +11,7 @@ namespace Script.Card.CardEffects
             Blessing debuff =target.AddComponent<Blessing>();
              
             debuff.ATKBlessing = -1;
-            debuff.destrotOnTurnEnd = true;
+            debuff.destroyOnTurnEnd = true;
              
             debuff.ApplyBlessings();
         }

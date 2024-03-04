@@ -7,13 +7,14 @@ namespace Script.Card.CardEffects
     {
         public override void DoOnEnable()
         {
-            destrotOnTurnEnd = true;
+            destroyOnTurnEnd = true;
             GetCard().Bufflist.ElixirSprite.SetActive(true);
         }
 
         protected override void OnTurnEnd()
         {
             GetCard().Heal(GetCard().MaxHp);
+            base.OnTurnEnd();
         }
 
         private void OnDestroy()

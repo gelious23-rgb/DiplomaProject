@@ -76,16 +76,20 @@ namespace Script.Card.CardEffects
 
         private void OnAllyHit(CardInfoDisplay ally, CardInfoDisplay damageSource)
         {
-            Debug.Log("Crown atatck blessing activated " + "Target is "+ally.CharacterCard.name + "Offender is " + damageSource.CharacterCard.name);
-            if (ally.owner.Board.Contains(GetCard()) && ally!= GetCard())
+           
+            if (GetCard().IsPlaced)
             {
-                Blessing crownAtkBless = ally.AddComponent<Blessing>();
-                crownAtkBless.ATKBlessing = 1;
-                crownAtkBless.HpBlessing = 1;
-                crownAtkBless.ApplyBlessings();
-                Bleed crownBleed = ally.AddComponent<Bleed>();
-                crownBleed.bleedPower = 1;
-                crownBleed.destrotOnTurnEnd = true;
+                Debug.Log("Crown atatck blessing activated " + "Target is "+ally.CharacterCard.name + "Offender is " + damageSource.CharacterCard.name);
+                if (ally.owner.Board.Contains(GetCard()) && ally!= GetCard())
+                {
+                    Blessing crownAtkBless = ally.AddComponent<Blessing>();
+                    crownAtkBless.ATKBlessing = 1;
+                    crownAtkBless.HpBlessing = 1;
+                    crownAtkBless.ApplyBlessings();
+                    Bleed crownBleed = ally.AddComponent<Bleed>();
+                    crownBleed.bleedPower = 1;
+                    crownBleed.destroyOnTurnEnd = true;
+                }
             }
         }
 
@@ -93,13 +97,13 @@ namespace Script.Card.CardEffects
         {
             if (GetCard().IsPlaced)
             {
-                if (deadCard.owner.IsPlayer)
+                if (deadCard.owner.IsPlayer && GetCard().owner == deadCard.owner)
                 {
                     CardEffectHandler.GetLibrary().GiveCardToPlayerHand(Random.Range(0, 
                         CardEffectHandler.GetLibrary().AllCards.Count));
                 }
 
-                if (deadCard.owner.IsPlayer == false)
+                if (deadCard.owner.IsPlayer == false && GetCard().owner == deadCard.owner)
                 {
                     CardEffectHandler.GetLibrary().GiveCardToEnemyHand(Random.Range(0, 
                         CardEffectHandler.GetLibrary().AllCards.Count));

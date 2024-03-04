@@ -11,50 +11,86 @@ namespace Script.Card.CardEffects
         private CardInfoDisplay target2;
         private int blessingPower = 1;
         private List<Blessing> _blessings = new List<Blessing>();
+        private int _counter = 2;
 
         public override void DoOnEnable()
         {
-            GetTargets();
-            _blessings =ApplyWineBuffs();
+
         }
 
         protected override void OnTurnEnd()
         {
-            blessingPower++;
-            _blessings[0].ATKBlessing = blessingPower;
-            _blessings[1].ATKBlessing = blessingPower;
+            if (GetCard().IsPlaced)
+            {
+                if (_blessings != null)
+                {
+                    foreach (var blessing in _blessings)
+                    {
+                        blessing.ATKBlessing += 1;
+                        blessing.HpBlessing += 1;
+                        blessing.ApplyBlessings();
+                    }
+                }
+            }
+   
+
         }
 
-        private void GetTargets()
+        public override void OnBeingPlayed(CardInfoDisplay self)
         {
-             PlaceInList = GetCard().owner.Board.FindIndex((x) => x.name == GetCard().name);
-             target1 = GetCard().owner.Board[PlaceInList - 1];
-             target2 = GetCard().owner.Board[PlaceInList + 1];
-             if (PlaceInList == 0)
-             {
-                 target1 =GetCard().owner.Board[PlaceInList + 2];
-             }
+            if (self == GetCard() )
+            {
+                var board = GetCard().owner.Board;
+                if (board.Count == 1)
+                {
+                    _counter = 1;
+                }
+                if (board != null)
+                {
+                    foreach (var card in board)
+                    {
+                        if (card != self)
+                        {
+                            if (_counter > 0)
+                            {
+                                var bless = card.AddComponent<Blessing>();
+                                bless.HpBlessing = 2;
+                                bless.ATKBlessing = 1;
+                                bless.ApplyBlessings();
+                                _blessings.Add(bless);
+                                _counter--;
+                            }
+                        }
+    
+                    }
+ 
+                }
+            }
+            if (GetCard().IsPlaced && self.owner == GetCard().owner && self != GetCard())
+            {
+                if (_counter < 0)
+                {
+                    var bless = self.AddComponent<Blessing>();
+                    bless.HpBlessing = 2;
+                    bless.ATKBlessing = 1;
+                    bless.ApplyBlessings();
+                    _blessings.Add(bless);
+                    _counter--;
+                }
+
+
+            }
         }
 
-        private  List<Blessing> ApplyWineBuffs()
-        {
-            Blessing wineBless1 = target1.AddComponent<Blessing>();
-            wineBless1.ATKBlessing = blessingPower;
-            Blessing wineBless2 = target2.AddComponent<Blessing>();
-            wineBless2.ATKBlessing = blessingPower;
-            wineBless1.ApplyBlessings();
-            wineBless2.ApplyBlessings();
-            List<Blessing> toReturn = new List<Blessing>();
-            toReturn.Add(wineBless1);
-            toReturn.Add(wineBless2);
-            
-            return toReturn;
-        }
+
+
 
         private void OnDestroy()
         {
-            target1.Heal(3);
-            target2.Heal(3);
+            foreach (var blessing in _blessings )
+            {
+                blessing.GetCard().Heal(3);
+            }
         }
     }
 }

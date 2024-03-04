@@ -26,38 +26,51 @@ namespace Script.Card
                 if (_playerSpawnerCards.Board.Exists(x => x == card))
                     _playerSpawnerCards.Board.Remove(card);
 
-                if (chechForMiracle(card) == null)
-                {
+                if (CheckForMiracle(card) == null)
                     Destroy(card.gameObject);
-                }
                 else
-                {
                     card.Heal(card.MaxHp);
-                }
+       
             }
-            else if (card.TryGetComponent<SisyphusEffect>(out var sisyphusEffect) == true)
+            else if (card.TryGetComponent<SisyphusEffect>(out var sisyphusEffect))
             {
                 if (_playerSpawnerCards.Board.Contains(card))
                 {
-                    sisyphusEffect.SisyphusRevive(_playerSpawnerCards.GetCardOfType(Card.Types.Powers));
+
+                    if (_playerSpawnerCards.GetCardOfType(Card.Types.Powers) == null)
+                    {
+                        _playerSpawnerCards.Board.Remove(card);
+                        Destroy(card.gameObject);
+                    }
+                    else
+                    {
+                        sisyphusEffect.SisyphusRevive(_playerSpawnerCards.GetCardOfType(Card.Types.Powers));
+                    }
                 }
                 else if (_enemySpawnerCards.Board.Contains(card))
                 {
-                    sisyphusEffect.SisyphusRevive(_enemySpawnerCards.GetCardOfType(Card.Types.Powers));
+                    
+                    if (_enemySpawnerCards.GetCardOfType(Card.Types.Powers) == null)
+                    {
+                        _enemySpawnerCards.Board.Remove(card);
+                        Destroy(card.gameObject);
+                    }
+                    else
+                    {
+                        sisyphusEffect.SisyphusRevive(_enemySpawnerCards.GetCardOfType(Card.Types.Powers));
+                    }
                 }
+
+
             }
         }
 
-        private Miracle chechForMiracle(CardInfoDisplay card)
+        private Miracle CheckForMiracle(CardInfoDisplay card)
         {
-            if (card.TryGetComponent<Miracle>(out var thisMiracle) == true)
-            {
+            if (card.TryGetComponent<Miracle>(out var thisMiracle))
                 return thisMiracle;
-            }
             else
-            {
                 return null;
-            }
         }
     }
 }

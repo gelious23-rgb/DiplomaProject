@@ -62,11 +62,12 @@ namespace Script.Game
         public void ChangeTurn()
         {
             StopAllCoroutines();
-            TurnEnd();
+
 
             
             _calculateDamage.CheckAmountCardsForCalculateDamage();
             _turn++;
+            TurnEnd();
 
             _endTurnButton.EndTurn.interactable = IsPlayerTurn;
             
@@ -88,8 +89,6 @@ namespace Script.Game
                 CardEffectHandler.OnTurnEnd.Invoke();
                 Debug.Log("Turn ended");
             }
-            
-            
 
         }
 

@@ -1012,7 +1012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7913920039556741023, guid: 743d166f1aed1d54f9b589f2b5bc4340, type: 3}
       propertyPath: m_Name
-      value: EnemyGameOver
+      value: PlayerGameOver
       objectReference: {fileID: 0}
     - target: {fileID: 7913920039556741023, guid: 743d166f1aed1d54f9b589f2b5bc4340, type: 3}
       propertyPath: m_IsActive
@@ -1679,7 +1679,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2180992539273209796, guid: e42aceb7df78fd6409eee9f201f95543, type: 3}
       propertyPath: m_Name
-      value: PlayerGameOver
+      value: EnemyGameOver
       objectReference: {fileID: 0}
     - target: {fileID: 2180992539273209796, guid: e42aceb7df78fd6409eee9f201f95543, type: 3}
       propertyPath: m_IsActive
@@ -2479,6 +2479,10 @@ PrefabInstance:
       propertyPath: WinPanel
       value: 
       objectReference: {fileID: 1388903650}
+    - target: {fileID: 3825830637099633097, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+      propertyPath: _losePanel
+      value: 
+      objectReference: {fileID: 1924324074}
     - target: {fileID: 3825830637099633100, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
       propertyPath: cardPref
       value: 
@@ -3013,12 +3017,16 @@ PrefabInstance:
       objectReference: {fileID: 1347836513}
     - target: {fileID: 5876503861331612547, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: _currentEnemyMana
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5876503861331612548, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: LosePanel
       value: 
       objectReference: {fileID: 1924324074}
+    - target: {fileID: 5876503861331612548, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+      propertyPath: _winPanel
+      value: 
+      objectReference: {fileID: 1388903650}
     - target: {fileID: 5876503861331612575, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: m_Name
       value: Enemy

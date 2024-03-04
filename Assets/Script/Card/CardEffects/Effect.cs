@@ -2,6 +2,7 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace Script.Card.CardEffects
@@ -10,7 +11,7 @@ namespace Script.Card.CardEffects
     public class Effect : MonoBehaviour
     {
         public BattleBehaviour BattleBehaviour;
-        public bool destrotOnTurnEnd=false;
+        public bool destroyOnTurnEnd=false;
         protected void Start()
         {
             if (CardEffectHandler.Effects.Contains(this) == false)
@@ -63,7 +64,7 @@ namespace Script.Card.CardEffects
         }
         protected virtual void OnTurnEnd()
         {
-          if(destrotOnTurnEnd){Destroy(this);}
+          if(destroyOnTurnEnd){Destroy(this);}
 
         }
        

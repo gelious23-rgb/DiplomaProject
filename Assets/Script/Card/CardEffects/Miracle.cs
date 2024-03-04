@@ -7,7 +7,7 @@ namespace Script.Card.CardEffects
     {
         public override void DoOnEnable()
         {
-            destrotOnTurnEnd = true;
+            destroyOnTurnEnd = true;
             GetCard().Bufflist.MiracleSprite.SetActive(true);
         }
 

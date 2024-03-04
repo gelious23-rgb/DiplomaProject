@@ -17,7 +17,7 @@ MonoBehaviour:
   CardType: 2
   cardImage: {fileID: 21300000, guid: fcf3448fd630b174aa8ac6f06148eb87, type: 3}
   hp: 6
-  attack: 5
-  manacost: 3
+  attack: 3
+  manacost: 5
   Effects:
   - {fileID: 6135291957925873404, guid: 8b4e6140356ba2e4884055678b8e977f, type: 3}

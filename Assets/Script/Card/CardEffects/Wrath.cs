@@ -7,7 +7,7 @@ namespace Script.Card.CardEffects
         private bool ApplyWrath = false;
         public override void DoOnEnable()
         {
-            destrotOnTurnEnd = true;
+            destroyOnTurnEnd = true;
         }
 
         public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
@@ -25,8 +25,9 @@ namespace Script.Card.CardEffects
                 Blessing wrathBuff = GetCard().AddComponent<Blessing>();
                 wrathBuff.ATKBlessing = GetCard().ATK;
                 wrathBuff.ApplyBlessings();
-                wrathBuff.destrotOnTurnEnd = true;
+                wrathBuff.destroyOnTurnEnd = true;
             }
+            base.OnTurnEnd();
         }
     }
 }

@@ -37,7 +37,6 @@ namespace Script.Card.CardEffects
           protected override void OnTurnEnd()
           {
                base.OnTurnEnd();
-               BuffIcon.SetActive(false);
           }
 
      }

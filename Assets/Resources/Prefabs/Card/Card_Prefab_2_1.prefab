@@ -1053,7 +1053,7 @@ MonoBehaviour:
   TransmutationSprite: {fileID: 6499082210946576809}
   BleedSprite: {fileID: 1124529002774223859}
   MiracleSprite: {fileID: 4448490709223788855}
-  ElixirSprite: {fileID: 0}
+  ElixirSprite: {fileID: 8035781173180229160}
   AtkBlessTextDisplay: {fileID: 3301831990008217759}
   HpBlessTextDisplay: {fileID: 2384521403032143122}
   BurnTextDisplay: {fileID: 6798099232106352032}

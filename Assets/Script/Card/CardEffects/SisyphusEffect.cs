@@ -20,8 +20,8 @@ namespace Script.Card.CardEffects
             if (sacrifice == null)
             {
                 GetCard().CurrentHP = 0;
-                BattleBehaviour.CheckAlivePlayerCardOnBoard(GetCard());
-                BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());
+                /*BattleBehaviour.CheckAlivePlayerCardOnBoard(GetCard());*/
+                /*BattleBehaviour.CheckAliveEnemyCardOnBoard(GetCard());*/
                 BattleBehaviour.CardDeath.DestroyCard(GetCard());
                 Debug.Log("Sisyphus is dead");
             }

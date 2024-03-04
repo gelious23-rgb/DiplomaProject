@@ -19,8 +19,9 @@ namespace Script.Card.CardEffects
         {
             if (self == GetCard())
             {
-                var Glvalue = GetCard().ATK * 0.5f;
-               Glutton.ATKBlessing += self.Heal(Mathf.RoundToInt(Glvalue)); 
+                var GluttonyValue = GetCard().CharacterCard.attack * 0.5f;
+               Glutton.ATKBlessing += self.Heal(Mathf.RoundToInt(GluttonyValue));
+               Glutton.ApplyBlessings();
             }
         }
     }

@@ -37,7 +37,7 @@ namespace Script.Card.CardEffects
 
         protected override void OnTurnEnd()
         {
-            if (destrotOnTurnEnd)
+            if (destroyOnTurnEnd)
             {
                 if (HpBlessing > 0)
                 {

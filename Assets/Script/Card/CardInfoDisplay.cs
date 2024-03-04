@@ -76,13 +76,13 @@ namespace Script.Card
 
 
          [FormerlySerializedAs("HP")] public int CurrentHP;
-      public int ATK;
-       public int DamageResistance = 0;
+      public int ATK; 
+      public int DamageResistance = 0;
       public IHealth OwnerHp;
       public SpawnerCards owner;
       
-      public GameObject BuffSpriteSpace;
-        public bool IsAlive => CurrentHP > 0;
+      public GameObject BuffSpriteSpace; 
+      public bool IsAlive => CurrentHP > 0;
 
         internal void Start()
         {
