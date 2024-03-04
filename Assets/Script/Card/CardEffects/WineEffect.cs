@@ -1,21 +1,19 @@
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Script.Card.CardEffects
 {
     public class WineEffect : Effect
     {
-        private int PlaceInList;
-        private CardInfoDisplay target1;
-        private CardInfoDisplay target2;
         private int blessingPower = 1;
         private List<Blessing> _blessings = new List<Blessing>();
-        private int _counter = 2;
+       [SerializeField] private int _counter = 2;
 
         public override void DoOnEnable()
         {
-
+            _counter = 2;
         }
 
         protected override void OnTurnEnd()
@@ -32,8 +30,6 @@ namespace Script.Card.CardEffects
                     }
                 }
             }
-   
-
         }
 
         public override void OnBeingPlayed(CardInfoDisplay self)
@@ -68,7 +64,8 @@ namespace Script.Card.CardEffects
             }
             if (GetCard().IsPlaced && self.owner == GetCard().owner && self != GetCard())
             {
-                if (_counter < 0)
+                Debug.Log("Ally Card not Self detected");
+                if (_counter > 0)
                 {
                     var bless = self.AddComponent<Blessing>();
                     bless.HpBlessing = 2;

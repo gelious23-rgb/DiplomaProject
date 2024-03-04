@@ -9,13 +9,14 @@ namespace Script.Card.CardEffects
         
         public override void OnAttack(CardInfoDisplay self, CardInfoDisplay target)
         {
-            if(self == GetCard())
-            if (atkCount < 2)
+            if (self == GetCard())
             {
-                atkCount++;
-                self.CanAttack = true;
+                if (atkCount < 2)
+                {
+                    atkCount++;
+                    GetCard().CanAttack = true;
+                }
             }
-           
         }
         protected override void OnTurnEnd()
         {

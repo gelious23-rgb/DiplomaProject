@@ -35,20 +35,24 @@ namespace Script.Card
            
             CardMove cardMove = eventData.pointerDrag.GetComponent<CardMove>();
             CardInfoDisplay cardInfo = cardMove.GetComponent<CardInfoDisplay>();
-            
 
-            if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
-               cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
+            if (cardInfo.CharacterCard.CardType != Card.Types.Tool)
             {
-                 _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
-                _playerSpawnerCards.Board.Add(cardInfo);
-                CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
-                cardMove.DefaultParent = transform;
+                if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
+                    cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
+                {
+                    _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
+                    _playerSpawnerCards.Board.Add(cardInfo);
+                    CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
+                    cardMove.DefaultParent = transform;
 
-                cardInfo.IsPlaced = true;
-                _playerMana.ReduceMana(cardInfo.CharacterCard.manacost);
-               _turnBehaviour.CheckCardsForAvailability();
+                    cardInfo.IsPlaced = true;
+                    _playerMana.ReduceMana(cardInfo.CharacterCard.manacost);
+                    _turnBehaviour.CheckCardsForAvailability();
+                }
             }
+             
+           
 
         }
 

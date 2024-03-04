@@ -10,6 +10,15 @@ namespace Script.Card.CardEffects
 
         public override void DoOnEnable()
         {
+            if (GetCard().CharacterCard.name == "Star of the Morning")
+            {
+                ATKBlessing = 2;
+            }
+            if (GetCard().CharacterCard.name == "Crux")
+            {
+                HpBlessing = 2;
+            }
+            
             ApplyBlessings();
         }
 
@@ -59,7 +68,7 @@ namespace Script.Card.CardEffects
                 }
                 GetCard().Bufflist.CallBufflist();
             }
-           
+            
             GetCard().RefreshData();
           
             base.OnTurnEnd();

@@ -31,6 +31,11 @@ namespace Script.Card.CardEffects
              
         }
 
+        public virtual void OnBeingHitAfter(CardInfoDisplay target, CardInfoDisplay damageSource)
+        {
+            
+        }
+
         protected void OnEnable()
         {
             BattleBehaviour = FindObjectOfType<BattleBehaviour>();

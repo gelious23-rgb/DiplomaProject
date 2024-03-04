@@ -38,7 +38,7 @@ namespace Script.Card
             var  Carddobj = Instantiate(sp.cardPref, sp.PlayerHand.transform);
             var Cardd = Carddobj.GetComponent<CardInfoDisplay>();
             Cardd.owner = sp; 
-            Cardd.CharacterCard = AllCards[6]; 
+            Cardd.CharacterCard = AllAllCards[7]; 
             Cardd.OnTurnStart(); 
             Cardd.RefreshData(); 
             Cardd.ShowCardInfo(Cardd.CharacterCard, true); 

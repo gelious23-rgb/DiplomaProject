@@ -7,7 +7,8 @@ namespace Script.Card.CardEffects
         public override void OnAttack(CardInfoDisplay self, CardInfoDisplay target)
         {
             BattleBehaviour.CardDeath.DestroyCard(target);
-            BattleBehaviour.CardDeath.DestroyCard(self);
+            Destroy(this);
+          
         }
         protected override void OnTurnEnd()
         {

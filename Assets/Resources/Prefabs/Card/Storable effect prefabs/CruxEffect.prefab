@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1124475226478343318}
   - component: {fileID: -7450434753568217012}
+  - component: {fileID: 2031040273795335883}
   m_Layer: 0
   m_Name: CruxEffect
   m_TagString: Untagged
@@ -45,6 +46,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BattleBehaviour: {fileID: 0}
-  destrotOnTurnEnd: 0
+  destroyOnTurnEnd: 0
+  HpBlessing: 2
+  ATKBlessing: 0
+--- !u!114 &2031040273795335883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2482257669654684496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3277a825b4568ab40859d9747cc4aeda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BattleBehaviour: {fileID: 0}
+  destroyOnTurnEnd: 0
   HpBlessing: 2
   ATKBlessing: 0

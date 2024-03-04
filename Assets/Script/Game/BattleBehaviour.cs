@@ -39,11 +39,13 @@ namespace Script.Game
             foreach (var effectClass in target.GetComponents<Effect>())
             {
                 CardEffectHandler.OnBeingHit.AddListener(effectClass.OnBeingHit);
+                CardEffectHandler.OnBeingHitAfter.AddListener(effectClass.OnBeingHitAfter);
             }
             CardEffectHandler.OnBeingHit.Invoke(target, attaker);
             CardEffectHandler.OnAttack.Invoke(attaker, target);
             Debug.Log(attaker.CharacterCard.name +" is an attacker "+ target.CharacterCard.name + " is a target");
             target.TakeDamage(attaker.ATK, attaker);
+            CardEffectHandler.OnBeingHitAfter.Invoke(target,attaker);
             Debug.Log(attaker.CharacterCard.name + "deals " + attaker.ATK + " pure damage to " + target.CharacterCard.name);
             CheckAlivePlayerCardOnBoard(target);
             CheckAliveEnemyCardOnBoard(attaker);
@@ -54,6 +56,7 @@ namespace Script.Game
             foreach (var effectClass in target.GetComponents<Effect>())
             {
                 CardEffectHandler.OnBeingHit.RemoveListener(effectClass.OnBeingHit);
+                CardEffectHandler.OnBeingHitAfter.RemoveListener(effectClass.OnBeingHitAfter);
             }
         }
 

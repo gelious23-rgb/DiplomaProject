@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Fanatic
   m_EditorClassIdentifier: 
   name: Fanatic
-  description: '<i>Indignation</i> '
+  description: "<i>Indignation</i> \n<i>Wrath</i> "
   CardType: 1
   cardImage: {fileID: 21300000, guid: b99df050e3e878141a8c64b8dc481bee, type: 3}
-  hp: 2
+  hp: 5
   attack: 2
-  manacost: 2
+  manacost: 3
   Effects:
   - {fileID: 4756470543349282968, guid: 3a4e1cae8f05cc641836fad7cc005327, type: 3}
+  - {fileID: 8048308665000402495, guid: f04a0715938505e4c88136676c1fcfe9, type: 3}

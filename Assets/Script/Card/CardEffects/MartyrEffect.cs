@@ -11,17 +11,23 @@ namespace Script.Card.CardEffects
             CardEffectHandler.OnDeath.AddListener(OnDeath);
         }
 
-        public void OnDeath(CardInfoDisplay self)
+        private void OnDeath(CardInfoDisplay self)
         {
-            if (self == GetCard())
+          
+            if (self == GetCard() && GetCard().IsPlaced)
             {
-                Debug.Log("Martyr effect 1");
+                Debug.Log(self.CharacterCard.name + "died");
                 if (GetCard().CurrentHP <= 0)
                 {
                     Debug.Log("Martyr effect 2");
-                   if(attacker !=null && attacker.IsAlive){ attacker.TakeDamage(1, GetCard());}
+                    if (attacker != null && attacker.IsAlive)
+                    {
+                        attacker.TakeDamage(1, GetCard());
+                    }
                 }
+                CardEffectHandler.OnDeath.RemoveListener(OnDeath);
             }
+            
         }
         public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
         {

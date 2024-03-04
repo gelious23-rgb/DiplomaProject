@@ -4,11 +4,11 @@ namespace Script.Card.CardEffects
 {
     public class CounterAttack : Effect
     {
-        public override void OnBeingHit(CardInfoDisplay target, CardInfoDisplay damageSource)
+        public override void OnBeingHitAfter(CardInfoDisplay target, CardInfoDisplay damageSource)
         {
             BattleBehaviour.CheckAliveEnemyCardOnBoard(target);
             BattleBehaviour.CheckAlivePlayerCardOnBoard(target);
-            if (this.GetCard().CurrentHP>0 && target == GetCard())
+            if (GetCard().CurrentHP>0 && target == GetCard())
             {
                 Debug.Log(target.CharacterCard.name + " is attacked by " +
                           damageSource.CharacterCard.name + " " + target.CharacterCard.name + " counterattacks for "
@@ -17,10 +17,6 @@ namespace Script.Card.CardEffects
             }
 
         }
-        protected override void OnTurnEnd()
-        {
-           // base.OnTurnEnd();
-
-        }
+        
     }
 }
