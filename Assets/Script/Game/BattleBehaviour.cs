@@ -13,22 +13,6 @@ namespace Script.Game
         
         [SerializeField] internal CalculateDamage _calculateDamage;
 
-       /* public void CardsFight(CardInfoDisplay playerCard, CardInfoDisplay enemyCard)
-        {
-            if (TurnBehaviour.IsPlayerTurn)
-            {
-                //CardEffectHandler.OnBeingHit.Invoke(enemyCard);
-                enemyCard.TakeDamage(playerCard.ATK, playerCard);
-            }
-            else
-            {
-               // CardEffectHandler.OnBeingHit.Invoke(playerCard);
-                playerCard.TakeDamage(enemyCard.ATK, enemyCard);
-            }
-            
-            CheckAlivePlayerCardOnBoard(playerCard);
-            CheckAliveEnemyCardOnBoard(enemyCard);
-        }*/
 
         public void CardAttacking(CardInfoDisplay target,CardInfoDisplay attaker)
         { 
@@ -60,13 +44,6 @@ namespace Script.Game
             }
         }
 
-        
-
-        /*public void CardsForceFight(CardInfoDisplay Card, CardInfoDisplay target)
-        { 
-           // CardEffectHandler.OnBeingHit.Invoke(Card, target);
-            Card.TakeDamage(target.ATK, target);
-        }*/
         public void CheckAliveEnemyCardOnBoard(CardInfoDisplay enemyCard)
         {
             if (!enemyCard.IsAlive)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Script.Card;
 using UnityEngine;
 
-public class PlayerHand : MonoBehaviour
+public class PlayerHandTest : MonoBehaviour
 {
 
     [SerializeField]
@@ -32,7 +32,6 @@ public class PlayerHand : MonoBehaviour
         {
             GameObject cardInstance = Instantiate(_cardPrefab,_playerHand.transform,true);
 
-            cardInstance.GetComponent<CardDisplay>()._card = _cards[Random.Range(0, _cards.Count)];
 
             cardInstance.GetComponent<Transform>().transform.localScale = new Vector3(1,1,1);
 

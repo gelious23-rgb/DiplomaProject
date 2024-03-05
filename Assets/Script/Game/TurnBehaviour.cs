@@ -52,7 +52,7 @@ namespace Script.Game
             if (IsPlayerTurn)
                 HandlePlayerTurn();
             else
-                HandleEnemyTurn();
+                HandleEnemyAITurn();
             
             foreach (var p in TimerReset.NextTurnTime())
                 yield return p;
@@ -102,7 +102,7 @@ namespace Script.Game
             }
         }
 
-        private void HandleEnemyTurn()
+        private void HandleEnemyAITurn()
         {
             foreach (var card in EnemySpawnerCards.Board)
                 card.ChangeAttackState(true);
