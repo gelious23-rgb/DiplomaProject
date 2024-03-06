@@ -11,8 +11,9 @@ public class LobbyController : MonoBehaviour
     [SerializeField] private GameObject SettingsPanel;
     [SerializeField] private Toggle PlayerOneReady;
     [SerializeField] private Toggle PlayerTwoReady;
-
     [SerializeField] private TextMeshProUGUI promptText;
+    [SerializeField] private TextMeshProUGUI readyOneText;
+    [SerializeField] private TextMeshProUGUI readyTwoText;
 
     private bool showNotReadyMessage = false;
 
@@ -23,35 +24,34 @@ public class LobbyController : MonoBehaviour
         UpdateStartButtonInteractivity();
     }
 
-    public void Settings()
-    {
-        LobbyPanel.SetActive(false);
-        SettingsPanel.SetActive(true);
-        SetPromptText("");
-        showNotReadyMessage = false;
-    }
-
-    public void Back()
-    {
-        SettingsPanel.SetActive(false);
-        LobbyPanel.SetActive(true);
-        UpdateStartButtonInteractivity();
-    }
-
-    public void Leave()
-    {
-        SceneManager.LoadScene(0);
-        Debug.Log("ChangeScenes");
-    }
+    
 
     public void TogglePlayerOneReady()
     {
         UpdateStartButtonInteractivity();
+
+        if (PlayerOneReady.isOn == false) 
+        {
+            readyOneText.text = "Not Ready";
+        }
+        else
+        {
+            readyOneText.text = "Ready";
+        }
     }
 
     public void TogglePlayerTwoReady()
     {
         UpdateStartButtonInteractivity();
+
+        if (PlayerTwoReady.isOn == false)
+        {
+            readyTwoText.text = "Not Ready";
+        }
+        else
+        {
+            readyTwoText.text = "Ready";
+        }
     }
 
     private void UpdateStartButtonInteractivity()
@@ -89,7 +89,25 @@ public class LobbyController : MonoBehaviour
             // Here's code for starting the game
         }
     }
+    public void Settings()
+    {
+        LobbyPanel.SetActive(false);
+        SettingsPanel.SetActive(true);
+        SetPromptText("");
+        showNotReadyMessage = false;
+    }
 
+    public void Back()
+    {
+        SettingsPanel.SetActive(false);
+        LobbyPanel.SetActive(true);
+        UpdateStartButtonInteractivity();
+    }
+    public void Leave()
+    {
+        SceneManager.LoadScene(0);
+        Debug.Log("ChangeScenes");
+    }
     private void SetPromptText(string message)
     {
         promptText.text = message;
@@ -98,6 +116,6 @@ public class LobbyController : MonoBehaviour
     private IEnumerator ClearPromptAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SetPromptText("");
+        SetPromptText("Both players are not ready");
     }
 }

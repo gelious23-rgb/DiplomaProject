@@ -6,12 +6,10 @@ using UnityEngine;
 
 public class Resolutions : MonoBehaviour
 {
-    [SerializeField] private TMPro.TMP_Dropdown resolutionDropDown;    //check name!
+    [SerializeField] private TMPro.TMP_Dropdown resolutionDropDown;
 
     private Resolution[] resolutions;
     private List<Resolution> filteredResolutions;
-
-    //private float currentRefreshRate;
     private int currentResolutionIndex = 0;
     [HideInInspector] public Resolution resolution;
     private void Start()
@@ -20,13 +18,12 @@ public class Resolutions : MonoBehaviour
         filteredResolutions = new List<Resolution>();
 
         resolutionDropDown.ClearOptions();
-        //currentRefreshRate = Screen.currentResolution.refreshRate;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            if (!filteredResolutions.Any(x => x.width == resolutions[i].width && x.height == resolutions[i].height))  //check if resolution already exists in list
+            if (!filteredResolutions.Any(x => x.width == resolutions[i].width && x.height == resolutions[i].height))
             {
-                filteredResolutions.Add(resolutions[i]);  //add resolution to list if it doesn't exist yet
+                filteredResolutions.Add(resolutions[i]);
             }
         }
 
@@ -51,23 +48,15 @@ public class Resolutions : MonoBehaviour
         resolution = filteredResolutions[resolutionIndex];
         if (PlayerPrefs.GetInt("ScreenMode") == 0)
         {
-            // Switch to 4k full
             Screen.SetResolution(resolution.width, resolution.height, true);
-
-            //Screen.fullScreen = true;
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         }
         if (PlayerPrefs.GetInt("ScreenMode") == 1)
         {
             Screen.SetResolution(resolution.width, resolution.height, true);
-            //Screen.fullScreen = true;
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         }
         if (PlayerPrefs.GetInt("ScreenMode") == 2)
         {
             Screen.SetResolution(resolution.width, resolution.height, false);
-            //Screen.fullScreen = false;
-            Screen.fullScreenMode = FullScreenMode.Windowed;
         }
     }
 }

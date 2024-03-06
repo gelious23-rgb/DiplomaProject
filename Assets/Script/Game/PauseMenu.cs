@@ -1,13 +1,16 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public GameObject pauseMenuUI;
-    public GameObject settingsMenuUI;
-    public GameObject popupSurrenderMenu;
-    public GameObject popupQuitMenu;
+    static bool GameIsPaused = false;
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject settingsMenuUI;
+    [SerializeField] private GameObject popupSurrenderMenu;
+    [SerializeField] private GameObject popupQuitMenu;
+    [SerializeField] private GameObject popupVictory;
+    [SerializeField] private TextMeshProUGUI playerName;
     bool canResume = true;
 
     // Update is called once per frame
@@ -33,7 +36,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f; // Zatrzymuje czas gry, aby wszystko siê zatrzyma³o
@@ -79,6 +82,13 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Surrender");
         Time.timeScale = 1f;
+        popupVictory.SetActive(true);
+        playerName.text = "Player *name*";
+        //Heres code for surrendering and displaying who won in *name* above
+    }
+    public void Confirm()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void PopUpQuit()

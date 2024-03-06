@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class AddTestCard : MonoBehaviour
 {
-    public GameObject cardPrefab; // Przypisz prefabrykat karty w Unity Editor.
-    public int cardLimit = 6; // Limit kart.
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private int cardLimit = 6;
 
-    private int currentCardCount = 1; // Licznik aktualnych kart.
+    private int currentCardCountPlayer = 1;
+    private int currentCardCountEnemy = 1;
 
     public void AddCard()
     {
-        if (currentCardCount < cardLimit)
+        if (currentCardCountPlayer < cardLimit)
         {
-            GameObject newCard = Instantiate(cardPrefab, transform); // Tworzy now¹ kartê w hierarchii obiektów Canvas.
-                                                                     // Tutaj mo¿esz dostosowaæ now¹ kartê, jeœli to konieczne.
+            GameObject newCard = Instantiate(cardPrefab, transform); 
 
             // Inkrementacja licznika kart.
-            currentCardCount++;
+            currentCardCountPlayer++;
         }
         else
         {

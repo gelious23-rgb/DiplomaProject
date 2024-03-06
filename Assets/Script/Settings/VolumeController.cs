@@ -4,24 +4,25 @@ using UnityEngine.UI;
 
 public class VolumeController : MonoBehaviour
 {
-    public TextMeshProUGUI volumeText;
-    public AudioSource music;
-    public Slider volumeSlider;
-    private bool isMuted;
+    [SerializeField] private TextMeshProUGUI volumeText;
+    [SerializeField] private AudioSource music;
+    [SerializeField] private Slider volumeSlider;
     [SerializeField] private Image muteButton;
     [SerializeField] private Sprite unmuted;
     [SerializeField] private Sprite muted;
 
+    private bool isMuted;
 
     private float musicVolume = 1f;
 
     void Start()
     {
+        music = GetComponent<AudioSource>();
         UpdateVolumeText();
 
-        music = GetComponent<AudioSource>();
         volumeSlider.value= musicVolume;
         isMuted = PlayerPrefs.GetInt("MUTED") == 1;
+        muteButton.sprite = isMuted ? muted : unmuted;
         AudioListener.pause = isMuted;
 
         if (!isMuted)
@@ -36,13 +37,10 @@ public class VolumeController : MonoBehaviour
         UpdateVolumeText();
     }
 
-    public void SetVolume(float volume)
-    { 
-        musicVolume = volume;
-    }
-    public void OnSliderValueChanged()
+    public void OnSliderValueChanged(float volume)
     {
-        musicVolume = volumeSlider.value;
+        musicVolume = volume;
+        volume = volumeSlider.value;
         UpdateVolumeText();
     }
     private void UpdateVolumeText()

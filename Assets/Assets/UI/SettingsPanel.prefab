@@ -1346,6 +1346,7 @@ GameObject:
   - component: {fileID: 3399829988546291756}
   - component: {fileID: 3399829988546291758}
   - component: {fileID: 3399829988546291757}
+  - component: {fileID: 498569043687897466}
   m_Layer: 5
   m_Name: Resolution
   m_TagString: Untagged
@@ -1471,6 +1472,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &498569043687897466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399829988546291755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b73186af2f162418fab4c384079ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropDown: {fileID: 3399829989718606343}
 --- !u!1 &3399829988577950255
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,6 +4164,7 @@ GameObject:
   - component: {fileID: 3399829990461348215}
   - component: {fileID: 3399829990461348169}
   - component: {fileID: 3399829990461348168}
+  - component: {fileID: 1848965842690437310}
   m_Layer: 5
   m_Name: Screen Mode
   m_TagString: Untagged
@@ -4275,6 +4290,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1848965842690437310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399829990461348214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573bbc35054471a4db7ee5328fc51803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScreenModeDropDown: {fileID: 3399829989923370130}
 --- !u!1 &3399829990482251413
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,16 +9,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject MenuPanel;
     [SerializeField] private GameObject JoinPanel;
     [SerializeField] private GameObject SettingsPanel;
+    [SerializeField] private GameObject CompediumPanel;
 
-    public void CreateGame()
-    {
-        SceneManager.LoadScene(1);
-    }
-    public void QuitGame()
-    {
-        Debug.Log("Quit");
-        Application.Quit();
-    }
     public void FindGame()
     {
         MenuPanel.SetActive(false);
@@ -48,7 +40,22 @@ public class MenuController : MonoBehaviour
     }
     public void Compedium()
     {
-        //Compedium script
+        MenuPanel.SetActive(false);
+        CompediumPanel.SetActive(true);
+    }
+    public void CompediumBack()
+    {
+        CompediumPanel.SetActive(false);
+        MenuPanel.SetActive(true);
+    }
+    public void CreateGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
     }
 
 }
