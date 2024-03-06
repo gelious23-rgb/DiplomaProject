@@ -14,6 +14,9 @@ namespace Script.Networking
         [SerializeField] private Button  startClient;
         [SerializeField] private Button  startGame;
         public GameObject CanvasGame;
+        public Sprite HellBG, HeavenBG;
+        public Image BGHell, BGHeaven;
+        
 
         private void Awake()
         {
@@ -22,10 +25,12 @@ namespace Script.Networking
                 Debug.Log("Start Host");
                 Singleton.StartHost();
                 startGame.gameObject.SetActive(true);
+                BGHeaven.sprite = HeavenBG;
             });
             startClient.onClick.AddListener(() =>
             {
                 Singleton.StartClient();
+                BGHell.sprite = HellBG;
             });
             startGame.gameObject.SetActive(false);
             startGame.onClick.AddListener(() =>

@@ -11,7 +11,7 @@ namespace Script.UI
         public Image thisImage;
         public Sprite HellCardSp, HeavenCardSp;
 
-        private void Start()
+        /*private void Start()
         {
             if (this.gameObject.transform.parent.gameObject.CompareTag("Enemy Hand"))
             {
@@ -22,6 +22,6 @@ namespace Script.UI
             {
                 thisImage.sprite = HeavenCardSp;
             }
-        }
+        }*/
     }
 }
