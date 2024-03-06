@@ -65,7 +65,7 @@ namespace Script.Services
 
         public void CheckAmountCardsForCalculateDamage()
         {
-            if (_turnBehaviour.IsPlayerTurn)
+            if (_turnBehaviour.IsPlayerTurn.Value)
                 CalculateDamageForPlayerTurn();
             else
                 CalculateDamageForEnemyTurn();

@@ -70,7 +70,7 @@ namespace Script.Card
         private void SetDraggableStatus()
         {
             CardDrop cardDrop = DefaultParent.GetComponent<CardDrop>();
-            _isDraggable = TurnBehaviour.IsPlayerTurn && (IsPlayerHandWithEnoughMana(cardDrop) || IsPlayerBoardWithAttackCapability(cardDrop));
+            _isDraggable = TurnBehaviour.IsPlayerTurn.Value && (IsPlayerHandWithEnoughMana(cardDrop) || IsPlayerBoardWithAttackCapability(cardDrop));
         }
 
 

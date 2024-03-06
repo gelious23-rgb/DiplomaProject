@@ -21,6 +21,7 @@ namespace Script.UI
             else
             {
                 thisImage.sprite = HeavenCardSp;
+                thisImage.gameObject.SetActive(false);
             }
         }*/
     }

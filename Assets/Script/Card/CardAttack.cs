@@ -28,7 +28,7 @@ namespace Script.Card
         {
             var cardInfoScript = GetComponent<CardInfoDisplay>();
             
-            if (!_turnBehaviour.IsPlayerTurn)
+            if (!_turnBehaviour.IsPlayerTurn.Value)
                 return;
 
             CardInfoDisplay cardInfoDis = eventData.pointerDrag.GetComponent<CardInfoDisplay>();
