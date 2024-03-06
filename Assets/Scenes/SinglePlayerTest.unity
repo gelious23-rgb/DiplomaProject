@@ -2473,7 +2473,7 @@ PrefabInstance:
     - target: {fileID: 3825830637099633100, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
       propertyPath: cardPref
       value: 
-      objectReference: {fileID: 1489109472383767633, guid: 46777fd7477b65b478ce247e76e2a647, type: 3}
+      objectReference: {fileID: 1489109472383767633, guid: dbaddd0962172cf41a77f7ac128ec734, type: 3}
     - target: {fileID: 3825830637099633101, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2989,7 +2989,7 @@ PrefabInstance:
     - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: cardPref
       value: 
-      objectReference: {fileID: 1489109472383767633, guid: 46777fd7477b65b478ce247e76e2a647, type: 3}
+      objectReference: {fileID: 1489109472383767633, guid: dbaddd0962172cf41a77f7ac128ec734, type: 3}
     - target: {fileID: 5876503861331612546, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: _turnBehaviour
       value: 
