@@ -12,6 +12,7 @@ namespace Script.Spawner
     public class EnemySpawnerCards : SpawnerCards
     {
         [SerializeField] internal Transform EnemyHand;
+        [SerializeField] internal Transform PlayerHand;
         private const int _maxEnemyHandSize = 6;
         private EnemyCardDeckInstance CurrentEnemyCardDeckInstance;
 
@@ -21,7 +22,8 @@ namespace Script.Spawner
         public void StartGame()
         {
             CurrentEnemyCardDeckInstance = new EnemyCardDeckInstance();
-            GiveStartCards(CurrentEnemyCardDeckInstance.EnemyDeck, EnemyHand);
+            var hand = NetworkManager.Singleton.IsHost ? EnemyHand : PlayerHand;
+            GiveStartCards(CurrentEnemyCardDeckInstance.EnemyDeck, hand);
             IsPlayer = false;
         }
         
@@ -57,14 +59,16 @@ namespace Script.Spawner
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
-            cardGameObj.GetComponent<NetworkObject>().Spawn(true);
-            cardGameObj.transform.SetParent(hand, false);
             cardGameObj.name = characterCard.name;
-
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
+            cardInfoDisplay.PlayerHand = PlayerHand;
+            cardInfoDisplay.EnemyHand = EnemyHand;
+            cardInfoDisplay.IsPlayer = false;
             cardInfoDisplay.OwnerHp = GetComponent<EnemyHealth>();
             cardInfoDisplay.owner = this;
 
+            cardGameObj.GetComponent<NetworkObject>()
+                .SpawnWithOwnership(NetworkManager.Singleton.LocalClient.ClientId, true);
             if (hand == EnemyHand)
             {
                 cardInfoDisplay.HideCardInfoClientRpc(characterCard);

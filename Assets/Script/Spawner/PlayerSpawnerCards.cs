@@ -13,6 +13,7 @@ namespace Script.Spawner
     {
         private const int _maxPlayerHandSize = 6;
         public Transform PlayerHand;
+        public Transform EnemyHand;
 
         private PlayerCardDeckInstance CurrentPlayerCardDeckInstance;
 
@@ -22,7 +23,8 @@ namespace Script.Spawner
         public void StartGame()
         {
             CurrentPlayerCardDeckInstance = new PlayerCardDeckInstance();
-            GiveStartCards(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
+            var hand = NetworkManager.Singleton.IsHost ? PlayerHand : EnemyHand;
+            GiveStartCards(CurrentPlayerCardDeckInstance.PlayerDeck, hand);
             IsPlayer = true;
         }
         protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
@@ -56,14 +58,14 @@ namespace Script.Spawner
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
-                cardGameObj.GetComponent<NetworkObject>().Spawn(true);
-            cardGameObj.transform.SetParent(hand, false);
             cardGameObj.name = characterCard.name;
-            
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
+            cardInfoDisplay.PlayerHand = PlayerHand;
+            cardInfoDisplay.EnemyHand = EnemyHand;
+            cardInfoDisplay.IsPlayer = true;
             cardInfoDisplay.OwnerHp = GetComponent<PlayerHealth>();
             cardInfoDisplay.owner = this;
-
+            cardGameObj.GetComponent<NetworkObject>().Spawn(true);
             if (hand == PlayerHand)
             {
                 cardInfoDisplay.ShowCardInfoClientRpc(characterCard, true);

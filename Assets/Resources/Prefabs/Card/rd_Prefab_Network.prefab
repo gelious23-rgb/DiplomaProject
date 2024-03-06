@@ -1862,6 +1862,8 @@ MonoBehaviour:
   _Image: {fileID: 3060517163286998808}
   CanAttack: 0
   IsPlaced: 0
+  PlayerHand: {fileID: 0}
+  EnemyHand: {fileID: 0}
   CurrentHP: 0
   ATK: 0
   DamageResistance: 0
@@ -1941,7 +1943,7 @@ MonoBehaviour:
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  AutoObjectParentSync: 0
 --- !u!1 &3327005188103944243
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ namespace Script.UI
             if (this.gameObject.transform.parent.gameObject.CompareTag("Enemy Hand"))
             {
                 thisImage.sprite = HellCardSp;
-                thisImage.gameObject.SetActive(true);
+                thisImage.gameObject.SetActive(false);
             }
             else
             {

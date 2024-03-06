@@ -41,7 +41,8 @@ namespace Script.Card
         public Image _Image;
         public bool CanAttack;
         public bool IsPlaced;
-
+        public Transform PlayerHand;
+        public Transform EnemyHand;
         private int _maxHp;
 
         public int MaxHp
@@ -96,6 +97,29 @@ namespace Script.Card
 
         }
 
+        public void SetupParent()
+        {
+            PlayerHand = GameObject.Find("Player Hand").transform;
+            EnemyHand = GameObject.Find("Enemy Hand").transform;
+            bool playerHand = true;
+            switch (IsPlayer)
+            {
+                case true when IsHost:
+                case false when !IsHost:
+                    playerHand = true;
+                    break;
+                case true when !IsHost:
+                case false when IsHost:
+                    playerHand = false;
+                    break;
+            }
+            SetCardParent(playerHand);
+        }
+
+        private void SetCardParent(bool playerHand)
+        {
+            transform.SetParent(playerHand ? PlayerHand : EnemyHand, false);
+        }
 
         public int Heal(int healAmount) //returns OverHeal amount
         {
@@ -201,10 +225,8 @@ namespace Script.Card
             _name.text = characterCard.name;
             _description.text = characterCard.description;
             _type.text = characterCard.CardType.ToString();
-        
-        
-
             RefreshData();
+            SetupParent();
         }
         
         [ClientRpc]
@@ -219,6 +241,7 @@ namespace Script.Card
             
             _hideGO.SetActive(true);
             IsPlayer = false;
+            SetupParent();
         }
 
         public void RefreshData()
