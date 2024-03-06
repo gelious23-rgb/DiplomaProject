@@ -4,6 +4,7 @@ using Script.Card.CardEffects;
 using Script.Logic;
 using Script.Networking;
 using Script.Spawner;
+using Script.UI;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -107,10 +108,16 @@ namespace Script.Card
                 case true when IsHost:
                 case false when !IsHost:
                     playerHand = true;
+                    var hideSc = GetComponent<HideScript>();
+                    hideSc.thisImage.sprite = hideSc.HeavenCardSp;
+                    hideSc.thisImage.gameObject.SetActive(false);
                     break;
                 case true when !IsHost:
                 case false when IsHost:
                     playerHand = false;
+                    var hideSc1 = GetComponent<HideScript>();
+                    hideSc1.thisImage.sprite = hideSc1.HellCardSp;
+                    hideSc1.thisImage.gameObject.SetActive(false);
                     break;
             }
             SetCardParent(playerHand);

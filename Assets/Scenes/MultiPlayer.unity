@@ -873,6 +873,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3825830637776267187, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
   m_PrefabInstance: {fileID: 2019238415}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &390702979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3825830637776267148, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+  m_PrefabInstance: {fileID: 2019238415}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390702969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &453155333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2853,6 +2864,10 @@ MonoBehaviour:
   startClient: {fileID: 1271505629}
   startGame: {fileID: 2132521722}
   CanvasGame: {fileID: 1314889235}
+  HellBG: {fileID: 21300000, guid: b99a7b2745d654748917c31751c1bd7b, type: 3}
+  HeavenBG: {fileID: 21300000, guid: 5492b71d76dfa624bb8b27610ae1cbaa, type: 3}
+  BGHell: {fileID: 1762432135}
+  BGHeaven: {fileID: 390702979}
 --- !u!114 &1619148928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3315,6 +3330,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5876503860495423157, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
   m_PrefabInstance: {fileID: 848536488}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762432135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5876503860495423160, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+  m_PrefabInstance: {fileID: 848536488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762432125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1812899931
 GameObject:
   m_ObjectHideFlags: 0
