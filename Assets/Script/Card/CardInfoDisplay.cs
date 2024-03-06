@@ -2,6 +2,7 @@
 using System;
 using Script.Card.CardEffects;
 using Script.Logic;
+using Script.Networking;
 using Script.Spawner;
 using TMPro;
 using UnityEngine;
@@ -80,6 +81,7 @@ namespace Script.Card
       public int DamageResistance = 0;
       public IHealth OwnerHp;
       public SpawnerCards owner;
+      public NetworkPlayerSpawnerCards NetworkPlayerSpawnerCards;
       
       public GameObject BuffSpriteSpace; 
       public bool IsAlive => CurrentHP > 0;

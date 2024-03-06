@@ -896,11 +896,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 6a5e9e40-cbba-4659-a84f-5e783aa58340
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: CCG Multiplayer
+  organizationId: baranets99934
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

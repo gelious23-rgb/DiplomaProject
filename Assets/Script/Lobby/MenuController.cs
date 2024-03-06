@@ -11,7 +11,7 @@ namespace Script.Lobby
 
         public void CreateGame()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("Lobby Scene");
         }
         public void QuitGame()
         {

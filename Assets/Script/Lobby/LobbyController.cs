@@ -40,7 +40,7 @@ public class LobbyController : MonoBehaviour
 
     public void Leave()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenuTest2");
         Debug.Log("ChangeScenes");
     }
 
