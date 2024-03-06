@@ -19,7 +19,7 @@ namespace Script.Networking
             Cardd.CharacterCard = AllCards[index];
             Cardd.OnTurnStart();
             Cardd.RefreshData();
-            Cardd.ShowCardInfo(Cardd.CharacterCard, true);
+            Cardd.ShowCardInfoClientRpc(Cardd.CharacterCard, true);
             sp.PlayerHandCards.Add(Cardd);
         }
     }

@@ -3,7 +3,7 @@ using Script.Card.CardDeck;
 using System.Collections.Generic;
 using System.Linq;
 using Script.Characters.Enemy;
-
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,8 +17,8 @@ namespace Script.Spawner
 
         public List<CardInfoDisplay> EnemyHandCards = new List<CardInfoDisplay>();
 
- 
-        void Start()
+
+        public void StartGame()
         {
             CurrentEnemyCardDeckInstance = new EnemyCardDeckInstance();
             GiveStartCards(CurrentEnemyCardDeckInstance.EnemyDeck, EnemyHand);
@@ -56,7 +56,9 @@ namespace Script.Spawner
         }
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
-            GameObject cardGameObj = Instantiate(cardPref, hand, false);
+            GameObject cardGameObj = Instantiate(cardPref);
+            cardGameObj.GetComponent<NetworkObject>().Spawn(true);
+            cardGameObj.transform.SetParent(hand, false);
             cardGameObj.name = characterCard.name;
 
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
@@ -65,7 +67,7 @@ namespace Script.Spawner
 
             if (hand == EnemyHand)
             {
-                cardInfoDisplay.HideCardInfo(characterCard);
+                cardInfoDisplay.HideCardInfoClientRpc(characterCard);
                 EnemyHandCards.Add(cardInfoDisplay);
             }
         }

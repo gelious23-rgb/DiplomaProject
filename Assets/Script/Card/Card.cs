@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using Script.Card.CardEffects;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Card
 {
     [CreateAssetMenu(fileName = "New Card", menuName = "Cards")]
-    public class Card : ScriptableObject
+    public class Card : ScriptableObject, INetworkSerializable
     {
         public new string name;
         [TextArea]  public string description;
 
-        public  Types CardType; 
+        public  Types CardType;
 
         public Sprite cardImage;
 
@@ -57,6 +58,16 @@ namespace Script.Card
             }
 
             return CardType;
+        }
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref name);
+            serializer.SerializeValue(ref description);
+            serializer.SerializeValue(ref hp);
+            serializer.SerializeValue(ref attack);
+            serializer.SerializeValue(ref manacost);
+            serializer.SerializeValue(ref CardType);
         }
     }
 }

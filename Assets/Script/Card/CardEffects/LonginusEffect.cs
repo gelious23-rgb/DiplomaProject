@@ -32,7 +32,7 @@ namespace Script.Card.CardEffects
                     lanceSC.CharacterCard = lance;
                     lanceSC.Start();
                     lanceSC.OnTurnStart();
-                    lanceSC.ShowCardInfo(lance, true);
+                    lanceSC.ShowCardInfoClientRpc(lance, true);
                     player.PlayerHandCards.Add(lanceSC);
                 
                 }

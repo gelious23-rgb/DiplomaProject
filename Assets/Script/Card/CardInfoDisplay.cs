@@ -5,13 +5,14 @@ using Script.Logic;
 using Script.Networking;
 using Script.Spawner;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Script.Card
 {
-    public class CardInfoDisplay : MonoBehaviour
+    public class CardInfoDisplay : NetworkBehaviour 
     {
 
         public Card CharacterCard;
@@ -74,9 +75,8 @@ namespace Script.Card
 
             }
         }
-
-
-         [FormerlySerializedAs("HP")] public int CurrentHP;
+        
+        [FormerlySerializedAs("HP")] public int CurrentHP;
       public int ATK; 
       public int DamageResistance = 0;
       public IHealth OwnerHp;
@@ -186,7 +186,8 @@ namespace Script.Card
             CurrentHP -= dmg-DamageResistance;
         }
 
-        public void ShowCardInfo(Card characterCard, bool isPlayer)
+        [ClientRpc]
+        public void ShowCardInfoClientRpc(Card characterCard, bool isPlayer)
         {
             IsPlayer = isPlayer;
             _hideGO.SetActive(false);
@@ -194,8 +195,7 @@ namespace Script.Card
             CharacterCard = characterCard;
             CurrentHP = characterCard.hp;
             ATK = characterCard.attack;
-
-            _sprite.sprite = characterCard.cardImage;
+            _sprite.sprite = null;
             _sprite.preserveAspect = true;
             _name.text = characterCard.name;
             _description.text = characterCard.description;
@@ -205,10 +205,17 @@ namespace Script.Card
 
             RefreshData();
         }
-
-        public void HideCardInfo(Card characterCard)
+        
+        [ClientRpc]
+        public void HideCardInfoClientRpc(Card characterCard)
         {
             CharacterCard = characterCard;
+            CurrentHP = characterCard.hp;
+            ATK = characterCard.attack;
+            _name.text = characterCard.name;
+            _description.text = characterCard.description;
+            _type.text = characterCard.CardType.ToString();
+            
             _hideGO.SetActive(true);
             IsPlayer = false;
         }

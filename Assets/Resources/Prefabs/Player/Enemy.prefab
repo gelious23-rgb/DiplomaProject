@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01825e21627149578b21b661c8203569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPref: {fileID: 1489109472383767633, guid: 71b2cbf2f969a394581f4b81045532fb, type: 3}
+  cardPref: {fileID: 3060517163286998810, guid: af0f58c4ab4f7b64fbfa5697c813cd4a, type: 3}
   Board: []
   IsPlayer: 0
   EnemyHand: {fileID: 5876503860495423157}

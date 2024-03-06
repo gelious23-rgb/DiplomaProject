@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada7cd9340f4452b9268276d39165b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPref: {fileID: 1489109472383767633, guid: 46777fd7477b65b478ce247e76e2a647, type: 3}
+  cardPref: {fileID: 3060517163286998810, guid: af0f58c4ab4f7b64fbfa5697c813cd4a, type: 3}
   Board: []
   IsPlayer: 0
   PlayerHand: {fileID: 3825830637776267187}

@@ -66,7 +66,7 @@ namespace Script.Networking
 
             if (hand == PlayerHand)
             {
-                cardInfoDisplay.ShowCardInfo(characterCard, true);
+                cardInfoDisplay.ShowCardInfoClientRpc(characterCard, true);
                 PlayerHandCards.Add(cardInfoDisplay);
             }
         }

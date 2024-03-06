@@ -83,7 +83,7 @@ namespace Script.Characters.Enemy
 
                 yield return new WaitForSeconds(.51f);
 
-                cardList[0].ShowCardInfo(cardList[0].CharacterCard, false);
+                cardList[0].ShowCardInfoClientRpc(cardList[0].CharacterCard, false);
                 cardList[0].transform.SetParent(EnemyField);
 
                 EnemySpawnerCards.Board.Add(cardList[0]);

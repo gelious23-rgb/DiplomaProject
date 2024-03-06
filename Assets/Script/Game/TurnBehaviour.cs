@@ -107,7 +107,7 @@ namespace Script.Game
             foreach (var card in EnemySpawnerCards.Board)
                 card.ChangeAttackState(true);
 
-            _enemyAI.MakeTurn();
+//            _enemyAI.MakeTurn();
         }
 
         private void PrepareTurn()

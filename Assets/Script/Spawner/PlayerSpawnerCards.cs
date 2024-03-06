@@ -3,6 +3,7 @@ using Script.Card.CardDeck;
 using System.Collections.Generic;
 using System.Linq;
 using Script.Characters.Player;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,9 +18,8 @@ namespace Script.Spawner
 
         public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>();
 
-        
 
-        void Start()
+        public void StartGame()
         {
             CurrentPlayerCardDeckInstance = new PlayerCardDeckInstance();
             GiveStartCards(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
@@ -56,6 +56,7 @@ namespace Script.Spawner
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
+                cardGameObj.GetComponent<NetworkObject>().Spawn(true);
             cardGameObj.transform.SetParent(hand, false);
             cardGameObj.name = characterCard.name;
             
@@ -65,7 +66,7 @@ namespace Script.Spawner
 
             if (hand == PlayerHand)
             {
-                cardInfoDisplay.ShowCardInfo(characterCard, true);
+                cardInfoDisplay.ShowCardInfoClientRpc(characterCard, true);
                 PlayerHandCards.Add(cardInfoDisplay);
             }
         }
