@@ -17,6 +17,7 @@ MonoBehaviour:
     instantly destroyed
   CardType: 0
   cardImage: {fileID: 21300000, guid: da7ff7197b7d52d488ec00522cf5b6f6, type: 3}
+  SpriteIndex: 16
   hp: 0
   attack: 0
   manacost: 0

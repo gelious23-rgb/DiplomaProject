@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Grants <i>Miracle</i> for 1 turn to random ally each turn.
   CardType: 3
   cardImage: {fileID: 21300000, guid: 08f2a7dc5fd5f584890b9e20a252a3a4, type: 3}
+  SpriteIndex: 5
   hp: 11
   attack: 0
   manacost: 5

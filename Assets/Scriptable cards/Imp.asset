@@ -17,6 +17,7 @@ MonoBehaviour:
     until the next turn."
   CardType: 2
   cardImage: {fileID: 21300000, guid: edccbd145f1c69544880b6c342fec975, type: 3}
+  SpriteIndex: 6
   hp: 3
   attack: 2
   manacost: 3

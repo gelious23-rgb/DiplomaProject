@@ -13,7 +13,7 @@ namespace Script.UI
 
         private void Start()
         {
-            if (!IsHost)
+            if (this.gameObject.transform.parent.gameObject.CompareTag("Enemy Hand"))
             {
                 thisImage.sprite = HellCardSp;
                 thisImage.gameObject.SetActive(true);
@@ -21,7 +21,6 @@ namespace Script.UI
             else
             {
                 thisImage.sprite = HeavenCardSp;
-                thisImage.gameObject.SetActive(true);
             }
         }
     }

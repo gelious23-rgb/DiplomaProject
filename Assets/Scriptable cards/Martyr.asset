@@ -17,6 +17,7 @@ MonoBehaviour:
     deal 1 damage to an attacker even if received lethal damage. '
   CardType: 1
   cardImage: {fileID: 21300000, guid: 54ccba84f2df22c4292280680825ddc2, type: 3}
+  SpriteIndex: 9
   hp: 4
   attack: 1
   manacost: 1

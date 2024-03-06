@@ -12,9 +12,9 @@ using UnityEngine.UI;
 
 namespace Script.Card
 {
-    public class CardInfoDisplay : NetworkBehaviour 
+    public class CardInfoDisplay : NetworkBehaviour
     {
-
+        public Sprite[] AllSprites;
         public Card CharacterCard;
         [SerializeField]
         private Image _sprite;
@@ -92,6 +92,7 @@ namespace Script.Card
             CardEffectHandler.OnTurnStart.AddListener(OnTurnStart);
             MaxHp = CharacterCard.hp;
             CurrentHP = MaxHp;
+            _sprite.sprite = AllSprites[CharacterCard.SpriteIndex];
 
         }
 

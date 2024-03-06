@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 'When used on a card, increase their MaxHp by 2.  '
   CardType: 0
   cardImage: {fileID: 21300000, guid: 268ae080ec9834645a8c1d7411572440, type: 3}
+  SpriteIndex: 2
   hp: 0
   attack: 0
   manacost: 0

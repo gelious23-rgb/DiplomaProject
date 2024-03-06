@@ -16,6 +16,7 @@ MonoBehaviour:
   description: '<i>Execution</i> '
   CardType: 2
   cardImage: {fileID: 21300000, guid: b7ac2bd55dbff074c9741a91c52c220b, type: 3}
+  SpriteIndex: 13
   hp: 6
   attack: 6
   manacost: 4

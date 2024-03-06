@@ -17,6 +17,7 @@ MonoBehaviour:
     cost to it\u2019s owner and opponent every turn."
   CardType: 4
   cardImage: {fileID: 21300000, guid: bff090f22fbccec4eae815d7eddf516e, type: 3}
+  SpriteIndex: 7
   hp: 22
   attack: 3
   manacost: 7

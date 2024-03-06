@@ -1826,6 +1826,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558503bb7f2a87749936e6144e49e850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllSprites:
+  - {fileID: 21300000, guid: fcf3448fd630b174aa8ac6f06148eb87, type: 3}
+  - {fileID: 21300000, guid: 3509b8a7098da5341ae12af223389213, type: 3}
+  - {fileID: 21300000, guid: 268ae080ec9834645a8c1d7411572440, type: 3}
+  - {fileID: 21300000, guid: b99df050e3e878141a8c64b8dc481bee, type: 3}
+  - {fileID: 21300000, guid: d280fa24ae4acb145a1ef48670648b7c, type: 3}
+  - {fileID: 21300000, guid: 2e989aa548b085c4c8472059f3a9ceb7, type: 3}
+  - {fileID: 21300000, guid: edccbd145f1c69544880b6c342fec975, type: 3}
+  - {fileID: 21300000, guid: a892d76d4aabe7644912f6179b975806, type: 3}
+  - {fileID: 21300000, guid: 47c38e100a02fd3428177c4ca5e81f3a, type: 3}
+  - {fileID: 21300000, guid: 54ccba84f2df22c4292280680825ddc2, type: 3}
+  - {fileID: 21300000, guid: 059d400b6006b8c41a0d88711600294f, type: 3}
+  - {fileID: 21300000, guid: 8a3096affc150084ab5918f3896b0007, type: 3}
+  - {fileID: 21300000, guid: 320bd17298ecfe241b326d2508801a70, type: 3}
+  - {fileID: 21300000, guid: b7ac2bd55dbff074c9741a91c52c220b, type: 3}
+  - {fileID: 21300000, guid: 5e2cd4913ccbedf4f8b77f3606dc89c3, type: 3}
+  - {fileID: 21300000, guid: 08a73d1b49eedd647a72c3423df7bbf7, type: 3}
+  - {fileID: 21300000, guid: da7ff7197b7d52d488ec00522cf5b6f6, type: 3}
+  - {fileID: 21300000, guid: a7ab1e82aaac6d94089cf500d400b4ed, type: 3}
   CharacterCard: {fileID: 0}
   _sprite: {fileID: 763672572258828481}
   _name: {fileID: 5330897292053243539}

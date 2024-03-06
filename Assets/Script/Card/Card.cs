@@ -16,7 +16,7 @@ namespace Script.Card
         public  Types CardType;
 
         public Sprite cardImage;
-
+        public int SpriteIndex;
         public int hp;
         public int attack;
         public int manacost;
@@ -68,6 +68,7 @@ namespace Script.Card
             serializer.SerializeValue(ref attack);
             serializer.SerializeValue(ref manacost);
             serializer.SerializeValue(ref CardType);
+            serializer.SerializeValue(ref SpriteIndex);
         }
     }
 }

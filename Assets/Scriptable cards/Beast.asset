@@ -19,6 +19,7 @@ MonoBehaviour:
     dies.
   CardType: 4
   cardImage: {fileID: 21300000, guid: 09523a0ef2822b74fb5fc9bc03b134ea, type: 3}
+  SpriteIndex: 1
   hp: 11
   attack: 6
   manacost: 5

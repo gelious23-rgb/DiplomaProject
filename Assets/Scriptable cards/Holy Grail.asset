@@ -17,6 +17,7 @@ MonoBehaviour:
     also grant 2 blessings for atk&hp. <i>Wine<i>. '
   CardType: 3
   cardImage: {fileID: 21300000, guid: d280fa24ae4acb145a1ef48670648b7c, type: 3}
+  SpriteIndex: 4
   hp: 12
   attack: 0
   manacost: 6

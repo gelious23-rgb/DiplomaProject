@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 'Protection. Blaze '
   CardType: 2
   cardImage: {fileID: 21300000, guid: 320bd17298ecfe241b326d2508801a70, type: 3}
+  SpriteIndex: 12
   hp: 7
   attack: 3
   manacost: 5

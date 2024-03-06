@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 'When used on a card, increase their Atk by 2.  '
   CardType: 0
   cardImage: {fileID: 21300000, guid: 059d400b6006b8c41a0d88711600294f, type: 3}
+  SpriteIndex: 10
   hp: 0
   attack: 0
   manacost: 0

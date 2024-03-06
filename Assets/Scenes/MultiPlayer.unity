@@ -1077,6 +1077,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1314889236}
     m_Modifications:
+    - target: {fileID: 5876503860495423156, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+      propertyPath: m_TagString
+      value: Enemy Hand
+      objectReference: {fileID: 0}
     - target: {fileID: 5876503860495423157, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: m_LocalPosition.z
       value: 51

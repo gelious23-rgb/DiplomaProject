@@ -16,6 +16,7 @@ MonoBehaviour:
   description: "<i>Indignation</i> \n<i>Wrath</i> "
   CardType: 1
   cardImage: {fileID: 21300000, guid: b99df050e3e878141a8c64b8dc481bee, type: 3}
+  SpriteIndex: 3
   hp: 5
   attack: 2
   manacost: 3

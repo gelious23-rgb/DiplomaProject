@@ -17,6 +17,7 @@ MonoBehaviour:
     card '
   CardType: 4
   cardImage: {fileID: 21300000, guid: 08a73d1b49eedd647a72c3423df7bbf7, type: 3}
+  SpriteIndex: 15
   hp: 8
   attack: 5
   manacost: 5
