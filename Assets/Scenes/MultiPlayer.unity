@@ -1278,9 +1278,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3060517163286998810, guid: af0f58c4ab4f7b64fbfa5697c813cd4a, type: 3}
     - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+      propertyPath: HellBoard
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b2d6b4c6ceb5284386d99ad5c5eb962, type: 3}
+    - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: PlayerHand
       value: 
       objectReference: {fileID: 390702976}
+    - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+      propertyPath: HeavensBoard
+      value: 
+      objectReference: {fileID: 21300000, guid: a352d024e5548cb4d953db8d5dda558f, type: 3}
+    - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+      propertyPath: EnemyBoardImage
+      value: 
+      objectReference: {fileID: 1762432135}
     - target: {fileID: 5876503861331612546, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: _turnBehaviour
       value: 
@@ -2868,6 +2880,8 @@ MonoBehaviour:
   HeavenBG: {fileID: 21300000, guid: 5492b71d76dfa624bb8b27610ae1cbaa, type: 3}
   BGHell: {fileID: 1762432135}
   BGHeaven: {fileID: 390702979}
+  HostInspectorList: 
+  ClientInspectorList: 
 --- !u!114 &1619148928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3762,6 +3776,18 @@ PrefabInstance:
       propertyPath: EnemyHand
       value: 
       objectReference: {fileID: 1762432132}
+    - target: {fileID: 3825830637099633100, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+      propertyPath: HellBoard
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b2d6b4c6ceb5284386d99ad5c5eb962, type: 3}
+    - target: {fileID: 3825830637099633100, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+      propertyPath: HeavensBoard
+      value: 
+      objectReference: {fileID: 21300000, guid: 5492b71d76dfa624bb8b27610ae1cbaa, type: 3}
+    - target: {fileID: 3825830637099633100, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+      propertyPath: PlayerBoardImage
+      value: 
+      objectReference: {fileID: 390702979}
     - target: {fileID: 3825830637099633101, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3866,6 +3892,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3825830637776267184, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3825830637970307527, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -3880,6 +3910,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825830637970307527, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377397094859929953, guid: 05901de3cf16b184f95bd1354de85fff, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -100,28 +100,32 @@ namespace Script.Card
 
         public void SetupParent()
         {
-            PlayerHand = GameObject.Find("Player Hand").transform;
-            EnemyHand = GameObject.Find("Enemy Hand").transform;
             var IsHost = NetworkManager.Singleton.IsHost;
-            bool playerHand = true;
-            switch (IsPlayer)
+            var hideSc = GetComponent<HideScript>();
+            
+            if (IsHost && IsPlayer)
             {
-                case true when IsHost:
-                case false when !IsHost:
-                    playerHand = true;
-                    var hideSc = GetComponent<HideScript>();
-                    hideSc.thisImage.sprite = hideSc.HeavenCardSp;
-                    hideSc.thisImage.gameObject.SetActive(false);
-                    break;
-                case true when !IsHost:
-                case false when IsHost:
-                    playerHand = false;
-                    var hideSc1 = GetComponent<HideScript>();
-                    hideSc1.thisImage.sprite = hideSc1.HellCardSp;
-                    hideSc1.thisImage.gameObject.SetActive(true);
-                    break;
+                hideSc.thisImage.sprite = hideSc.HeavenCardSp;
+                hideSc.thisImage.gameObject.SetActive(false);
             }
-            SetCardParent(playerHand);
+
+            if (!IsHost && IsPlayer)
+            {
+                hideSc.thisImage.sprite = hideSc.HellCardSp;
+                hideSc.thisImage.gameObject.SetActive(false);
+            }
+            
+            if(IsHost && !IsPlayer)
+            {
+                hideSc.thisImage.sprite = hideSc.HellCardSp;
+                hideSc.thisImage.gameObject.SetActive(true);
+            }
+            
+            if (!IsHost && !IsPlayer)
+            {
+                hideSc.thisImage.sprite = hideSc.HeavenCardSp;
+                hideSc.thisImage.gameObject.SetActive(true);
+            }
         }
 
         private void SetCardParent(bool playerHand)

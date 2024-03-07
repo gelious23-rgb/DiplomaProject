@@ -6,6 +6,7 @@ using Script.Characters.Player;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Script.Spawner
 {
@@ -14,18 +15,22 @@ namespace Script.Spawner
         private const int _maxPlayerHandSize = 6;
         public Transform PlayerHand;
         public Transform EnemyHand;
+        public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>();
+        [Space] public Image PlayerBoardImage;
+        public Sprite HeavensBoard;
+        public Sprite HellBoard;
 
         private List<Card.Card> PlayerDeck;
-        public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>();
 
 
         public void StartGame(List<int> currentPlayerDeck)
         {
             var allCards = new PlayerCardDeckInstance().GetCardLibrary();
             PlayerDeck = currentPlayerDeck.Select(index => allCards.AllCards[index]).ToList();
-            var hand = NetworkManager.Singleton.IsHost ? PlayerHand : EnemyHand;
             GiveStartCards(PlayerDeck, PlayerHand);
             IsPlayer = true;
+
+            PlayerBoardImage.sprite = NetworkManager.Singleton.IsHost ? HeavensBoard : HellBoard;
         }
         protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
         {

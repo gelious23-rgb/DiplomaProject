@@ -6,6 +6,7 @@ using Script.Characters.Enemy;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Script.Spawner
 {
@@ -17,6 +18,10 @@ namespace Script.Spawner
 
         public List<Card.Card> EnemyDeck;
         public List<CardInfoDisplay> EnemyHandCards = new List<CardInfoDisplay>();
+        [Space]
+        public Image EnemyBoardImage;
+        public Sprite HeavensBoard;
+        public Sprite HellBoard;
 
 
         public void StartGame(List<int> enemyPlayerDeck)
@@ -26,6 +31,8 @@ namespace Script.Spawner
             var hand = NetworkManager.Singleton.IsHost ? EnemyHand : PlayerHand;
             GiveStartCards(EnemyDeck, EnemyHand);
             IsPlayer = false;
+            
+            EnemyBoardImage.sprite = NetworkManager.Singleton.IsHost ? HellBoard : HeavensBoard;
         }
         
         protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
