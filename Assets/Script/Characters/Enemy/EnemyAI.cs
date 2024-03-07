@@ -58,7 +58,7 @@ namespace Script.Characters.Enemy
                     activeCardMoveAnimation.MovetoTarget(enemy.transform);
                     yield return new WaitForSeconds(.75f);
 
-                    _battleBehaviour.CardAttacking(enemy, activeCard);
+                    //_battleBehaviour.CardAttackingServerRpc(enemy, activeCard);
                 }
 
                 yield return new WaitForSeconds(.2f);

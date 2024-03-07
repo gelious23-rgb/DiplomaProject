@@ -164,7 +164,9 @@ namespace Script.Game
         private void HandleEnemyAITurn()
         {
             foreach (var card in EnemySpawnerCards.Board)
+            {
                 card.ChangeAttackState(true);
+            }
 //          _enemyAI.MakeTurn();
         }
 

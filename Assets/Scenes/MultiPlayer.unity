@@ -2749,6 +2749,14 @@ PrefabInstance:
       propertyPath: _calculateDamage
       value: 
       objectReference: {fileID: 1748654228}
+    - target: {fileID: 631714634621064793, guid: f4b387e753937204a9c1bd9ea84a1908, type: 3}
+      propertyPath: _enemySpawnerCards
+      value: 
+      objectReference: {fileID: 1033813791}
+    - target: {fileID: 631714634621064793, guid: f4b387e753937204a9c1bd9ea84a1908, type: 3}
+      propertyPath: _playerSpawnerCards
+      value: 
+      objectReference: {fileID: 919126619}
     - target: {fileID: 631714634621064795, guid: f4b387e753937204a9c1bd9ea84a1908, type: 3}
       propertyPath: m_Name
       value: BattleBehaviour
