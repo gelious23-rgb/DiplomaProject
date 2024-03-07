@@ -1,3 +1,4 @@
+using System;
 using Script.Card.CardEffects;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +17,12 @@ namespace Script.Game
 {
     public class TurnBehaviour : NetworkBehaviour
     {
-        private NetworkVariable<int> _turn = new(0);
-        private int _maxMana = 1;
-        public NetworkVariable<int> PlayerManaSync, EnemyManaSync;
+        public NetworkVariable<int> _turn = new(0);
+        public NetworkVariable<int> PlayerManaSync = new (10);
+        public NetworkVariable<int> EnemyManaSync  = new (7); 
+        public NetworkVariable<bool> IsPlayerTurn = new(true);
 
+        private int _maxMana = 1;
         [Header("Player")]
         [SerializeField] private PlayerSpawnerCards PlayerSpawnerCards;
         [SerializeField] private PlayerMana _playerMana;
@@ -33,7 +36,20 @@ namespace Script.Game
         [SerializeField] private EndTurnButton _endTurnButton;
         [SerializeField] private CalculateDamage _calculateDamage;
         private CardDeath CardDeath;
-        public NetworkVariable<bool> IsPlayerTurn = new(true);
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+                PlayerManaSync.Value += 1;
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+                PlayerManaSync.Value -= 1;
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+                EnemyManaSync.Value += 1;
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                EnemyManaSync.Value -= 1;
+        }
+#endif
 
         public override void OnNetworkSpawn()
         {
@@ -41,11 +57,12 @@ namespace Script.Game
             if (IsHost)
             {
                 _turn.OnValueChanged += OnValueChanged;
-               
                 IsPlayerTurn.Value = _turn.Value % 2 == 0;
             }
+            
             PlayerManaSync.OnValueChanged += OnManaChanged;
             EnemyManaSync.OnValueChanged += OnManaChanged;
+            
             if(IsHost)
                 _endTurnButton.EndTurn.interactable = IsPlayerTurn.Value;
             else
@@ -70,12 +87,7 @@ namespace Script.Game
 
         public void StartGame()
         {
-            PlayerManaSync = new NetworkVariable<int>(
-                10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-            EnemyManaSync = new NetworkVariable<int>(7, NetworkVariableReadPermission.Everyone,
-                NetworkVariableWritePermission.Owner);
             OnManaChanged(0, 0);
-            
             StartCoroutine(TurnFunc());
         }
 
@@ -168,21 +180,6 @@ namespace Script.Game
            // _playerMana.CurrentPlayerMana = _enemyMana.CurrentEnemyMana = _maxMana;
 
         }
-
-        
-       [ContextMenu("DebugChangeManaHost")]
-        public void DebugChangeManaHost()
-        {
-            PlayerManaSync.Value += 3;
-        }
-        [ContextMenu("DebugChangeManaClient")]
-        public void DebugChangeManaClient()
-        {
-            EnemyManaSync.Value += 3;
-        }
-        
-
-         
 
         public void CheckCardsForAvailability()
         {

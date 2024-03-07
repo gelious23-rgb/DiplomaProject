@@ -46,7 +46,7 @@ namespace Script.Card
                 {
                     _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
                     _playerSpawnerCards.Board.Add(cardInfo);
-                    CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
+                    //CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
                     cardMove.DefaultParent = transform;
 
                     cardInfo.IsPlaced = true;
@@ -54,9 +54,6 @@ namespace Script.Card
                     _turnBehaviour.CheckCardsForAvailability();
                 }
             }
-             
-           
-
         }
 
 
