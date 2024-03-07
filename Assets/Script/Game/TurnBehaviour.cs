@@ -199,7 +199,7 @@ namespace Script.Game
             PlayerManaSync.Value -= characterCardManacost;
             Debug.Log("Reduce host mana method invoked");
         }
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         public void ReduceClientManaServerRpc(int characterCardManacost)
         {
             EnemyManaSync.Value -= characterCardManacost;
