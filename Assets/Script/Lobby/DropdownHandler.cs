@@ -21,7 +21,7 @@ public class DropdownHandler : MonoBehaviour
 
     private void Start()
     {
-        // Przypisanie metod do zdarzeÒ OnValueChanged dla obu dropdownÛw
+        // Przypisanie metod do zdarze—Å OnValueChanged dla obu dropdown—Éw
         dropdown1.onValueChanged.AddListener(OnDropdown1ValueChanged);
         dropdown2.onValueChanged.AddListener(OnDropdown2ValueChanged);
         dropdown2.value = 2;
