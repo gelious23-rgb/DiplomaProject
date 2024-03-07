@@ -50,7 +50,14 @@ namespace Script.Card
                     cardMove.DefaultParent = transform;
 
                     cardInfo.IsPlaced = true;
-                    _playerMana.ReduceMana(cardInfo.CharacterCard.manacost);
+                    if (cardInfo.owner.gameObject.GetComponent<NetworkObject>().NetworkManager.IsHost)
+                    {
+                        _turnBehaviour.ReduceHostMana(cardInfo.CharacterCard.manacost);
+                    }
+                    else
+                    {
+                        _turnBehaviour.ReduceClientManaServerRpc(cardInfo.CharacterCard.manacost);
+                    }
                     _turnBehaviour.CheckCardsForAvailability();
                 }
             }

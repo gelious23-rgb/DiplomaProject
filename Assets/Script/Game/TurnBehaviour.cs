@@ -150,6 +150,8 @@ namespace Script.Game
             }
         }
 
+         
+
         private void HandlePlayerTurn()
         {
             foreach (var card in PlayerSpawnerCards.Board)
@@ -190,6 +192,18 @@ namespace Script.Game
         {
             foreach (var card in EnemySpawnerCards.Board)
                 card.HighlightAsTarget(highlight);
+        }
+
+        public void ReduceHostMana(int characterCardManacost)
+        {
+            PlayerManaSync.Value -= characterCardManacost;
+            Debug.Log("Reduce host mana method invoked");
+        }
+        [ServerRpc]
+        public void ReduceClientManaServerRpc(int characterCardManacost)
+        {
+            EnemyManaSync.Value -= characterCardManacost;
+            Debug.Log("Reduce client mana method invoked");
         }
     }
 }
