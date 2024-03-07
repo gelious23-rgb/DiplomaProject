@@ -17,7 +17,7 @@ namespace Script.UI
 
         public void ResetTime()
         {
-            _turnTime.Value = 5;
+            _turnTime.Value = 100;
             TurnTimeText.text = _turnTime.ToString();
         }
 

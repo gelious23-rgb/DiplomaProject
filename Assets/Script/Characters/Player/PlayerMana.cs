@@ -1,4 +1,5 @@
-﻿using Script.Logic;
+﻿using Script.Game;
+using Script.Logic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,7 +14,12 @@ namespace Script.Characters.Player
         public int CurrentPlayerMana
         {
             get => _currentPlayerMana;
-            set => _currentPlayerMana = value;
+            set
+            {
+                _currentPlayerMana = value;
+                ShowMana();
+            } 
+            
         }
 
         public void ReduceMana(int manaCost)

@@ -18,7 +18,8 @@ namespace Script.Game
     {
         private NetworkVariable<int> _turn = new(0);
         private int _maxMana = 1;
-        
+        public NetworkVariable<int> PlayerManaSync, EnemyManaSync;
+
         [Header("Player")]
         [SerializeField] private PlayerSpawnerCards PlayerSpawnerCards;
         [SerializeField] private PlayerMana _playerMana;
@@ -40,9 +41,11 @@ namespace Script.Game
             if (IsHost)
             {
                 _turn.OnValueChanged += OnValueChanged;
+               
                 IsPlayerTurn.Value = _turn.Value % 2 == 0;
             }
-            
+            PlayerManaSync.OnValueChanged += OnManaChanged;
+            EnemyManaSync.OnValueChanged += OnManaChanged;
             if(IsHost)
                 _endTurnButton.EndTurn.interactable = IsPlayerTurn.Value;
             else
@@ -50,13 +53,38 @@ namespace Script.Game
             
         }
 
-        public void StartGame() => StartCoroutine(TurnFunc());
+        private void OnManaChanged(int previousvalue, int newvalue)
+        {
+            if (IsHost)
+            {
+                _playerMana.CurrentPlayerMana = PlayerManaSync.Value;
+                _enemyMana.CurrentEnemyMana = EnemyManaSync.Value;
+            }
+            else
+            {
+                _playerMana.CurrentPlayerMana = EnemyManaSync.Value;
+                _enemyMana.CurrentEnemyMana = PlayerManaSync.Value;
+            }
+            
+        }
+
+        public void StartGame()
+        {
+            PlayerManaSync = new NetworkVariable<int>(
+                10, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+            EnemyManaSync = new NetworkVariable<int>(7, NetworkVariableReadPermission.Everyone,
+                NetworkVariableWritePermission.Owner);
+            OnManaChanged(0, 0);
+            
+            StartCoroutine(TurnFunc());
+        }
 
         private void OnValueChanged(int previousvalue, int newvalue)
         {
             IsPlayerTurn.Value = newvalue % 2 == 0;
             UpdateEndButtonClientRpc(IsPlayerTurn.Value);
         }
+        
 
         [ClientRpc]
         private void UpdateEndButtonClientRpc(bool value)
@@ -136,9 +164,25 @@ namespace Script.Game
 
         private void UpdateMana()
         {
-            _maxMana = Mathf.Min(_maxMana + 1, 10);
-            _playerMana.CurrentPlayerMana = _enemyMana.CurrentEnemyMana = _maxMana;
+            //_maxMana = Mathf.Min(_maxMana + 1, 10);
+           // _playerMana.CurrentPlayerMana = _enemyMana.CurrentEnemyMana = _maxMana;
+
         }
+
+        
+       [ContextMenu("DebugChangeManaHost")]
+        public void DebugChangeManaHost()
+        {
+            PlayerManaSync.Value += 3;
+        }
+        [ContextMenu("DebugChangeManaClient")]
+        public void DebugChangeManaClient()
+        {
+            EnemyManaSync.Value += 3;
+        }
+        
+
+         
 
         public void CheckCardsForAvailability()
         {
