@@ -118,7 +118,7 @@ namespace Script.Card
                     playerHand = false;
                     var hideSc1 = GetComponent<HideScript>();
                     hideSc1.thisImage.sprite = hideSc1.HellCardSp;
-                    hideSc1.thisImage.gameObject.SetActive(false);
+                    hideSc1.thisImage.gameObject.SetActive(true);
                     break;
             }
             SetCardParent(playerHand);
@@ -233,6 +233,7 @@ namespace Script.Card
             _description.text = characterCard.description;
             _type.text = characterCard.CardType.ToString();
             RefreshData();
+            SetupParent();
         }
         
         public void HideCardInfoClientRpc(Card characterCard)
@@ -246,6 +247,7 @@ namespace Script.Card
             
             _hideGO.SetActive(true);
             IsPlayer = false;
+            SetupParent();
         }
 
         public void RefreshData()
