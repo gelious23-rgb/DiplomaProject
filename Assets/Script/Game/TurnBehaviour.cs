@@ -74,8 +74,9 @@ namespace Script.Game
             {
                 //CardEffectHandler.OnTurnStart.Invoke();
             }
-            PrepareTurn();
+            TimerReset.ResetTime();
             
+            PrepareTurnClientRpc();
             if (IsPlayerTurn.Value)
                 HandlePlayerTurn();
             else
@@ -90,10 +91,15 @@ namespace Script.Game
         public void ChangeTurnServerRpc()
         {
             StopAllCoroutines();
-            _calculateDamage.CheckAmountCardsForCalculateDamage();
+            TurnEndClientRpc();
             _turn.Value++;
-            TurnEnd();
-            
+            StartCoroutine(TurnFunc());
+        }
+
+        [ClientRpc]
+        private void TurnEndClientRpc()
+        {
+            _calculateDamage.CheckAmountCardsForCalculateDamage();
             if (IsPlayerTurn.Value)
             {
                 PlayerSpawnerCards.GiveNewCards();
@@ -102,17 +108,6 @@ namespace Script.Game
                 _playerMana.ShowMana();
                 _enemyMana.ShowMana();
             }
-            StartCoroutine(TurnFunc());
-        }
-
-        private void TurnEnd()
-        {
-            if (_turn.Value % 2 == 0)
-            {
-                //CardEffectHandler.OnTurnEnd.Invoke();
-                Debug.Log("Turn ended");
-            }
-
         }
 
         private void HandlePlayerTurn()
@@ -131,12 +126,11 @@ namespace Script.Game
 //          _enemyAI.MakeTurn();
         }
 
-        private void PrepareTurn()
+        [ClientRpc]
+        private void PrepareTurnClientRpc()
         {
-            TimerReset.ResetTime();
             foreach (var card in PlayerSpawnerCards.Board)
                 card.DeHighlightCard();
-
             CheckCardsForAvailability();
         }
 
