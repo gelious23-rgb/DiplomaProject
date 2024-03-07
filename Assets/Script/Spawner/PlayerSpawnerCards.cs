@@ -15,16 +15,16 @@ namespace Script.Spawner
         public Transform PlayerHand;
         public Transform EnemyHand;
 
-        private PlayerCardDeckInstance CurrentPlayerCardDeckInstance;
-
+        private List<Card.Card> PlayerDeck;
         public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>();
 
 
-        public void StartGame()
+        public void StartGame(List<int> currentPlayerDeck)
         {
-            CurrentPlayerCardDeckInstance = new PlayerCardDeckInstance();
+            var allCards = new PlayerCardDeckInstance().GetCardLibrary();
+            PlayerDeck = currentPlayerDeck.Select(index => allCards.AllCards[index]).ToList();
             var hand = NetworkManager.Singleton.IsHost ? PlayerHand : EnemyHand;
-            GiveStartCards(CurrentPlayerCardDeckInstance.PlayerDeck, hand);
+            GiveStartCards(PlayerDeck, PlayerHand);
             IsPlayer = true;
         }
         protected override void GiveStartCards(List<Card.Card> deck, Transform hand)
@@ -52,12 +52,12 @@ namespace Script.Spawner
         }
         public override void GiveNewCards()
         {
-            CurrentPlayerCardDeckInstance ??= new PlayerCardDeckInstance();
-            GiveCardToHand(CurrentPlayerCardDeckInstance.PlayerDeck, PlayerHand);
+            GiveCardToHand(PlayerDeck, PlayerHand);
         }
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
+            cardGameObj.transform.SetParent(hand, false);
             cardGameObj.name = characterCard.name;
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
             cardInfoDisplay.PlayerHand = PlayerHand;
@@ -65,7 +65,6 @@ namespace Script.Spawner
             cardInfoDisplay.IsPlayer = true;
             cardInfoDisplay.OwnerHp = GetComponent<PlayerHealth>();
             cardInfoDisplay.owner = this;
-            cardGameObj.GetComponent<NetworkObject>().Spawn(true);
             if (hand == PlayerHand)
             {
                 cardInfoDisplay.ShowCardInfoClientRpc(characterCard, true);

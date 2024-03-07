@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace Script.Card
 {
-    public class CardInfoDisplay : NetworkBehaviour
+    public class CardInfoDisplay : MonoBehaviour
     {
         public Sprite[] AllSprites;
         public Card CharacterCard;
@@ -102,6 +102,7 @@ namespace Script.Card
         {
             PlayerHand = GameObject.Find("Player Hand").transform;
             EnemyHand = GameObject.Find("Enemy Hand").transform;
+            var IsHost = NetworkManager.Singleton.IsHost;
             bool playerHand = true;
             switch (IsPlayer)
             {
@@ -218,7 +219,6 @@ namespace Script.Card
             CurrentHP -= dmg-DamageResistance;
         }
 
-        [ClientRpc]
         public void ShowCardInfoClientRpc(Card characterCard, bool isPlayer)
         {
             IsPlayer = isPlayer;
@@ -233,10 +233,8 @@ namespace Script.Card
             _description.text = characterCard.description;
             _type.text = characterCard.CardType.ToString();
             RefreshData();
-            SetupParent();
         }
         
-        [ClientRpc]
         public void HideCardInfoClientRpc(Card characterCard)
         {
             CharacterCard = characterCard;
@@ -248,7 +246,6 @@ namespace Script.Card
             
             _hideGO.SetActive(true);
             IsPlayer = false;
-            SetupParent();
         }
 
         public void RefreshData()

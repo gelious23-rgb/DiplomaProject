@@ -9,13 +9,14 @@ using Script.Services;
 using Script.Spawner;
 using Script.UI;
 using Script.UI.Buttons;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Script.Game
 {
-    public class TurnBehaviour : MonoBehaviour
+    public class TurnBehaviour : NetworkBehaviour
     {
-        private int _turn;
+        private NetworkVariable<int> _turn = new(0);
         private int _maxMana = 1;
         
         [Header("Player")]
@@ -31,47 +32,69 @@ namespace Script.Game
         [SerializeField] private EndTurnButton _endTurnButton;
         [SerializeField] private CalculateDamage _calculateDamage;
         private CardDeath CardDeath;
+        public NetworkVariable<bool> IsPlayerTurn = new(true);
 
-        public bool IsPlayerTurn => _turn % 2 == 0;
-
-        private void Start()
+        public override void OnNetworkSpawn()
         {
-            _turn = 0;
-            StartCoroutine(TurnFunc());
-            CardDeath = FindObjectOfType<CardDeath>();
-
+            base.OnNetworkSpawn();
+            if (IsHost)
+            {
+                _turn.OnValueChanged += OnValueChanged;
+                IsPlayerTurn.Value = _turn.Value % 2 == 0;
+            }
+            
+            if(IsHost)
+                _endTurnButton.EndTurn.interactable = IsPlayerTurn.Value;
+            else
+                _endTurnButton.EndTurn.interactable = !IsPlayerTurn.Value;
+            
         }
-        
+
+        public void StartGame() => StartCoroutine(TurnFunc());
+
+        private void OnValueChanged(int previousvalue, int newvalue)
+        {
+            IsPlayerTurn.Value = newvalue % 2 == 0;
+            UpdateEndButtonClientRpc(IsPlayerTurn.Value);
+        }
+
+        [ClientRpc]
+        private void UpdateEndButtonClientRpc(bool value)
+        {
+            Debug.Log($"Update End Button {IsHost} {value}");
+            if(IsHost)
+                _endTurnButton.EndTurn.interactable = value;
+            else
+                _endTurnButton.EndTurn.interactable = !value;
+        }
+
         IEnumerator TurnFunc()
         {
-            if(_turn % 2 == 0){CardEffectHandler.OnTurnStart.Invoke();}
+            if (_turn.Value % 2 == 0)
+            {
+                //CardEffectHandler.OnTurnStart.Invoke();
+            }
+            PrepareTurn();
             
-                PrepareTurn();
-            
-            
-            if (IsPlayerTurn)
+            if (IsPlayerTurn.Value)
                 HandlePlayerTurn();
             else
                 HandleEnemyAITurn();
             
             foreach (var p in TimerReset.NextTurnTime())
                 yield return p;
-            ChangeTurn();
+            ChangeTurnServerRpc();
         }
 
-        public void ChangeTurn()
+        [ServerRpc(RequireOwnership = false)]
+        public void ChangeTurnServerRpc()
         {
             StopAllCoroutines();
-
-
-            
             _calculateDamage.CheckAmountCardsForCalculateDamage();
-            _turn++;
+            _turn.Value++;
             TurnEnd();
-
-            _endTurnButton.EndTurn.interactable = IsPlayerTurn;
             
-            if (IsPlayerTurn)
+            if (IsPlayerTurn.Value)
             {
                 PlayerSpawnerCards.GiveNewCards();
                 EnemySpawnerCards.GiveNewCards(); 
@@ -84,14 +107,13 @@ namespace Script.Game
 
         private void TurnEnd()
         {
-            if (_turn % 2 == 0)
+            if (_turn.Value % 2 == 0)
             {
-                CardEffectHandler.OnTurnEnd.Invoke();
+                //CardEffectHandler.OnTurnEnd.Invoke();
                 Debug.Log("Turn ended");
             }
 
         }
-
 
         private void HandlePlayerTurn()
         {
@@ -106,8 +128,7 @@ namespace Script.Game
         {
             foreach (var card in EnemySpawnerCards.Board)
                 card.ChangeAttackState(true);
-
-//            _enemyAI.MakeTurn();
+//          _enemyAI.MakeTurn();
         }
 
         private void PrepareTurn()
@@ -118,8 +139,6 @@ namespace Script.Game
 
             CheckCardsForAvailability();
         }
-
-
 
         private void UpdateMana()
         {
@@ -137,8 +156,5 @@ namespace Script.Game
             foreach (var card in EnemySpawnerCards.Board)
                 card.HighlightAsTarget(highlight);
         }
-
-
-
     }
 }

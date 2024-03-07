@@ -38,7 +38,7 @@ namespace Script.Card
 
             if (cardInfo.CharacterCard.CardType != Card.Types.Tool)
             {
-                if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn && _playerMana.CurrentPlayerMana >=
+                if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn.Value && _playerMana.CurrentPlayerMana >=
                     cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
                 {
                     _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);

@@ -14,16 +14,17 @@ namespace Script.Spawner
         [SerializeField] internal Transform EnemyHand;
         [SerializeField] internal Transform PlayerHand;
         private const int _maxEnemyHandSize = 6;
-        private EnemyCardDeckInstance CurrentEnemyCardDeckInstance;
 
+        public List<Card.Card> EnemyDeck;
         public List<CardInfoDisplay> EnemyHandCards = new List<CardInfoDisplay>();
 
 
-        public void StartGame()
+        public void StartGame(List<int> enemyPlayerDeck)
         {
-            CurrentEnemyCardDeckInstance = new EnemyCardDeckInstance();
+            var allCards = new EnemyCardDeckInstance().GetCardLibrary();
+            EnemyDeck = enemyPlayerDeck.Select(index => allCards.AllCards[index]).ToList();
             var hand = NetworkManager.Singleton.IsHost ? EnemyHand : PlayerHand;
-            GiveStartCards(CurrentEnemyCardDeckInstance.EnemyDeck, hand);
+            GiveStartCards(EnemyDeck, EnemyHand);
             IsPlayer = false;
         }
         
@@ -53,12 +54,12 @@ namespace Script.Spawner
         }
         public override void GiveNewCards()
         {
-            CurrentEnemyCardDeckInstance ??= new EnemyCardDeckInstance();
-            GiveCardToHand(CurrentEnemyCardDeckInstance.EnemyDeck, EnemyHand);
+            GiveCardToHand(EnemyDeck, EnemyHand);
         }
         protected override void SetupCard(Card.Card characterCard, Transform hand)
         {
             GameObject cardGameObj = Instantiate(cardPref);
+            cardGameObj.transform.SetParent(hand, false);
             cardGameObj.name = characterCard.name;
             CardInfoDisplay cardInfoDisplay = cardGameObj.GetComponent<CardInfoDisplay>();
             cardInfoDisplay.PlayerHand = PlayerHand;
@@ -66,9 +67,6 @@ namespace Script.Spawner
             cardInfoDisplay.IsPlayer = false;
             cardInfoDisplay.OwnerHp = GetComponent<EnemyHealth>();
             cardInfoDisplay.owner = this;
-
-            cardGameObj.GetComponent<NetworkObject>()
-                .SpawnWithOwnership(NetworkManager.Singleton.LocalClient.ClientId, true);
             if (hand == EnemyHand)
             {
                 cardInfoDisplay.HideCardInfoClientRpc(characterCard);

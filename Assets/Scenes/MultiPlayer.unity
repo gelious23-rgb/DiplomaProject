@@ -551,7 +551,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1748654227}
         m_TargetAssemblyTypeName: Script.Game.TurnBehaviour, Assembly-CSharp
-        m_MethodName: ChangeTurn
+        m_MethodName: ChangeTurnServerRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3739,31 +3739,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &2007241608 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4519870075534421929, guid: ccc201210cbcb2740bf85372286a1206, type: 3}
-  m_PrefabInstance: {fileID: 1142233146}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2007241611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007241608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 123369188
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1001 &2019238415
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ namespace Script.Characters.Enemy
             yield return HandleActiveCardsAttack();
             
             yield return new WaitForSeconds(1);
-            _turnBehaviour.ChangeTurn();
+            _turnBehaviour.ChangeTurnServerRpc();
         }
         
         private IEnumerator HandleActiveCardsAttack()
