@@ -3,6 +3,7 @@ using Script.Characters;
 using Script.Characters.Player;
 using Script.Game;
 using Script.Spawner;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -38,7 +39,9 @@ namespace Script.Card
 
             if (cardInfo.CharacterCard.CardType != Card.Types.Tool)
             {
-                if(cardMove && _playerSpawnerCards.Board.Count < 6 && _turnBehaviour.IsPlayerTurn.Value && _playerMana.CurrentPlayerMana >=
+                var isPlayerTurn = (_turnBehaviour.IsPlayerTurn.Value && NetworkManager.Singleton.IsHost)
+                                   || (!_turnBehaviour.IsPlayerTurn.Value && !NetworkManager.Singleton.IsHost);
+                if(cardMove && _playerSpawnerCards.Board.Count < 6 && isPlayerTurn && _playerMana.CurrentPlayerMana >=
                     cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
                 {
                     _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);

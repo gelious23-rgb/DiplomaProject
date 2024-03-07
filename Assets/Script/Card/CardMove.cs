@@ -3,6 +3,7 @@ using Script.Characters.Player;
 using Script.Game;
 using System;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -70,7 +71,9 @@ namespace Script.Card
         private void SetDraggableStatus()
         {
             CardDrop cardDrop = DefaultParent.GetComponent<CardDrop>();
-            _isDraggable = TurnBehaviour.IsPlayerTurn.Value && (IsPlayerHandWithEnoughMana(cardDrop) || IsPlayerBoardWithAttackCapability(cardDrop));
+            var isPlayerTurn = (_turnBehaviour.IsPlayerTurn.Value && NetworkManager.Singleton.IsHost)
+                               || (!_turnBehaviour.IsPlayerTurn.Value && !NetworkManager.Singleton.IsHost);
+            _isDraggable = isPlayerTurn && (IsPlayerHandWithEnoughMana(cardDrop) || IsPlayerBoardWithAttackCapability(cardDrop));
         }
 
 
