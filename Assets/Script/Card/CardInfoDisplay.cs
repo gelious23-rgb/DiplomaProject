@@ -98,10 +98,16 @@ namespace Script.Card
 
         }
 
-        public void SetupParent()
+        public void SetupParent(bool onBoard = false)
         {
             var IsHost = NetworkManager.Singleton.IsHost;
             var hideSc = GetComponent<HideScript>();
+
+            if (onBoard)
+            {
+                hideSc.thisImage.gameObject.SetActive(false);
+                return;
+            }
             
             if (IsHost && IsPlayer)
             {
@@ -223,7 +229,7 @@ namespace Script.Card
             CurrentHP -= dmg-DamageResistance;
         }
 
-        public void ShowCardInfoClientRpc(Card characterCard, bool isPlayer)
+        public void ShowCardInfoClientRpc(Card characterCard, bool isPlayer, bool onBoard = false)
         {
             IsPlayer = isPlayer;
             _hideGO.SetActive(false);
@@ -231,13 +237,12 @@ namespace Script.Card
             CharacterCard = characterCard;
             CurrentHP = characterCard.hp;
             ATK = characterCard.attack;
-            _sprite.sprite = null;
             _sprite.preserveAspect = true;
             _name.text = characterCard.name;
             _description.text = characterCard.description;
             _type.text = characterCard.CardType.ToString();
             RefreshData();
-            SetupParent();
+            SetupParent(onBoard);
         }
         
         public void HideCardInfoClientRpc(Card characterCard)

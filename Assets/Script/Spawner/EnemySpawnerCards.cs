@@ -18,7 +18,7 @@ namespace Script.Spawner
 
         public List<Card.Card> EnemyDeck;
         public List<CardInfoDisplay> EnemyHandCards = new List<CardInfoDisplay>();
-        [Space]
+        [Space] public Transform EnemyBoard;
         public Image EnemyBoardImage;
         public Sprite HeavensBoard;
         public Sprite HellBoard;

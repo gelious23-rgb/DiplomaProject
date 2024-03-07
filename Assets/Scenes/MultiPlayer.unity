@@ -1282,6 +1282,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 7b2d6b4c6ceb5284386d99ad5c5eb962, type: 3}
     - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
+      propertyPath: EnemyBoard
+      value: 
+      objectReference: {fileID: 661920206}
+    - target: {fileID: 5876503861331612545, guid: c3a36b5e8ec4e164595240fde90d7284, type: 3}
       propertyPath: PlayerHand
       value: 
       objectReference: {fileID: 390702976}

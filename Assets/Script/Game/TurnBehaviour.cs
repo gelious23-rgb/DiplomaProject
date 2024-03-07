@@ -205,5 +205,28 @@ namespace Script.Game
             EnemyManaSync.Value -= characterCardManacost;
             Debug.Log("Reduce client mana method invoked");
         }
+        
+        [ClientRpc]
+        public void ShowCardDropClientRpc(int index)
+        {
+            if(IsHost) return;
+            Debug.Log(index);
+            var card = EnemySpawnerCards.EnemyHandCards[index];
+            EnemySpawnerCards.EnemyHandCards.RemoveAt(index);
+            EnemySpawnerCards.Board.Add(card);
+            card.ShowCardInfoClientRpc(card.CharacterCard, false, true);
+            card.GetComponent<CardMove>().transform.SetParent(EnemySpawnerCards.EnemyBoard);
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        public void ShowCardDropServerRpc(int index)
+        {
+            Debug.Log(index);
+            var card = EnemySpawnerCards.EnemyHandCards[index];
+            EnemySpawnerCards.EnemyHandCards.RemoveAt(index);
+            EnemySpawnerCards.Board.Add(card);
+            card.ShowCardInfoClientRpc(card.CharacterCard, false, true);
+            card.GetComponent<CardMove>().transform.SetParent(EnemySpawnerCards.EnemyBoard);
+        }
     }
 }

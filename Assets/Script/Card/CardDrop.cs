@@ -20,6 +20,7 @@ namespace Script.Card
 
         private PlayerMana _playerMana;
         private PlayerSpawnerCards _playerSpawnerCards;
+        private EnemySpawnerCards _enemySpawnerCards;
 
         
         private void Start()
@@ -27,6 +28,7 @@ namespace Script.Card
             _turnBehaviour = FindObjectOfType<TurnBehaviour>();
             _playerMana = FindObjectOfType<PlayerMana>();
             _playerSpawnerCards = FindObjectOfType<PlayerSpawnerCards>();
+            _enemySpawnerCards = FindObjectOfType<EnemySpawnerCards>();
         }
 
         public void OnDrop(PointerEventData eventData)
@@ -44,20 +46,26 @@ namespace Script.Card
                 if(cardMove && _playerSpawnerCards.Board.Count < 6 && isPlayerTurn && _playerMana.CurrentPlayerMana >=
                     cardInfo.CharacterCard.manacost && !cardMove.GetComponent<CardInfoDisplay>().IsPlaced)
                 {
+                    var index = _playerSpawnerCards.PlayerHandCards.IndexOf(cardInfo);
                     _playerSpawnerCards.PlayerHandCards.Remove(cardInfo);
                     _playerSpawnerCards.Board.Add(cardInfo);
-                    //CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
                     cardMove.DefaultParent = transform;
+                    //CardEffectHandler.OnBeingPlayed.Invoke(cardInfo);
 
                     cardInfo.IsPlaced = true;
                     if (cardInfo.owner.gameObject.GetComponent<NetworkObject>().NetworkManager.IsHost)
                     {
+                        Debug.Log(index);
                         _turnBehaviour.ReduceHostMana(cardInfo.CharacterCard.manacost);
+                        _turnBehaviour.ShowCardDropClientRpc(index);
                     }
                     else
                     {
+                        Debug.Log(index);
                         _turnBehaviour.ReduceClientManaServerRpc(cardInfo.CharacterCard.manacost);
+                        _turnBehaviour.ShowCardDropServerRpc(index);
                     }
+                    
                     _turnBehaviour.CheckCardsForAvailability();
                 }
             }

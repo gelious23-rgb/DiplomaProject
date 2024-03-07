@@ -16,7 +16,8 @@ namespace Script.Spawner
         public Transform PlayerHand;
         public Transform EnemyHand;
         public List<CardInfoDisplay> PlayerHandCards = new List<CardInfoDisplay>();
-        [Space] public Image PlayerBoardImage;
+        [Space] public Transform PlayerBoard; 
+        public Image PlayerBoardImage;
         public Sprite HeavensBoard;
         public Sprite HellBoard;
 
