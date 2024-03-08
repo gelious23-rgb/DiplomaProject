@@ -3,7 +3,7 @@ using Script.Characters.Player;
 using Script.Game;
 using Script.Logic;
 using Script.Spawner;
-
+using Unity.Netcode;
 using UnityEngine;
 
 
@@ -55,6 +55,12 @@ namespace Script.Services
 
         }
         
+        /*[ServerRpc]
+        public void ShowEnemyDeathPanelServerRpc(int damage)
+        {
+            _enemyDeath.Death(ref damage);
+        }*/
+        
         public void DealDamageToPlayerHero(int damage)
         {
             int currentPlayerHealth = _playerHealth.CurrentHealth;
@@ -62,6 +68,12 @@ namespace Script.Services
             _playerHealth.Show();
             _playerDeath.Death( currentPlayerHealth);
         }
+        
+        /*[ServerRpc]
+        public void ShowPlayerDeathPanelServerRpc(int damage)
+        {
+            _playerDeath.Death(damage);
+        }*/
 
         public void CheckAmountCardsForCalculateDamage()
         {

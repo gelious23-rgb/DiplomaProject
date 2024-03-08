@@ -2,13 +2,14 @@ using EasyButtons;
 using Script.UI.Buttons;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Script.UI.Panel
 {
     public class LosePanel : MonoBehaviour, IPanel
     { 
         [SerializeField]
-        public TextMeshProUGUI  enemyGameOver;
+        public Image  enemyGameOver;
         [SerializeField]
         private RestartButton _restartTurnButton;
         

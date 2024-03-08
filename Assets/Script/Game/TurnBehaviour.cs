@@ -166,8 +166,8 @@ namespace Script.Game
             foreach (var card in EnemySpawnerCards.Board)
             {
                 card.ChangeAttackState(true);
-            }
-//          _enemyAI.MakeTurn();
+            } 
+            //_enemyAI.MakeTurn();
         }
 
         [ClientRpc]
@@ -182,7 +182,10 @@ namespace Script.Game
         {
             //_maxMana = Mathf.Min(_maxMana + 1, 10);
            // _playerMana.CurrentPlayerMana = _enemyMana.CurrentEnemyMana = _maxMana;
-
+           
+           /*PlayerManaSync.Value += 1;
+           EnemyManaSync.Value += 1;*/
+           
         }
 
         public void CheckCardsForAvailability()

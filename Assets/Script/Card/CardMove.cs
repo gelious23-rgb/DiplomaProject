@@ -73,7 +73,7 @@ namespace Script.Card
             CardDrop cardDrop = DefaultParent.GetComponent<CardDrop>();
             var isPlayerTurn = (_turnBehaviour.IsPlayerTurn.Value && NetworkManager.Singleton.IsHost)
                                || (!_turnBehaviour.IsPlayerTurn.Value && !NetworkManager.Singleton.IsHost);
-            _isDraggable = isPlayerTurn && (IsPlayerHandWithEnoughMana(cardDrop) || IsPlayerBoardWithAttackCapability(cardDrop));
+            _isDraggable = isPlayerTurn && (IsPlayerHandWithEnoughMana(cardDrop) || IsPlayerBoardWithAttackCapability(cardDrop) || IsPlayerBoard() );
         }
 
 
